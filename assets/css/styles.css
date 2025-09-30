@@ -1,0 +1,710 @@
+.table-card { background:#fff; border-radius:8px; box-shadow:0 0 15px rgba(0,0,0,0.05); padding:16px; }
+.table-toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:12px; }
+.table-toolbar input[type="search"] { padding:6px 10px; border:1px solid #d5dce6; border-radius:6px; }
+.table-toolbar select { padding:4px 8px; border:1px solid #d5dce6; border-radius:6px; }
+.table-responsive { width:100%; overflow:auto; }
+.data-table { width:100%; border-collapse:collapse; }
+.data-table thead th { position:sticky; top:0; background:#f8636f; color:#fff; text-align:left; padding:10px; font-weight:600; }
+.data-table tbody td { padding:10px; border-bottom:1px solid #eef1f6; color:#2b2b2b; vertical-align:top; }
+.data-table tbody tr:hover { background:#fff6f7; }
+.sidebar nav ul li.submenu-wrap { padding: 0; background: transparent; margin: 0 15px; }
+.sidebar-disclosure { display: block; border-radius: 8px 0 0 8px; }
+.sidebar-disclosure > summary {
+    list-style: none;
+    padding: 12px 18px;
+    font-weight: 600;
+    color: #003b6f;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.sidebar-disclosure > summary::-webkit-details-marker { display: none; }
+.sidebar-disclosure[open] > summary { background: linear-gradient(135deg, #f8636f, #ff7a85); color: #fff; }
+.sidebar-disclosure .submenu { padding: 6px 0 6px 18px; }
+.sidebar-disclosure .submenu li a { display:block; padding: 8px 14px 8px 28px; color:#2d4b66; position:relative; }
+.sidebar-disclosure .submenu li a::before { content:""; position:absolute; left:14px; top:50%; transform:translateY(-50%); width:6px; height:6px; border-radius:50%; background:#c9d3df; }
+.sidebar-disclosure .submenu li a:hover { color:#f8636f; }
+.sidebar-disclosure .submenu li a:hover::before { background:#f8636f; }
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #e3f0fe 0%, #f9fafc 100%);
+    color: #222;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* Container width for main layout */
+.main-content { 
+    max-width: 1400px; 
+    margin: 0 auto;
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #aacdfd 0%, #e3f0fe 100%);
+    padding: 12px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.menu-icon {
+    font-size: 22px;
+    cursor: pointer;
+    color: #1d3ca8;
+}
+
+/* Show hamburger button */
+.menu-icon { 
+    display: block; 
+    font-size: 24px;
+    cursor: pointer;
+    color: #1d3ca8;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(29, 60, 168, 0.2);
+}
+
+.menu-icon:hover {
+    background-color: rgba(29, 60, 168, 0.15);
+    transform: scale(1.05);
+}
+
+.admin-info {
+    font-weight: 600;
+    font-size: 14px;
+    color: #1d3ca8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.admin-info:hover {
+    background: rgba(29, 60, 168, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Animasi icon kecil di header */
+.animated-icon {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* Sidebar - Hidden by default */
+.sidebar {
+    width: 300px;
+    background: #fff;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+    padding-top: 20px;
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.sidebar.sidebar--open {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    padding: 12px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #003b6f;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    border-radius: 8px 0 0 8px;
+    transition: color 0.2s ease, background 0.2s ease;
+    user-select: none;
+    margin: 3px 15px;
+    position: relative;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.sidebar nav ul li:hover { background: rgba(248, 99, 111, 0.08); color: #f8636f; }
+
+.sidebar nav ul li:not(.expandable).active {
+    background: linear-gradient(135deg, #f8636f, #ff7a85);
+    color: white;
+    box-shadow: 0 4px 12px rgba(248, 99, 111, 0.3);
+}
+
+.sidebar nav ul li.expandable { position: relative; }
+.sidebar nav ul li.has-submenu { position: relative; }
+
+.sidebar nav ul li.expandable .fa-chevron-down { transition: transform 0.3s ease; margin-left: auto; }
+.sidebar nav ul li.has-submenu .fa-chevron-down { transition: transform 0.3s ease; margin-left: auto; }
+.sidebar nav ul li.has-submenu.active .fa-chevron-down { transform: rotate(180deg); }
+
+.sidebar nav ul li.expandable.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.sidebar nav ul li.expandable > ul,
+.sidebar nav ul li.has-submenu > ul {
+    list-style: none;
+    padding-left: 18px;
+    margin-top: 6px;
+    display: none; /* default hidden */
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: transparent;
+    border-radius: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.sidebar nav ul > li.has-submenu > ul.is-open {
+    display: block !important;
+    opacity: 1 !important;
+    max-height: 800px !important;
+    padding: 6px 0 !important;
+}
+
+.sidebar nav ul li.expandable > ul li,
+.sidebar nav ul li.has-submenu > ul li {
+    font-weight: 500;
+    font-size: 14px;
+    color: #0e3a5c;
+    padding: 0;
+    cursor: pointer;
+    margin: 4px 0;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+}
+
+/* Bullet kecil dan jarak kiri untuk submenu seperti referensi */
+.sidebar nav ul li.expandable > ul li a,
+.sidebar nav ul li.has-submenu > ul li a {
+    position: relative;
+    padding-left: 28px; /* ruang untuk bullet */
+}
+
+.sidebar nav ul li.expandable > ul li a::before,
+.sidebar nav ul li.has-submenu > ul li a::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #c9d3df;
+}
+
+/* Warna aktif/hover bullet menyesuaikan brand */
+.sidebar nav ul li.expandable > ul li:hover a::before,
+.sidebar nav ul li.expandable > ul li.active a::before,
+.sidebar nav ul li.has-submenu > ul li:hover a::before,
+.sidebar nav ul li.has-submenu > ul li.active a::before {
+    background: #f8636f;
+}
+
+/* Visual chevron lebih jelas */
+.sidebar nav ul li.expandable .fa-chevron-down {
+    color: #7a8aa0;
+}
+.sidebar nav ul li.expandable.active .fa-chevron-down {
+    color: #f8636f;
+}
+
+.sidebar nav ul li.expandable > ul li a,
+.sidebar nav ul li.has-submenu > ul li a {
+    display: block;
+    padding: 8px 14px 8px 28px;
+    width: 100%;
+    color: #2d4b66;
+    text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease;
+    text-align: left;
+}
+
+.sidebar nav ul li.expandable > ul li:hover,
+.sidebar nav ul li.has-submenu > ul li:hover {
+    background: rgba(248, 99, 111, 0.06);
+}
+
+.sidebar nav ul li.expandable > ul li:hover a,
+.sidebar nav ul li.has-submenu > ul li:hover a { color: #f8636f; }
+
+/* remove double hover style from previous version */
+
+.sidebar nav ul li.expandable > ul li i {
+    font-size: 12px;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Item induk aktif: garis aksen kiri, tanpa background penuh */
+.sidebar nav ul li.expandable.active {
+    background: transparent;
+    color: #f8636f;
+    border-left: 3px solid #f8636f;
+}
+
+/* Main content - Full width by default */
+.main-content {
+    margin-left: 0;
+    padding: 15px 40px;
+    flex-grow: 1;
+    min-height: calc(100vh - 120px);
+    transition: margin-left 0.3s ease;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Optional UI scale so 100% browser zoom ≈ 110% look */
+.main-content.ui-scale-110 {
+    transform: scale(1.1);
+    transform-origin: top center;
+    width: calc(100% / 1.1);
+}
+
+/* Sidebar overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;
+}
+
+/* When sidebar is open, adjust main content and show overlay */
+body.sidebar-open .main-content {
+    margin-left: 300px;
+    max-width: calc(1400px - 300px);
+    align-items: flex-start;
+}
+
+body.sidebar-open .sidebar-overlay {
+    display: block;
+}
+
+.main-content h2 {
+    color: #003b6f;
+    margin-bottom: 15px;
+    font-size: 28px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Kartu info atas */
+.card-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-card {
+    flex: 1 1 280px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 22px 25px;
+    position: relative;
+    overflow: visible;
+    cursor: default;
+    isolation: isolate;
+    min-height: 120px;
+}
+
+.info-card .icon-wrapper {
+    background: rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 14px;
+    margin-right: 16px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    position: relative;
+    overflow: visible;
+}
+
+.info-card.blue {
+    background: linear-gradient(90deg, #0a5fd7 0%, #0450b7 50%, #0a5fd7 100%);
+    box-shadow: 0 6px 14px rgba(4,80,183,0.45);
+}
+
+.info-card.green {
+    background: linear-gradient(90deg, #1b9a6e 0%, #117a55 50%, #1b9a6e 100%);
+    box-shadow: 0 6px 14px rgba(17,122,85,0.45);
+}
+
+.info-card.yellow {
+    background: linear-gradient(90deg, #f2a11a 0%, #d8890e 50%, #f2a11a 100%);
+    box-shadow: 0 6px 14px rgba(216,137,14,0.45);
+}
+
+/* Improve contrast for yellow card */
+.info-card.yellow, .info-card.yellow .info-text { color: #2b2b2b; }
+.info-card.yellow .icon-wrapper { background: rgba(0,0,0,0.08); }
+
+/* Hexagon badge effect using pseudo elements */
+.info-card::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+    border-radius: 20px;
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0.6;
+}
+
+.info-card::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 16px;
+    z-index: -2;
+}
+
+/* Inner badge on left */
+.info-card .icon-wrapper {
+    background: rgba(255,255,255,0.25);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-right: 16px;
+    box-shadow: inset 0 -2px 0 rgba(255,255,255,0.25), 0 4px 8px rgba(0,0,0,0.12);
+}
+
+/* Animasi icon di kartu info */
+.icon-animated {
+    animation: bounce 3s ease-in-out infinite;
+}
+
+/* Text di kartu info */
+.info-text > div:first-child {
+    font-size: 0.85rem;
+}
+
+.info-text .number {
+    font-size: 1.9rem;
+    margin-top: 3px;
+}
+
+/* Chart section */
+.charts-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chart-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    flex: 1 1 550px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px 30px;
+    min-height: 400px;
+}
+
+.chart-header {
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 10px 14px;
+    color: #fff;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    background: #dc1f3b;
+    box-shadow: 0 4px 10px rgba(220,31,59,0.25);
+}
+
+.red-bg { background: #dc1f3b; }
+
+/* Filter info */
+.filter-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    color: #222;
+}
+
+.filter-info > div {
+    flex: 1 1 auto;
+}
+
+.filter-info strong {
+    font-weight: 600;
+}
+
+.filter-info span {
+    margin-left: 4px;
+    font-weight: 600;
+    color: #555;
+}
+
+.filter-label {
+    text-align: right;
+    color: #222;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Placeholder chart style */
+.pie-chart-placeholder,
+.bar-chart-placeholder {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 320px;
+}
+
+.pie-chart-placeholder img,
+.bar-chart-placeholder img {
+    max-width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+}
+
+/* Note di bawah chart */
+.note {
+    font-size: 0.75rem;
+    color: #777;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* Content Sections */
+.content-section {
+    margin-top: 15px;
+    padding: 15px 0;
+}
+
+.content-section h2 {
+    color: #003b6f;
+    margin-bottom: 15px;
+    font-size: 24px;
+    text-align: left;
+}
+
+/* News Grid */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.news-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #f8636f;
+    transition: transform 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.news-card h3 {
+    color: #003b6f;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.news-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.news-date {
+    color: #999;
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* Match Grid */
+.match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.match-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 4px solid #19976b;
+    transition: transform 0.2s ease;
+}
+
+.match-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.match-card h3 {
+    color: #003b6f;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.match-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.match-date {
+    color: #19976b;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 0.85rem;
+    background: #e3f0fe;
+    color: #003b6f;
+    margin-top: auto;
+}
+
+/* Keyframes Animasi */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .sidebar {
+        width: 320px;
+        padding-top: 15px;
+    }
+    .main-content {
+        padding: 20px 15px;
+    }
+    .main-content { 
+        max-width: none; 
+        margin: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        align-items: center;
+    }
+    .card-container {
+        flex-direction: column;
+        justify-content: center;
+        max-width: 100%;
+    }
+    .charts-section {
+        flex-direction: column;
+        justify-content: center;
+        max-width: 100%;
+    }
+    body.sidebar-open .main-content {
+        margin-left: 0;
+        max-width: none;
+        align-items: center;
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "cabor": "Sepak Bola", "jumlahAtlet": 120, "pelatih": 15, "klub": 8 },
+    { "cabor": "Bulutangkis", "jumlahAtlet": 80, "pelatih": 10, "klub": 6 },
+    { "cabor": "Renang", "jumlahAtlet": 60, "pelatih": 7, "klub": 5 },
+    { "cabor": "Atletik", "jumlahAtlet": 55, "pelatih": 6, "klub": 4 }
+  ]
+}
+

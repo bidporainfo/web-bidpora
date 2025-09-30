@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "nama": "Pekan ParalimpiK Pelajar Daerah (PEPARPEDA) Jateng 2025",
+      "deskripsi": "Kompetisi Olahraga Pelajar Disabilitas",
+      "tglMulai": "19-08-2025",
+      "tglSelesai": "21-08-2025",
+      "tingkat": "Provinsi"
+    },
+    {
+      "nama": "POPDA SMA/SMK/MA Jateng 2025",
+      "deskripsi": "Kompetisi Olahraga Pelajar Se-Jawa Tengah",
+      "tglMulai": "16-06-2025",
+      "tglSelesai": "19-06-2025",
+      "tingkat": "Provinsi"
+    },
+    {
+      "nama": "Kejuaraan Multi Event Pelajar Kabupaten",
+      "deskripsi": "Kejuaraan tingkat Kabupaten",
+      "tglMulai": "22-05-2025",
+      "tglSelesai": "25-05-2025",
+      "tingkat": "Kabupaten"
+    }
+  ]
+}
+

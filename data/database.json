@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "email": "admin@dispora.jepara.go.id"
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": "PON XXI Aceh-Sumut 2024",
+      "content": "Atlet Kabupaten Jepara berhasil meraih prestasi gemilang dalam PON XXI yang diselenggarakan di Aceh dan Sumatera Utara.",
+      "image_url": "assets/images/pon.jpg",
+      "author": "Admin DISPORA",
+      "published_at": "2024-10-15T10:00:00Z",
+      "is_published": true
+    },
+    {
+      "id": 2,
+      "title": "Kejuaraan Bulutangkis Regional",
+      "content": "Tim bulutangkis Kabupaten Jepara berhasil menjadi juara dalam kejuaraan regional yang diselenggarakan di Semarang.",
+      "image_url": "assets/images/pon1.jpg",
+      "author": "Admin DISPORA",
+      "published_at": "2024-09-20T14:30:00Z",
+      "is_published": true
+    }
+  ],
+  "achievements": [
+    {
+      "id": 1,
+      "title": "Juara 1 PON XXI",
+      "description": "Berhasil meraih juara 1 dalam cabang olahraga atletik",
+      "image_url": "assets/images/pon.jpg",
+      "category": "Atletik",
+      "achievement_date": "2024-10-15"
+    }
+  ],
+  "gallery": [
+    {
+      "id": 1,
+      "title": "Momentum Kemenangan",
+      "description": "Momen kebahagiaan atlet setelah meraih kemenangan",
+      "image_url": "assets/images/pon.jpg",
+      "category": "Prestasi"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Kejuaraan Sepak Bola U-17",
+      "description": "Kejuaraan sepak bola untuk kategori usia 17 tahun ke bawah",
+      "event_date": "2024-12-15",
+      "event_time": "08:00:00",
+      "location": "Lapangan Sepak Bola Jepara",
+      "image_url": "assets/images/pon3.jpg"
+    }
+  ],
+  "medal_tallies": [
+    {
+      "id": 1,
+      "competition_name": "PON XXI Aceh-Sumut 2024",
+      "gold_count": 5,
+      "silver_count": 3,
+      "bronze_count": 2,
+      "competition_date": "2024-10-15",
+      "image_url": "assets/images/pon.jpg"
+    }
+  ],
+  "match_schedules": [
+    {
+      "id": 1,
+      "sport": "Sepak Bola",
+      "team_a": "Jepara FC",
+      "team_b": "Kudus United",
+      "match_date": "2024-12-15",
+      "match_time": "15:00:00",
+      "venue": "Lapangan Jepara",
+      "status": "upcoming",
+      "result_a": null,
+      "result_b": null,
+      "image_url": "assets/images/pon3.jpg"
+    }
+  ],
+  "ekompetisi": [
+    {
+      "id": 1,
+      "name": "Pekan Paralimpik Pelajar Daerah (PEPARPEDA) Jateng 2025",
+      "description": "Kompetisi Olahraga Pelajar Disabilitas",
+      "start_date": "2025-08-19",
+      "end_date": "2025-08-21",
+      "level": "Provinsi",
+      "image_url": "assets/images/pon.jpg"
+    },
+    {
+      "id": 2,
+      "name": "POPDA SMA/SMK/MA Jateng 2025",
+      "description": "Kompetisi Olahraga Pelajar Se-Jawa Tengah",
+      "start_date": "2025-06-16",
+      "end_date": "2025-06-19",
+      "level": "Provinsi",
+      "image_url": "assets/images/pon1.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Kejuaraan Multi Event Pelajar Kabupaten",
+      "description": "Kejuaraan tingkat Kabupaten",
+      "start_date": "2025-05-22",
+      "end_date": "2025-05-25",
+      "level": "Kabupaten",
+      "image_url": "assets/images/pon2.jpg"
+    }
+  ]
+}

@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DISPORA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20250926-1" />
+    <style>
+        /* CRUD Styles */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background: #f8636f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #e5555a;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f8636f;
+        }
+
+        .form-group small {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .btn-edit {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-edit:hover {
+            background: #0056b3;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.published {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.draft {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .news-title-cell {
+            max-width: 300px;
+        }
+
+        .text-muted {
+            color: #6c757d;
+        }
+
+        .table-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .table-toolbar label {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .table-toolbar input,
+        .table-toolbar select {
+            margin-left: 8px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Dropdown arrow animation */
+        .sidebar-disclosure summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .sidebar-disclosure summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .sidebar-disclosure summary i.fa-chevron-down {
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-disclosure[open] summary i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        /* Content Section Management */
+        .content-section {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sidebar Navigation Active States */
+        .sidebar nav ul li.active {
+            background: linear-gradient(135deg, #f8636f, #ff7a85);
+            color: white;
+            border-radius: 8px;
+            margin: 0 15px;
+        }
+
+        .sidebar nav ul li.active i {
+            color: white;
+        }
+
+        /* Submenu Active States */
+        .sidebar-disclosure .submenu li a.active {
+            color: #f8636f;
+            font-weight: 600;
+        }
+
+        .sidebar-disclosure .submenu li a.active::before {
+            background: #f8636f;
+            transform: scale(1.2);
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .dashboard-header h2 {
+            margin: 0;
+        }
+
+        /* Profile Dropdown Styles */
+        .admin-info {
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            min-width: 200px;
+            z-index: 1000;
+            display: none;
+            margin-top: 5px;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+            animation: dropdownFadeIn 0.2s ease-out;
+        }
+
+        .profile-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid white;
+        }
+
+        .profile-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .profile-role {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 0;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #333;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-item i {
+            width: 16px;
+            text-align: center;
+            color: #666;
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <img src="DISPORA_LOGO.png" alt="DISPORA Logo" />
+            </div>
+            <div class="menu-icon" aria-label="Buka menu" role="button" tabindex="0"><i class="fas fa-bars"></i></div>
+        </div>
+        <div class="admin-info" onclick="toggleProfileDropdown()">
+            <i class="fas fa-user-lock animated-icon"></i> Admin Kabupaten Jepara <i class="fas fa-caret-down"></i>
+            <div class="profile-dropdown" id="profileDropdown">
+                <div class="profile-header">
+                    <div class="profile-name">Admin Kabupaten Jepara</div>
+                    <div class="profile-role">Admin Kabupaten/Kota</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-item" onclick="showProfile()">
+                    <i class="fas fa-user"></i> My Profile
+                </div>
+                <div class="dropdown-item" onclick="changePassword()">
+                    <i class="fas fa-cog"></i> Ubah Password
+                </div>
+                <div class="dropdown-item" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <nav>
+            <ul>
+                <li class="active"><a href="#dashboard-section" style="display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#keolahragaan" style="display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;"><i class="fas fa-dumbbell"></i> Data Keolahragaan</a></li>
+                <li class="submenu-wrap">
+                    <details class="sidebar-disclosure">
+                        <summary><i class="fas fa-cogs"></i> Manajemen Konten <i class="fas fa-chevron-down"></i></summary>
+                        <ul class="submenu">
+                            <li><a href="#kelola-berita"><i class="fas fa-edit"></i> Kelola Berita</a></li>
+                            <li><a href="#kelola-prestasi"><i class="fas fa-medal"></i> Kelola Prestasi</a></li>
+                            <li><a href="#kelola-galeri"><i class="fas fa-images"></i> Kelola Galeri</a></li>
+                            <li><a href="#kelola-events"><i class="fas fa-calendar"></i> Kelola Events</a></li>
+                            <li><a href="#kelola-dashboard"><i class="fas fa-sliders-h"></i> Kelola Dashboard</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <li><a href="#pelatihan" style="display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;"><i class="fas fa-chalkboard-teacher"></i> Pelatihan/Workshop</a></li>
+                <li><i class="fas fa-link"></i> Link Survey</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Overlay untuk menutup sidebar saat klik di luar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="main-content ui-scale-110" style="align-items:center;">
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="content-section active">
+            <div class="dashboard-header">
+                <h2>Dashboard</h2>
+            </div>
+
+            <div class="card-container">
+                <div class="info-card blue">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-running icon-animated"></i>
+                    </div>
+                    <div class="info-text">
+                        <div>Jumlah Atlet</div>
+                        <div class="number">0</div>
+                    </div>
+                </div>
+                <div class="info-card green">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users icon-animated"></i>
+                    </div>
+                    <div class="info-text">
+                        <div>Jumlah Tenaga Olahraga</div>
+                        <div class="number">0</div>
+                    </div>
+                </div>
+                <div class="info-card yellow">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-swimmer icon-animated"></i>
+                    </div>
+                    <div class="info-text">
+                        <div>Jumlah CABOR</div>
+                        <div class="number">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="charts-section">
+                <div class="chart-box">
+                    <div class="chart-header red-bg">Ringkasan Data Dashboard (Pie)</div>
+                    <div class="filter-info">
+                        <div><strong>Filter Diterapkan</strong></div>
+                        <div>Kab/Kota <span>: Semua</span></div>
+                        <div class="filter-label">Filter</div>
+                    </div>
+                    <div class="pie-chart-placeholder">
+                        <canvas id="pieAtlet" height="280"></canvas>
+                    </div>
+                    <div class="note">* Geser ke bawah untuk melihat data Cabang yang lain</div>
+                </div>
+                <div class="chart-box">
+                    <div class="chart-header red-bg">Ringkasan Data Dashboard (Bar)</div>
+                    <div class="filter-info">
+                        <div><strong>Filter Diterapkan</strong></div>
+                        <div>Cabang Olahraga <span>: </span></div>
+                        <div>Medali <span>: Emas - Tinggi ke Rendah</span></div>
+                        <div class="filter-label">Filter</div>
+                    </div>
+                    <div class="bar-chart-placeholder">
+                        <canvas id="barMedali" height="280"></canvas>
+                    </div>
+                    <div class="note">* Geser ke kanan untuk melihat data Cabang yang lain</div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Berita Terkini Section -->
+        <section id="berita-terkini" class="content-section" style="display: none;">
+            <h2>Berita Terkini</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <h3>Kejuaraan Nasional 2025</h3>
+                    <p>Atlet Kabupaten Jepara berhasil meraih 5 medali emas dalam Kejuaraan Nasional 2025.</p>
+                    <span class="news-date">20 Januari 2025</span>
+                </div>
+                <div class="news-card">
+                    <h3>Pelatihan Atlet Muda</h3>
+                    <p>Program pelatihan intensif untuk atlet muda dimulai bulan ini dengan target 100 peserta.</p>
+                    <span class="news-date">18 Januari 2025</span>
+                </div>
+                <div class="news-card">
+                    <h3>Prestasi Bulan Ini</h3>
+                    <p>Kabupaten Jepara mencatatkan prestasi gemilang dengan 15 medali di berbagai cabang olahraga.</p>
+                    <span class="news-date">15 Januari 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Keolahragaan Section (SPA) -->
+        <section id="keolahragaan" class="content-section" style="display: none;">
+            <h2>Data Keolahragaan</h2>
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="keloPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="keloSearch" type="search" placeholder="Cari..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="keloTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Cabang Olahraga</th>
+                                <th>Jumlah Atlet</th>
+                                <th>Pelatih</th>
+                                <th>Klub</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- E-Kompetisi Section (SPA) -->
+        <section id="e-kompetisi" class="content-section" style="display: none;">
+            <h2>Data E-Kompetisi</h2>
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="ekoPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="ekoSearch" type="search" placeholder="Cari..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="ekoTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Deskripsi</th>
+                                <th>Tgl Mulai</th>
+                                <th>Tgl Selesai</th>
+                                <th>Tingkat</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pelatihan/Workshop Section (SPA) -->
+        <section id="pelatihan" class="content-section" style="display: none;">
+            <h2>Data Pelatihan Workshop</h2>
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="pelPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="pelSearch" type="search" placeholder="Cari..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="pelTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Tanggal Pendaftaran</th>
+                                <th>Tanggal Workshop</th>
+                                <th>Kuota</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kelola Berita Section -->
+        <section id="kelola-berita" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Berita</h2>
+                <button class="btn-primary" onclick="showAddNewsForm()">
+                    <i class="fas fa-plus"></i> Tambah Berita
+                </button>
+            </div>
+            
+            <!-- Form Tambah/Edit Berita -->
+            <div id="news-form" class="form-card" style="display: none;">
+                <h3 id="form-title">Tambah Berita Baru</h3>
+                <form id="news-form-element" enctype="multipart/form-data">
+                    <input type="hidden" id="news-id" value="">
+                    <div class="form-group">
+                        <label for="news-title">Judul Berita</label>
+                        <input type="text" id="news-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="news-content">Konten</label>
+                        <textarea id="news-content" rows="6" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="news-author">Penulis</label>
+                        <input type="text" id="news-author" value="Admin DISPORA">
+                    </div>
+                    <div class="form-group">
+                        <label for="news-image">Gambar</label>
+                        <input type="file" id="news-image" accept="image/*">
+                        <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="news-published" checked>
+                            Publikasikan segera
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideNewsForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Daftar Berita -->
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="newsPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="newsSearch" type="search" placeholder="Cari berita..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="newsTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul</th>
+                                <th>Penulis</th>
+                                <th>Tanggal</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kelola Prestasi Section -->
+        <section id="kelola-prestasi" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Prestasi</h2>
+                <button class="btn-primary" onclick="showAddAchievementForm()">
+                    <i class="fas fa-plus"></i> Tambah Prestasi
+                </button>
+            </div>
+            
+            <!-- Form Tambah/Edit Prestasi -->
+            <div id="achievement-form" class="form-card" style="display: none;">
+                <h3 id="achievement-form-title">Tambah Prestasi Baru</h3>
+                <form id="achievement-form-element" enctype="multipart/form-data">
+                    <input type="hidden" id="achievement-id" value="">
+                    <div class="form-group">
+                        <label for="achievement-title">Judul Prestasi</label>
+                        <input type="text" id="achievement-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-description">Deskripsi</label>
+                        <textarea id="achievement-description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-category">Kategori</label>
+                        <select id="achievement-category" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="Atletik">Atletik</option>
+                            <option value="Renang">Renang</option>
+                            <option value="Bulutangkis">Bulutangkis</option>
+                            <option value="Sepak Bola">Sepak Bola</option>
+                            <option value="Basket">Basket</option>
+                            <option value="Voli">Voli</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-date">Tanggal Prestasi</label>
+                        <input type="date" id="achievement-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-image">Gambar</label>
+                        <input type="file" id="achievement-image" accept="image/*">
+                        <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideAchievementForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Daftar Prestasi -->
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="achievementPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="achievementSearch" type="search" placeholder="Cari prestasi..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="achievementTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kelola Galeri Section -->
+        <section id="kelola-galeri" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Galeri</h2>
+                <button class="btn-primary" onclick="showAddGalleryForm()">
+                    <i class="fas fa-plus"></i> Tambah Foto
+                </button>
+            </div>
+            
+            <!-- Form Tambah/Edit Galeri -->
+            <div id="gallery-form" class="form-card" style="display: none;">
+                <h3 id="gallery-form-title">Tambah Foto Baru</h3>
+                <form id="gallery-form-element" enctype="multipart/form-data">
+                    <input type="hidden" id="gallery-id" value="">
+                    <div class="form-group">
+                        <label for="gallery-title">Judul Foto</label>
+                        <input type="text" id="gallery-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gallery-description">Deskripsi</label>
+                        <textarea id="gallery-description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="gallery-category">Kategori</label>
+                        <select id="gallery-category" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="Prestasi">Prestasi</option>
+                            <option value="Latihan">Latihan</option>
+                            <option value="Penghargaan">Penghargaan</option>
+                            <option value="Kegiatan">Kegiatan</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gallery-image">Foto</label>
+                        <input type="file" id="gallery-image" accept="image/*" required>
+                        <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideGalleryForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Daftar Galeri -->
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="galleryPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="gallerySearch" type="search" placeholder="Cari foto..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="galleryTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Gambar</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kelola Events Section -->
+        <section id="kelola-events" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Events/Jadwal</h2>
+                <button class="btn-primary" onclick="showAddEventForm()">
+                    <i class="fas fa-plus"></i> Tambah Event
+                </button>
+            </div>
+            
+            <!-- Form Tambah/Edit Event -->
+            <div id="event-form" class="form-card" style="display: none;">
+                <h3 id="event-form-title">Tambah Event Baru</h3>
+                <form id="event-form-element" enctype="multipart/form-data">
+                    <input type="hidden" id="event-id" value="">
+                    <div class="form-group">
+                        <label for="event-title">Judul Event</label>
+                        <input type="text" id="event-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-description">Deskripsi</label>
+                        <textarea id="event-description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Tanggal Event</label>
+                        <input type="date" id="event-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-time">Waktu Event</label>
+                        <input type="time" id="event-time">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location">Lokasi</label>
+                        <input type="text" id="event-location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-image">Gambar</label>
+                        <input type="file" id="event-image" accept="image/*">
+                        <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideEventForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Daftar Events -->
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="eventPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="eventSearch" type="search" placeholder="Cari event..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="eventTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
+                                <th>Lokasi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kelola Dashboard Section -->
+        <section id="kelola-dashboard" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Dashboard</h2>
+            </div>
+            <div id="dashboard-form" class="form-card">
+                <h3>Input Data Dashboard</h3>
+                <form id="dashboard-form-element">
+                    <div class="form-group">
+                        <label for="dashboard-atlet">Jumlah Atlet</label>
+                        <input type="number" id="dashboard-atlet" value="180" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dashboard-tenaga">Jumlah Tenaga Olahraga</label>
+                        <input type="number" id="dashboard-tenaga" value="54" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dashboard-cabor">Jumlah CABOR</label>
+                        <input type="number" id="dashboard-cabor" value="67" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        © 2025 Sistem Informasi Manajemen Pembinaan Olahraga
+    </footer>
+    <script src="assets/js/simple-auth.js"></script>
+    <script>
+        // Navigation Management
+        class NavigationManager {
+            constructor() {
+                this.currentSection = 'dashboard-section';
+                this.init();
+            }
+
+            init() {
+                this.setupNavigation();
+                this.showSection('dashboard-section');
+            }
+
+            setupNavigation() {
+                // Setup sidebar navigation
+                const sidebarLinks = document.querySelectorAll('.sidebar nav ul li a');
+                sidebarLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const href = link.getAttribute('href');
+                        if (href && href.startsWith('#')) {
+                            const sectionId = href.substring(1);
+                            this.navigateToSection(sectionId);
+                        }
+                    });
+                });
+
+                // Setup submenu navigation
+                const submenuLinks = document.querySelectorAll('.sidebar-disclosure .submenu li a');
+                submenuLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const href = link.getAttribute('href');
+                        if (href && href.startsWith('#')) {
+                            const sectionId = href.substring(1);
+                            this.navigateToSection(sectionId);
+                        }
+                    });
+                });
+            }
+
+            navigateToSection(sectionId) {
+                // Hide all sections
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                    section.style.display = 'none';
+                });
+
+                // Show target section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    targetSection.classList.add('active');
+                    this.currentSection = sectionId;
+                }
+
+                // Update active states in sidebar
+                this.updateSidebarActiveStates(sectionId);
+
+                // Auto-render data if needed
+                this.autoRenderData(sectionId);
+            }
+
+            updateSidebarActiveStates(sectionId) {
+                // Remove active class from all sidebar items
+                document.querySelectorAll('.sidebar nav ul li').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.sidebar-disclosure .submenu li a').forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                // Add active class to current section
+                if (sectionId === 'dashboard-section') {
+                    document.querySelector('.sidebar nav ul li:first-child').classList.add('active');
+                } else if (sectionId === 'keolahragaan') {
+                    document.querySelector('.sidebar nav ul li:nth-child(2)').classList.add('active');
+                } else if (sectionId.startsWith('kelola-')) {
+                    // Open the disclosure and mark submenu as active
+                    const disclosure = document.querySelector('.sidebar-disclosure');
+                    if (disclosure) {
+                        disclosure.open = true;
+                    }
+                    
+                    const submenuLink = document.querySelector(`.sidebar-disclosure .submenu li a[href="#${sectionId}"]`);
+                    if (submenuLink) {
+                        submenuLink.classList.add('active');
+                    }
+                }
+            }
+
+            autoRenderData(sectionId) {
+                // Auto-render data based on section
+                switch(sectionId) {
+                    // E-Kompetisi removed
+                    case 'pelatihan':
+                        if (window.renderPelatihan) {
+                            window.renderPelatihan();
+                        }
+                        break;
+                    case 'keolahragaan':
+                        if (window.renderKeolahragaan) {
+                            window.renderKeolahragaan();
+                        }
+                        break;
+                    case 'kelola-dashboard':
+                        if (window.simpleStorage && window.simpleStorage.showEditForm) {
+                            window.simpleStorage.showEditForm();
+                        }
+                        break;
+                }
+            }
+
+            showSection(sectionId) {
+                this.navigateToSection(sectionId);
+            }
+        }
+
+        // Guard: hanya admin yang boleh akses
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!window.simpleAuth.requireAdmin('login.html')) return;
+            
+            // Initialize navigation manager
+            window.navigationManager = new NavigationManager();
+            
+            // Initialize simple storage manager
+            window.simpleStorage = new SimpleStorageManager();
+            
+            // Initialize dashboard
+        });
+
+        // E-Kompetisi functions removed
+
+        // Profile Dropdown Functions
+        function toggleProfileDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function showProfile() {
+            alert('Fitur My Profile akan segera tersedia!');
+            closeProfileDropdown();
+        }
+
+        function changePassword() {
+            alert('Fitur Ubah Password akan segera tersedia!');
+            closeProfileDropdown();
+        }
+
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                // Clear session
+                localStorage.removeItem('dispora_user');
+                // Redirect to login
+                window.location.href = 'login.html';
+            }
+            closeProfileDropdown();
+        }
+
+        function closeProfileDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.remove('show');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const adminInfo = document.querySelector('.admin-info');
+            const dropdown = document.getElementById('profileDropdown');
+            
+            if (!adminInfo.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Dashboard functions sudah dipindah ke supabase-integration.js
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="assets/js/simple-storage.js"></script>
+    <script src="assets/js/crud-news.js"></script>
+    <script src="assets/js/crud-all.js"></script>
+    <script src="assets/js/main.js?v=20250926-1"></script>
+</body>
+</html>

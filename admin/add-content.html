@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tambah Konten - DISPORA Admin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #003b6f 0%, #0056b3 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .admin-logo img {
+            height: 40px;
+        }
+        
+        .admin-logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .admin-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .form-subtitle {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #003b6f;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .file-upload-label:hover {
+            border-color: #003b6f;
+            background: #f0f8ff;
+        }
+        
+        .file-upload-label.has-file {
+            border-color: #28a745;
+            background: #f0fff4;
+        }
+        
+        .file-preview {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .file-preview img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #003b6f;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-container">
+            <div class="admin-logo">
+                <img src="../DISPORA_LOGO.png" alt="DISPORA Logo" />
+                <h1>Tambah Konten</h1>
+            </div>
+            <nav class="admin-nav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="../public.html" target="_blank">Lihat Website</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="form-container">
+            <div class="form-header">
+                <h2 class="form-title" id="form-title">Tambah Konten</h2>
+                <p class="form-subtitle" id="form-subtitle">Isi form di bawah ini untuk menambah konten baru</p>
+            </div>
+            
+            <div id="alert-container"></div>
+            
+            <form id="content-form" enctype="multipart/form-data">
+                <!-- News Form -->
+                <div id="news-form" class="content-form hidden">
+                    <div class="form-group">
+                        <label for="news-title">Judul Berita *</label>
+                        <input type="text" id="news-title" name="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="news-content">Konten Berita *</label>
+                        <textarea id="news-content" name="content" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="news-author">Penulis</label>
+                        <input type="text" id="news-author" name="author" value="Admin DISPORA">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="news-image">Gambar Berita</label>
+                        <div class="file-upload">
+                            <input type="file" id="news-image" name="image" accept="image/*">
+                            <label for="news-image" class="file-upload-label" id="news-image-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Pilih Gambar</span>
+                            </label>
+                        </div>
+                        <div class="file-preview" id="news-image-preview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="news-published" name="is_published" checked>
+                            Publikasikan segera
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Achievements Form -->
+                <div id="achievements-form" class="content-form hidden">
+                    <div class="form-group">
+                        <label for="achievement-title">Judul Prestasi *</label>
+                        <input type="text" id="achievement-title" name="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="achievement-description">Deskripsi</label>
+                        <textarea id="achievement-description" name="description"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="achievement-category">Kategori</label>
+                            <input type="text" id="achievement-category" name="category" placeholder="Contoh: Atletik, Renang">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="achievement-date">Tanggal Prestasi</label>
+                            <input type="date" id="achievement-date" name="achievement_date">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="achievement-image">Gambar Prestasi</label>
+                        <div class="file-upload">
+                            <input type="file" id="achievement-image" name="image" accept="image/*">
+                            <label for="achievement-image" class="file-upload-label" id="achievement-image-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Pilih Gambar</span>
+                            </label>
+                        </div>
+                        <div class="file-preview" id="achievement-image-preview"></div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Form -->
+                <div id="gallery-form" class="content-form hidden">
+                    <div class="form-group">
+                        <label for="gallery-title">Judul Foto *</label>
+                        <input type="text" id="gallery-title" name="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gallery-description">Deskripsi</label>
+                        <textarea id="gallery-description" name="description"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gallery-category">Kategori</label>
+                        <select id="gallery-category" name="category">
+                            <option value="Prestasi">Prestasi</option>
+                            <option value="Latihan">Latihan</option>
+                            <option value="Penghargaan">Penghargaan</option>
+                            <option value="Event">Event</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gallery-image">Gambar *</label>
+                        <div class="file-upload">
+                            <input type="file" id="gallery-image" name="image" accept="image/*" required>
+                            <label for="gallery-image" class="file-upload-label" id="gallery-image-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Pilih Gambar</span>
+                            </label>
+                        </div>
+                        <div class="file-preview" id="gallery-image-preview"></div>
+                    </div>
+                </div>
+                
+                <!-- Events Form -->
+                <div id="events-form" class="content-form hidden">
+                    <div class="form-group">
+                        <label for="event-title">Judul Acara *</label>
+                        <input type="text" id="event-title" name="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="event-description">Deskripsi</label>
+                        <textarea id="event-description" name="description"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="event-date">Tanggal Acara *</label>
+                            <input type="date" id="event-date" name="event_date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="event-time">Waktu Acara</label>
+                            <input type="time" id="event-time" name="event_time">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="event-location">Lokasi</label>
+                        <input type="text" id="event-location" name="location">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="event-image">Gambar Acara</label>
+                        <div class="file-upload">
+                            <input type="file" id="event-image" name="image" accept="image/*">
+                            <label for="event-image" class="file-upload-label" id="event-image-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Pilih Gambar</span>
+                            </label>
+                        </div>
+                        <div class="file-preview" id="event-image-preview"></div>
+                    </div>
+                </div>
+                
+                <!-- Medal Tallies Form -->
+                <div id="medal_tallies-form" class="content-form hidden">
+                    <div class="form-group">
+                        <label for="medal-competition">Nama Kompetisi *</label>
+                        <input type="text" id="medal-competition" name="competition_name" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="medal-gold">Medali Emas</label>
+                            <input type="number" id="medal-gold" name="gold_count" min="0" value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="medal-silver">Medali Perak</label>
+                            <input type="number" id="medal-silver" name="silver_count" min="0" value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="medal-bronze">Medali Perunggu</label>
+                            <input type="number" id="medal-bronze" name="bronze_count" min="0" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medal-date">Tanggal Kompetisi</label>
+                        <input type="date" id="medal-date" name="competition_date">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medal-image">Gambar Kompetisi</label>
+                        <div class="file-upload">
+                            <input type="file" id="medal-image" name="image" accept="image/*">
+                            <label for="medal-image" class="file-upload-label" id="medal-image-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Pilih Gambar</span>
+                            </label>
+                        </div>
+                        <div class="file-preview" id="medal-image-preview"></div>
+                    </div>
+                </div>
+                
+                <!-- Match Schedules Form -->
+                <div id="match_schedules-form" class="content-form hidden">
+                    <div class="form-group">
+                        <label for="match-sport">Cabang Olahraga *</label>
+                        <input type="text" id="match-sport" name="sport" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="match-team-a">Tim A *</label>
+                            <input type="text" id="match-team-a" name="team_a" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="match-team-b">Tim B *</label>
+                            <input type="text" id="match-team-b" name="team_b" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="match-date">Tanggal Pertandingan *</label>
+                            <input type="date" id="match-date" name="match_date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="match-time">Waktu Pertandingan *</label>
+                            <input type="time" id="match-time" name="match_time" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="match-venue">Venue</label>
+                        <input type="text" id="match-venue" name="venue">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="match-result-a">Skor Tim A</label>
+                            <input type="number" id="match-result-a" name="result_a" min="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="match-result-b">Skor Tim B</label>
+                            <input type="number" id="match-result-b" name="result_b" min="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="match-status">Status</label>
+                        <select id="match-status" name="status">
+                            <option value="upcoming">Mendatang</option>
+                            <option value="ongoing">Berlangsung</option>
+                            <option value="completed">Selesai</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="match-image">Gambar Pertandingan</label>
+                        <div class="file-upload">
+                            <input type="file" id="match-image" name="image" accept="image/*">
+                            <label for="match-image" class="file-upload-label" id="match-image-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Pilih Gambar</span>
+                            </label>
+                        </div>
+                        <div class="file-preview" id="match-image-preview"></div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Simpan Konten
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <script>
+        let contentType = '';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            initializeForm();
+            setupFileUploads();
+        });
+        
+        function checkAuth() {
+            fetch('../api/auth.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success || !data.data.logged_in || data.data.role !== 'admin') {
+                        window.location.href = '../login.html';
+                    }
+                })
+                .catch(error => {
+                    console.error('Auth check failed:', error);
+                    window.location.href = '../login.html';
+                });
+        }
+        
+        function initializeForm() {
+            const urlParams = new URLSearchParams(window.location.search);
+            contentType = urlParams.get('type') || 'news';
+            
+            // Hide all forms
+            document.querySelectorAll('.content-form').forEach(form => {
+                form.classList.add('hidden');
+            });
+            
+            // Show selected form
+            const selectedForm = document.getElementById(contentType + '-form');
+            if (selectedForm) {
+                selectedForm.classList.remove('hidden');
+            }
+            
+            // Update form title
+            const titles = {
+                'news': 'Tambah Berita',
+                'achievements': 'Tambah Prestasi',
+                'gallery': 'Tambah Galeri',
+                'events': 'Tambah Acara',
+                'medal_tallies': 'Tambah Medali',
+                'match_schedules': 'Tambah Jadwal Pertandingan'
+            };
+            
+            const subtitles = {
+                'news': 'Tambahkan berita terbaru untuk website',
+                'achievements': 'Tambahkan prestasi atlet terbaru',
+                'gallery': 'Tambahkan foto ke galeri',
+                'events': 'Tambahkan acara atau event baru',
+                'medal_tallies': 'Tambahkan data medali kompetisi',
+                'match_schedules': 'Tambahkan jadwal pertandingan baru'
+            };
+            
+            document.getElementById('form-title').textContent = titles[contentType] || 'Tambah Konten';
+            document.getElementById('form-subtitle').textContent = subtitles[contentType] || 'Isi form di bawah ini untuk menambah konten baru';
+        }
+        
+        function setupFileUploads() {
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+            
+            fileInputs.forEach(input => {
+                input.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    const label = document.getElementById(input.id + '-label');
+                    const preview = document.getElementById(input.id + '-preview');
+                    
+                    if (file) {
+                        label.classList.add('has-file');
+                        label.innerHTML = `<i class="fas fa-check"></i> <span>${file.name}</span>`;
+                        
+                        if (file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    } else {
+                        label.classList.remove('has-file');
+                        label.innerHTML = `<i class="fas fa-cloud-upload-alt"></i> <span>Pilih Gambar</span>`;
+                        preview.innerHTML = '';
+                    }
+                });
+            });
+        }
+        
+        document.getElementById('content-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const apiEndpoint = `../api/${contentType}.php`;
+            
+            fetch(apiEndpoint, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showAlert('success', data.message);
+                    this.reset();
+                    document.querySelectorAll('.file-upload-label').forEach(label => {
+                        label.classList.remove('has-file');
+                        label.innerHTML = `<i class="fas fa-cloud-upload-alt"></i> <span>Pilih Gambar</span>`;
+                    });
+                    document.querySelectorAll('.file-preview').forEach(preview => {
+                        preview.innerHTML = '';
+                    });
+                } else {
+                    showAlert('error', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('error', 'Terjadi kesalahan saat menyimpan data');
+            });
+        });
+        
+        function showAlert(type, message) {
+            const alertContainer = document.getElementById('alert-container');
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+            
+            alertContainer.innerHTML = `
+                <div class="alert ${alertClass}">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    ${message}
+                </div>
+            `;
+            
+            alertContainer.style.display = 'block';
+            
+            setTimeout(() => {
+                alertContainer.style.display = 'none';
+            }, 5000);
+        }
+        
+        function goBack() {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "nama": "Workshop Kepelatihan Dasar",
+      "tanggalPendaftaran": "01-02-2025",
+      "tanggalWorkshop": "10-02-2025",
+      "kuota": 50
+    },
+    {
+      "nama": "Pelatihan Manajemen Klub",
+      "tanggalPendaftaran": "05-03-2025",
+      "tanggalWorkshop": "15-03-2025",
+      "kuota": 40
+    },
+    {
+      "nama": "Sertifikasi Wasit Cabang A",
+      "tanggalPendaftaran": "20-04-2025",
+      "tanggalWorkshop": "28-04-2025",
+      "kuota": 30
+    }
+  ]
+}
+

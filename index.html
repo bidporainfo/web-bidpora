@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DISPORA - Loading</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .loading-container {
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .logo-section {
+            margin-bottom: 40px;
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+        
+        .logo-section img {
+            height: 120px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .logo-section h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .logo-section p {
+            font-size: 18px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+        
+        .loading-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .loading-subtext {
+            font-size: 14px;
+            opacity: 0.8;
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+        
+        .progress-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            margin: 30px auto 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f8636f, #ff7a85);
+            border-radius: 2px;
+            animation: progress 2s ease-out forwards;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            color: rgba(255,255,255,0.1);
+            font-size: 24px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; left: 80%; animation-delay: 1s; }
+        .floating-element:nth-child(3) { top: 30%; left: 70%; animation-delay: 2s; }
+        .floating-element:nth-child(4) { top: 80%; left: 20%; animation-delay: 3s; }
+        .floating-element:nth-child(5) { top: 10%; left: 50%; animation-delay: 4s; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.4; }
+        }
+        
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                opacity: 0.1; 
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg); 
+                opacity: 0.3; 
+            }
+        }
+        
+        .status-message {
+            margin-top: 20px;
+            font-size: 16px;
+            opacity: 0;
+            animation: statusFadeIn 0.5s ease-out 1.5s forwards;
+        }
+        
+        @keyframes statusFadeIn {
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .logo-section h1 { font-size: 36px; }
+            .logo-section img { height: 80px; }
+            .progress-bar { width: 250px; }
+        }
+    </style>
+    <script src="assets/js/simple-auth.js"></script>
+    <script>
+        // Fallback jika simple-auth.js tidak ter-load
+        if (typeof window.simpleAuth === 'undefined') {
+            console.warn('simple-auth.js not loaded, using fallback');
+            window.simpleAuth = {
+                isLoggedIn: function() {
+                    const user = localStorage.getItem('dispora_user');
+                    return user !== null;
+                }
+            };
+        }
+    </script>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"><i class="fas fa-running"></i></div>
+        <div class="floating-element"><i class="fas fa-medal"></i></div>
+        <div class="floating-element"><i class="fas fa-trophy"></i></div>
+        <div class="floating-element"><i class="fas fa-users"></i></div>
+        <div class="floating-element"><i class="fas fa-dumbbell"></i></div>
+    </div>
+    
+    <div class="loading-container">
+        <div class="logo-section">
+            <img src="DISPORA_LOGO.png" alt="DISPORA Logo" />
+        </div>
+        
+        <div class="loading-spinner"></div>
+        
+        <div class="loading-text">Memuat...</div>
+        <div class="loading-subtext">Menyiapkan sistem untuk Anda</div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        
+        <div class="status-message" id="statusMessage">
+            <i class="fas fa-check-circle"></i> Sistem siap!
+        </div>
+    </div>
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusMessage = document.getElementById('statusMessage');
+            let redirectDelay = 2000; // 2 seconds
+            
+            // Update status message
+            setTimeout(() => {
+                statusMessage.innerHTML = '<i class="fas fa-user-check"></i> Memeriksa status login...';
+            }, 1000);
+            
+            setTimeout(() => {
+                // Cek session sederhana
+                if (window.simpleAuth.isLoggedIn()) {
+                    statusMessage.innerHTML = '<i class="fas fa-tachometer-alt"></i> Mengalihkan ke Dashboard Admin...';
+                    setTimeout(() => { window.location.href = 'dashboard.html'; }, redirectDelay);
+                } else {
+                    statusMessage.innerHTML = '<i class="fas fa-home"></i> Mengalihkan ke Halaman Utama...';
+                    setTimeout(() => { window.location.href = 'public.html'; }, redirectDelay);
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

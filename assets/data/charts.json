@@ -1,0 +1,17 @@
+{
+  "atletPerCabor": [
+    { "label": "Sepak Bola", "value": 40 },
+    { "label": "Bulutangkis", "value": 25 },
+    { "label": "Renang", "value": 18 },
+    { "label": "Atletik", "value": 22 },
+    { "label": "Karate", "value": 12 },
+    { "label": "Taekwondo", "value": 15 }
+  ],
+  "medaliPerCabor": {
+    "labels": ["Wushu","Atletik","Bola Voli Indoor","Senam","Sepak Bola","Taekwondo","Angkat Besi"],
+    "emas":   [  5,  2, 130, 18, 95, 12,  6 ],
+    "perak":  [  3,  1, 120, 10, 93,  9,  5 ],
+    "perunggu":[  2,  1,  60,  6, 40,  7,  3 ]
+  }
+}
+

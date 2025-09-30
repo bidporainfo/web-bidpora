@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - DISPORA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/simple-auth.js"></script>
+    <script>
+        // Fallback jika simple-auth.js tidak ter-load
+        if (typeof window.simpleAuth === 'undefined') {
+            console.warn('simple-auth.js not loaded, using fallback');
+            window.simpleAuth = {
+                login: async function(username, password) {
+                    // Simple fallback login
+                    if (username === 'admin' && password === 'admin123') {
+                        const user = {
+                            id: 1,
+                            username: 'admin',
+                            email: 'admin@dispora.jepara.go.id',
+                            role: 'admin',
+                            loginTime: new Date().toISOString()
+                        };
+                        localStorage.setItem('dispora_user', JSON.stringify(user));
+                        return { success: true, user: user };
+                    } else {
+                        return { success: false, message: 'Username atau password salah' };
+                    }
+                },
+                isLoggedIn: function() {
+                    const user = localStorage.getItem('dispora_user');
+                    return user !== null;
+                },
+                logout: function() {
+                    localStorage.removeItem('dispora_user');
+                }
+            };
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+        
+        .logo-section {
+            margin-bottom: 20px;
+        }
+        
+        .logo-section img {
+            height: 60px;
+            margin-bottom: 10px;
+        }
+        
+        .logo-section h1 {
+            color: #003b6f;
+            font-size: 20px;
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #f8636f;
+        }
+        
+        .form-group .input-icon {
+            position: relative;
+        }
+        
+        .form-group .input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+        
+        .form-group .input-icon input {
+            padding-left: 45px;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #f8636f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .login-btn:hover {
+            background: #e55a66;
+            transform: translateY(-1px);
+        }
+        
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 15px 0;
+            position: relative;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+            z-index: 1;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .guest-btn {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: #f8636f;
+            border: 1px solid #f8636f;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .guest-btn:hover {
+            background: #f8636f;
+            color: white;
+        }
+        
+        
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <img src="DISPORA_LOGO.png" alt="DISPORA Logo" />
+        </div>
+        
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+        
+        <!-- Login Form -->
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="login-username">Username</label>
+                <div class="input-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="login-username" name="username" required />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <div class="input-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-password" name="password" required />
+                </div>
+            </div>
+            
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Masuk
+            </button>
+        </form>
+        
+        <div class="divider">
+            <span>atau</span>
+        </div>
+        
+        <button class="guest-btn" onclick="goToPublic()">
+            <i class="fas fa-eye"></i> Lihat sebagai Pengunjung
+        </button>
+    </div>
+    
+    <script>
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+        }
+        
+        function hideMessages() {
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('success-message').style.display = 'none';
+        }
+        
+        async function handleLogin(event) {
+            event.preventDefault();
+            hideMessages();
+            
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simple validation
+            if (!username || !password) {
+                showError('Username dan password harus diisi');
+                return;
+            }
+
+            // Login dengan sistem sederhana
+            const result = await window.simpleAuth.login(username, password);
+            
+            if (result.success) {
+                showSuccess('Login berhasil! Mengalihkan...');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                showError(result.message);
+            }
+        }
+        
+        
+        function goToPublic() {
+            window.location.href = 'public.html';
+        }
+        
+        // Cek session: jika sudah login, langsung ke dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.simpleAuth.isLoggedIn()) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DISPORA - Informasi Olahraga Kabupaten Jepara</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+        .public-nav {
+            background: linear-gradient(135deg, #aacdfd 0%, #e3f0fe 100%);
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-section img {
+            height: 50px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu a {
+            color: #003b6f;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: #f8636f;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(248, 99, 111, 0.3);
+        }
+        
+        
+        
+        .login-btn {
+            background: #003b6f;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid #003b6f;
+        }
+        
+        .login-btn:hover {
+            background: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 59, 111, 0.3);
+        }
+        
+        .public-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            margin-top: -20px;
+        }
+        
+        .hero-section {
+            position: relative;
+            min-height: 650px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            margin-bottom: 30px;
+            overflow: hidden;
+            padding: 0;
+            margin-top: -5px;
+        }
+        
+        /* Slider Container */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 580px;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            gap: 40px;
+        }
+        
+        .slide-image {
+            flex: 0 1 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-image {
+            width: 90%;
+            height: 520px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-image:hover {
+            transform: scale(1.01);
+        }
+        
+        .slide-text {
+            flex: 0 1 50%;
+            padding: 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .welcome-text {
+            font-size: 28px;
+            color: #f8636f;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .dispora-title {
+            font-size: 64px;
+            color: #003b6f;
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 0.9;
+            text-align: center;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            color: #003b6f;
+            font-weight: 600;
+            margin: 0 0 25px 0;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        
+        
+        .description {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.7;
+            font-weight: 400;
+            text-align: center;
+            margin: 0;
+            max-width: 100%;
+        }
+        
+        /* Slider Navigation */
+        .slider-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #f8636f, #e5555a);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(248, 99, 111, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #e5555a, #d44a4f);
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(248, 99, 111, 0.4);
+        }
+        
+        .slide-indicators {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .indicator.active {
+            background: linear-gradient(135deg, #f8636f, #e5555a);
+            transform: scale(1.2);
+            box-shadow: 0 3px 10px rgba(248, 99, 111, 0.4);
+        }
+        
+        .indicator:hover {
+            background: #f8636f;
+            transform: scale(1.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-card.blue .icon { color: #0a5fd7; }
+        .stat-card.green .icon { color: #1b9a6e; }
+        .stat-card.yellow .icon { color: #f2a11a; }
+        .stat-card.red .icon { color: #f8636f; }
+        
+        .stat-card .number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #003b6f;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .label {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .section {
+            margin: 60px 0;
+        }
+        
+        .section h3 {
+            color: #003b6f;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-card h4 {
+            color: #003b6f;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .news-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .news-date {
+            color: #999;
+            font-size: 12px;
+            font-style: italic;
+        }
+        
+        .login-prompt {
+            background: linear-gradient(135deg, #f8636f, #ff7a85);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .login-prompt h3 {
+            margin-bottom: 15px;
+        }
+        
+        .login-prompt p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .login-prompt .btn {
+            background: white;
+            color: #f8636f;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .login-prompt .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            background: #003b6f;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+        
+        /* Contact Section Styles */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #f8636f, #ff7a85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            color: #003b6f;
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .contact-details p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        /* Hero Section Updates */
+        .hero-section h2 {
+            color: #f8636f;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .hero-logo h3 {
+            color: #003b6f;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        /* News Latest Section */
+        .news-latest-section {
+            margin: 60px 0;
+        }
+        
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .news-header h2 {
+            color: #f8636f;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .btn-more {
+            background: #f8636f;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-more:hover {
+            background: #e5555a;
+            transform: translateY(-2px);
+        }
+        
+        .news-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .news-card-latest {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card-latest:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-content h4 {
+            color: #003b6f;
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .news-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .news-content p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        /* Calendar Section */
+        .calendar-section {
+            margin: 60px 0;
+        }
+        
+        .calendar-section h2 {
+            color: #003b6f;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .calendar-widget {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-header h3 {
+            color: #003b6f;
+            font-size: 20px;
+            margin: 0;
+        }
+        
+        .calendar-nav {
+            background: #f8636f;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .calendar-day {
+            text-align: center;
+            padding: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.2s ease;
+        }
+        
+        .calendar-day:hover {
+            background: #f8636f;
+            color: white;
+        }
+        
+        .calendar-events h4 {
+            color: #003b6f;
+            margin-bottom: 20px;
+        }
+        
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .event-time {
+            background: #f8636f;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .event-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Medal Section */
+        .medal-section {
+            margin: 60px 0;
+        }
+        
+        .medal-section h2 {
+            color: #003b6f;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .medal-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .medal-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 150px;
+        }
+        
+        .medal-card.gold {
+            border-top: 5px solid #ffd700;
+        }
+        
+        .medal-card.silver {
+            border-top: 5px solid #c0c0c0;
+        }
+        
+        .medal-card.bronze {
+            border-top: 5px solid #cd7f32;
+        }
+        
+        .medal-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .medal-card.gold .medal-icon { color: #ffd700; }
+        .medal-card.silver .medal-icon { color: #c0c0c0; }
+        .medal-card.bronze .medal-icon { color: #cd7f32; }
+        
+        .medal-count {
+            font-size: 36px;
+            font-weight: 700;
+            color: #003b6f;
+            margin-bottom: 10px;
+        }
+        
+        .medal-label {
+            color: #666;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        /* Schedule Section */
+        .schedule-section {
+            margin: 60px 0;
+        }
+        
+        .schedule-section h2 {
+            color: #003b6f;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .schedule-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .schedule-time {
+            background: #f8636f;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .schedule-info h4 {
+            color: #003b6f;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        
+        .schedule-info p {
+            color: #666;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .schedule-venue {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Results Section */
+        .results-section {
+            margin: 60px 0;
+        }
+        
+        .results-section h2 {
+            color: #003b6f;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .result-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .result-sport {
+            color: #003b6f;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .result-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .team {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .score {
+            background: #f8636f;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .result-status {
+            text-align: center;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .result-status.winner {
+            background: #4caf50;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .nav-container {
+                padding: 0 10px;
+            }
+            
+            .public-nav ul {
+                justify-content: center;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .nav-left {
+                gap: 30px;
+            }
+            
+            .nav-menu {
+                gap: 10px;
+            }
+            
+            .nav-menu a {
+                padding: 8px 14px;
+                font-size: 14px;
+            }
+            
+            
+            
+            .login-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            
+            .hero-section {
+                min-height: 550px;
+                padding: 0;
+            }
+            
+            .slider-container {
+                height: 520px;
+            }
+            
+            .slide-content {
+                flex-direction: column;
+                padding: 10px;
+                gap: 0;
+            }
+            
+            .slide-image {
+                flex: none;
+                height: 250px;
+                margin-bottom: 15px;
+            }
+            
+            .hero-image {
+                height: 250px;
+                border-radius: 15px 15px 0 0;
+            }
+            
+            .slide-text {
+                flex: none;
+                padding: 25px;
+                text-align: center;
+                border-radius: 0 0 15px 15px;
+                margin-left: 0;
+            }
+            
+            .welcome-text {
+                font-size: 24px;
+                text-align: center;
+            }
+            
+            .dispora-title {
+                font-size: 48px;
+                text-align: center;
+            }
+            
+            .subtitle {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            
+            .description {
+                font-size: 15px;
+                text-align: center;
+            }
+            
+            .slider-nav {
+                bottom: 20px;
+                padding: 12px 20px;
+                gap: 15px;
+            }
+            
+            .nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .indicator {
+                width: 10px;
+                height: 10px;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .contact-icon {
+                align-self: center;
+            }
+            
+            .news-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .calendar-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .medal-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .schedule-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="public-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo-section">
+                    <img src="DISPORA_LOGO.png" alt="DISPORA Logo" />
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#beranda" class="active" onclick="showSection('beranda')">Beranda</a></li>
+                    <li><a href="#berita" onclick="showSection('berita')">Berita</a></li>
+                    <li><a href="#prestasi" onclick="showSection('prestasi')">Prestasi</a></li>
+                    <li><a href="#galeri" onclick="showSection('galeri')">Galeri</a></li>
+                    <li><a href="#kontak" onclick="showSection('kontak')">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <a href="login-simple.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="public-content">
+        <!-- Beranda Section -->
+        <section id="beranda-section" class="section active">
+            <div class="hero-section">
+                <div class="slider-container">
+                    <!-- Slide 1: Selamat Datang -->
+                    <div class="slide active">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <img src="assets/images/pon.jpg" alt="Selamat Datang di DISPORA" class="hero-image">
+                            </div>
+                            <div class="slide-text">
+                                <h1 class="welcome-text">SELAMAT DATANG</h1>
+                                <h2 class="dispora-title">DISPORA</h2>
+                                <h3 class="subtitle">Dinas Pemuda dan Olahraga</h3>
+                                <p class="description">Bergabunglah dengan kami dalam membangun generasi muda yang sehat, berprestasi, dan berkarakter melalui pembinaan olahraga yang berkualitas dan berkelanjutan.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2: Prestasi Olahraga -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <img src="assets/images/pon1.jpg" alt="Prestasi Olahraga" class="hero-image">
+                            </div>
+                            <div class="slide-text">
+                                <h1 class="welcome-text">PRESTASI</h1>
+                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h3 class="subtitle">Mencapai Keunggulan</h3>
+                                <p class="description">Wujudkan impian menjadi juara melalui latihan yang tekun, dedikasi yang tinggi, dan semangat pantang menyerah dalam setiap kompetisi olahraga.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3: Kompetisi -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <img src="assets/images/pon2.jpg" alt="Kompetisi Olahraga" class="hero-image">
+                            </div>
+                            <div class="slide-text">
+                                <h1 class="welcome-text">KOMPETISI</h1>
+                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h3 class="subtitle">Ajang Prestasi</h3>
+                                <p class="description">Ikuti berbagai kompetisi olahraga yang diselenggarakan untuk mengasah kemampuan, membangun karakter, dan meraih prestasi terbaik.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4: Pembinaan -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <img src="assets/images/pon3.jpg" alt="Pembinaan Olahraga" class="hero-image">
+                            </div>
+                            <div class="slide-text">
+                                <h1 class="welcome-text">PEMBINAAN</h1>
+                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h3 class="subtitle">Membangun Karakter</h3>
+                                <p class="description">Program pembinaan olahraga yang komprehensif untuk mengembangkan potensi atlet muda dengan pelatihan berkualitas dan pendampingan profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 5: Festival Olahraga -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-image">
+                                <img src="assets/images/pon5.jpg" alt="Festival Olahraga" class="hero-image">
+                            </div>
+                            <div class="slide-text">
+                                <h1 class="welcome-text">FESTIVAL</h1>
+                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h3 class="subtitle">Kebersamaan & Prestasi</h3>
+                                <p class="description">Rayakan semangat olahraga dalam festival yang mempersatukan seluruh elemen masyarakat untuk menciptakan lingkungan olahraga yang sehat dan kompetitif.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slider Navigation -->
+                <div class="slider-nav">
+                    <button class="nav-btn prev-btn" onclick="changeSlide(-1)">❮</button>
+                    <div class="slide-indicators">
+                        <span class="indicator active" onclick="currentSlide(1)"></span>
+                        <span class="indicator" onclick="currentSlide(2)"></span>
+                        <span class="indicator" onclick="currentSlide(3)"></span>
+                        <span class="indicator" onclick="currentSlide(4)"></span>
+                        <span class="indicator" onclick="currentSlide(5)"></span>
+                    </div>
+                    <button class="nav-btn next-btn" onclick="changeSlide(1)">❯</button>
+                </div>
+            </div>
+            
+            <!-- Berita Terbaru Section -->
+            <div class="news-latest-section">
+                <div class="news-header">
+                    <h2>BERITA TERBARU</h2>
+                    <button class="btn-more">Selengkapnya <i class="fas fa-play"></i></button>
+                </div>
+                <div class="news-cards-container">
+                    <div class="news-card-latest">
+                        <div class="news-image">
+                            <img src="assets/images/pomnas-ceremony.jpg" alt="POMNAS XIX Closing Ceremony" onerror="this.src='https://via.placeholder.com/300x200/4A90E2/FFFFFF?text=POMNAS+XIX'">
+                        </div>
+                        <div class="news-content">
+                            <h4>Wamendikti Saintek Menutup Secara Resmi POMNAS XIX</h4>
+                            <div class="news-meta">27 Sep 2025 | SEMARANG</div>
+                            <p>Wakil Menteri Pendidikan Tinggi, Sains, dan Teknologi, Prof. Dr. Fauzan, M.Pd. menutup secara resmi POMNAS XIX di Jawa Tengah, Jumat (26/9). Wamendikti Saintek.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card-latest">
+                        <div class="news-image">
+                            <img src="assets/images/basketball-championship.jpg" alt="Basketball Championship" onerror="this.src='https://via.placeholder.com/300x200/50C878/FFFFFF?text=Basketball'">
+                        </div>
+                        <div class="news-content">
+                            <h4>DKI Jakarta Juara Umum POMNAS XIX Dengan Menyabet 81 Emas</h4>
+                            <div class="news-meta">27 Sep 2025 | SEMARANG</div>
+                            <p>Pertandingan Bola Basket Putra mempertemukan Provinsi DKI Jakarta dengan Jawa Tengah, menjadi pertandingan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card-latest">
+                        <div class="news-image">
+                            <img src="assets/images/karate-competition.jpg" alt="Karate Competition" onerror="this.src='https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=Karate'">
+                        </div>
+                        <div class="news-content">
+                            <h4>Hasil POMNAS XIX Menjadi Catatan Provinsi Untuk Berbenah</h4>
+                            <div class="news-meta">26 Sep 2025 | SEMARANG</div>
+                            <p>Pertandingan Cabor Karate pada hari kedua, Kamis (25/9) masih menyisakan 2 nomor pertandingan, yaitu Kumite Beregu Putra</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kalender Section -->
+            <div class="calendar-section">
+                <h2>KALENDER KEGIATAN</h2>
+                <div class="calendar-container">
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <button class="calendar-nav"><i class="fas fa-chevron-left"></i></button>
+                            <h3>Januari 2025</h3>
+                            <button class="calendar-nav"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day-header">Sen</div>
+                            <div class="calendar-day-header">Sel</div>
+                            <div class="calendar-day-header">Rab</div>
+                            <div class="calendar-day-header">Kam</div>
+                            <div class="calendar-day-header">Jum</div>
+                            <div class="calendar-day-header">Sab</div>
+                            <div class="calendar-day-header">Min</div>
+                            
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            <div class="calendar-day">3</div>
+                            <div class="calendar-day">4</div>
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day">6</div>
+                            <div class="calendar-day">7</div>
+                            <div class="calendar-day">8</div>
+                            <div class="calendar-day">9</div>
+                            <div class="calendar-day">10</div>
+                            <div class="calendar-day">11</div>
+                            <div class="calendar-day">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day">14</div>
+                            <div class="calendar-day">15</div>
+                            <div class="calendar-day">16</div>
+                            <div class="calendar-day">17</div>
+                            <div class="calendar-day">18</div>
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day">20</div>
+                            <div class="calendar-day">21</div>
+                            <div class="calendar-day">22</div>
+                            <div class="calendar-day">23</div>
+                            <div class="calendar-day">24</div>
+                            <div class="calendar-day">25</div>
+                            <div class="calendar-day">26</div>
+                            <div class="calendar-day">27</div>
+                            <div class="calendar-day">28</div>
+                            <div class="calendar-day">29</div>
+                            <div class="calendar-day">30</div>
+                            <div class="calendar-day">31</div>
+                        </div>
+                    </div>
+                    <div class="calendar-events">
+                        <h4>Kegiatan Hari Ini</h4>
+                        <div class="event-item">
+                            <div class="event-time">09:00</div>
+                            <div class="event-desc">Pelatihan Atlet Renang</div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-time">14:00</div>
+                            <div class="event-desc">Kejuaraan Bulutangkis</div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-time">19:00</div>
+                            <div class="event-desc">Rapat Koordinasi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Medali Section -->
+            <div class="medal-section">
+                <h2>PEROLEHAN MEDALI</h2>
+                <div class="medal-stats">
+                    <div class="medal-card gold">
+                        <div class="medal-icon"><i class="fas fa-medal"></i></div>
+                        <div class="medal-count">45</div>
+                        <div class="medal-label">Emas</div>
+                    </div>
+                    <div class="medal-card silver">
+                        <div class="medal-icon"><i class="fas fa-medal"></i></div>
+                        <div class="medal-count">32</div>
+                        <div class="medal-label">Perak</div>
+                    </div>
+                    <div class="medal-card bronze">
+                        <div class="medal-icon"><i class="fas fa-medal"></i></div>
+                        <div class="medal-count">28</div>
+                        <div class="medal-label">Perunggu</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Jadwal Pertandingan Section -->
+            <div class="schedule-section">
+                <h2>JADWAL PERTANDINGAN</h2>
+                <div class="schedule-grid">
+                    <div class="schedule-card">
+                        <div class="schedule-time">09:00</div>
+                        <div class="schedule-info">
+                            <h4>Sepak Bola</h4>
+                            <p>Jepara vs Kudus</p>
+                            <span class="schedule-venue">Stadion Gelora Bumi Kartini</span>
+                        </div>
+                    </div>
+                    <div class="schedule-card">
+                        <div class="schedule-time">14:00</div>
+                        <div class="schedule-info">
+                            <h4>Bulu Tangkis</h4>
+                            <p>Final Putra</p>
+                            <span class="schedule-venue">GOR Jepara</span>
+                        </div>
+                    </div>
+                    <div class="schedule-card">
+                        <div class="schedule-time">16:00</div>
+                        <div class="schedule-info">
+                            <h4>Renang</h4>
+                            <p>Gaya Bebas 100m</p>
+                            <span class="schedule-venue">Kolam Renang Jepara</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hasil Pertandingan Section -->
+            <div class="results-section">
+                <h2>HASIL PERTANDINGAN</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-sport">Sepak Bola</div>
+                        <div class="result-teams">
+                            <span class="team">Jepara</span>
+                            <span class="score">2 - 1</span>
+                            <span class="team">Kudus</span>
+                        </div>
+                        <div class="result-status winner">Menang</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-sport">Bulu Tangkis</div>
+                        <div class="result-teams">
+                            <span class="team">Jepara</span>
+                            <span class="score">21 - 19</span>
+                            <span class="team">Semarang</span>
+                        </div>
+                        <div class="result-status winner">Menang</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-sport">Renang</div>
+                        <div class="result-teams">
+                            <span class="team">Jepara</span>
+                            <span class="score">1:05.32</span>
+                            <span class="team">-</span>
+                        </div>
+                        <div class="result-status winner">Rekor</div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        
+        <!-- Berita Section -->
+        <section id="berita-section" class="section" style="display: none;">
+            <h3>Berita Terkini</h3>
+            <div class="news-grid">
+                <div class="news-card">
+                    <h4>Kejuaraan Nasional 2025</h4>
+                    <p>Atlet Kabupaten Jepara berhasil meraih 5 medali emas dalam Kejuaraan Nasional 2025 yang diselenggarakan di Jakarta.</p>
+                    <div class="news-date">20 Januari 2025</div>
+                </div>
+                <div class="news-card">
+                    <h4>Pelatihan Atlet Muda</h4>
+                    <p>Program pelatihan intensif untuk atlet muda dimulai bulan ini dengan target 100 peserta dari berbagai cabang olahraga.</p>
+                    <div class="news-date">18 Januari 2025</div>
+                </div>
+                <div class="news-card">
+                    <h4>Prestasi Bulan Ini</h4>
+                    <p>Kabupaten Jepara mencatatkan prestasi gemilang dengan 15 medali di berbagai cabang olahraga tingkat provinsi.</p>
+                    <div class="news-date">15 Januari 2025</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Prestasi Section -->
+        <section id="prestasi-section" class="section" style="display: none;">
+            <h3>Prestasi Atlet</h3>
+            <div class="news-grid">
+                <div class="news-card">
+                    <h4>Medali Emas Renang</h4>
+                    <p>Atlet renang Kabupaten Jepara berhasil meraih medali emas pada Kejuaraan Renang Jawa Tengah 2025.</p>
+                    <div class="news-date">12 Januari 2025</div>
+                </div>
+                <div class="news-card">
+                    <h4>Juara Bulutangkis</h4>
+                    <p>Tim bulutangkis putra berhasil menjadi juara pada turnamen tingkat kabupaten se-Jawa Tengah.</p>
+                    <div class="news-date">10 Januari 2025</div>
+                </div>
+                <div class="news-card">
+                    <h4>Prestasi Atletik</h4>
+                    <p>Atlet atletik meraih 3 medali perak dan 2 medali perunggu pada kejuaraan regional.</p>
+                    <div class="news-date">8 Januari 2025</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Galeri Section -->
+        <section id="galeri-section" class="section" style="display: none;">
+            <h3>Galeri Kegiatan</h3>
+            <div class="news-grid">
+                <div class="news-card">
+                    <h4>Kejuaraan Sepak Bola</h4>
+                    <p>Foto-foto kegiatan kejuaraan sepak bola tingkat kabupaten yang berlangsung di Stadion Gelora Bumi Kartini.</p>
+                    <div class="news-date">5 Januari 2025</div>
+                </div>
+                <div class="news-card">
+                    <h4>Pelatihan Wasit</h4>
+                    <p>Kegiatan pelatihan wasit untuk berbagai cabang olahraga yang diikuti oleh 50 peserta.</p>
+                    <div class="news-date">3 Januari 2025</div>
+                </div>
+                <div class="news-card">
+                    <h4>Seminar Olahraga</h4>
+                    <p>Seminar pengembangan olahraga yang menghadirkan pembicara dari KONI Pusat.</p>
+                    <div class="news-date">1 Januari 2025</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kontak Section -->
+        <section id="kontak-section" class="section" style="display: none;">
+            <h3>Kontak Kami</h3>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Alamat</h4>
+                            <p>Jl. Pemuda No. 123<br>Jepara, Jawa Tengah 59411</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telepon</h4>
+                            <p>(0291) 123456<br>(0291) 789012</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>info@dispora.jepara.go.id<br>admin@dispora.jepara.go.id</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2025 DISPORA Kabupaten Jepara. Semua hak dilindungi.</p>
+    </footer>
+    
+    <script src="assets/js/image-handler.js"></script>
+    <script>
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + '-section').style.display = 'block';
+            document.getElementById(sectionName + '-section').classList.add('active');
+            
+            // Update nav links
+            document.querySelectorAll('.public-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        
+        
+        
+        
+        // Slider functionality
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            // Show current slide
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex >= totalSlides) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = totalSlides - 1;
+            }
+            
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto-slide functionality
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000); // Change slide every 5 seconds
+
+        // Load data for public sections
+        async function loadPublicData() {
+            try {
+                const response = await fetch('data/database.json');
+                const data = await response.json();
+                
+                // Load news data
+                if (data.news && data.news.length > 0) {
+                    loadNewsData(data.news);
+                }
+                
+                // Load achievements data
+                if (data.achievements && data.achievements.length > 0) {
+                    loadAchievementsData(data.achievements);
+                }
+                
+                // Load gallery data
+                if (data.gallery && data.gallery.length > 0) {
+                    loadGalleryData(data.gallery);
+                }
+                
+            } catch (error) {
+                console.error('Error loading public data:', error);
+            }
+        }
+
+        function loadNewsData(newsData) {
+            const newsContainer = document.querySelector('#berita-section .news-latest');
+            if (!newsContainer) return;
+
+            const newsHTML = newsData.slice(0, 3).map(news => `
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="${news.image_url}" alt="${news.title}" onerror="this.src='assets/images/pon.jpg'">
+                    </div>
+                    <div class="news-content">
+                        <h4>${news.title}</h4>
+                        <p>${news.content.substring(0, 100)}...</p>
+                        <div class="news-date">${new Date(news.published_at).toLocaleDateString('id-ID')}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            newsContainer.innerHTML = newsHTML;
+        }
+
+        function loadAchievementsData(achievementsData) {
+            const achievementsContainer = document.querySelector('#prestasi-section .achievements-grid');
+            if (!achievementsContainer) return;
+
+            const achievementsHTML = achievementsData.map(achievement => `
+                <div class="achievement-card">
+                    <div class="achievement-image">
+                        <img src="${achievement.image_url}" alt="${achievement.title}" onerror="this.src='assets/images/pon.jpg'">
+                    </div>
+                    <div class="achievement-content">
+                        <h4>${achievement.title}</h4>
+                        <p>${achievement.description}</p>
+                        <div class="achievement-category">${achievement.category}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            achievementsContainer.innerHTML = achievementsHTML;
+        }
+
+        function loadGalleryData(galleryData) {
+            const galleryContainer = document.querySelector('#galeri-section .gallery-grid');
+            if (!galleryContainer) return;
+
+            const galleryHTML = galleryData.map(item => `
+                <div class="gallery-item">
+                    <img src="${item.image_url}" alt="${item.title}" onerror="this.src='assets/images/pon.jpg'">
+                    <div class="gallery-overlay">
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            galleryContainer.innerHTML = galleryHTML;
+        }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPublicData();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DISPORA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .logo-section {
+            margin-bottom: 30px;
+        }
+        
+        .logo-section img {
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-section h1 {
+            color: #003b6f;
+            font-size: 24px;
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .divider {
+            margin: 20px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e1e5e9;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .guest-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .guest-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .info-box h4 {
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .info-box p {
+            color: #6c757d;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <img src="DISPORA_LOGO.png" alt="DISPORA Logo" onerror="this.style.display='none'">
+            <h1>DISPORA JEPARA</h1>
+        </div>
+        
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+        
+        <!-- Login Form -->
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required placeholder="Masukkan username">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Masukkan password">
+            </div>
+            
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Masuk
+            </button>
+        </form>
+        
+        <div class="divider">
+            <span>atau</span>
+        </div>
+        
+        <button class="guest-btn" onclick="goToPublic()">
+            <i class="fas fa-eye"></i> Lihat sebagai Pengunjung
+        </button>
+        
+        <div class="info-box">
+            <h4>Default Login:</h4>
+            <p><strong>Username:</strong> admin</p>
+            <p><strong>Password:</strong> admin123</p>
+        </div>
+    </div>
+    
+    <script>
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+        }
+        
+        function hideMessages() {
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('success-message').style.display = 'none';
+        }
+        
+        function handleLogin(event) {
+            event.preventDefault();
+            hideMessages();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (!username || !password) {
+                showError('Username dan password harus diisi');
+                return;
+            }
+
+            // Simple login check
+            if (username === 'admin' && password === 'admin123') {
+                // Simpan session
+                const user = {
+                    id: 1,
+                    username: 'admin',
+                    email: 'admin@dispora.jepara.go.id',
+                    role: 'admin',
+                    loginTime: new Date().toISOString()
+                };
+                localStorage.setItem('dispora_user', JSON.stringify(user));
+                
+                showSuccess('Login berhasil! Mengalihkan...');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                showError('Username atau password salah');
+            }
+        }
+        
+        function goToPublic() {
+            window.location.href = 'public.html';
+        }
+        
+        // Cek session: jika sudah login, langsung ke dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('dispora_user');
+            if (user) {
+                try {
+                    const userData = JSON.parse(user);
+                    if (userData && userData.role === 'admin') {
+                        window.location.href = 'dashboard.html';
+                    }
+                } catch (e) {
+                    // Invalid user data, continue with login
+                }
+            }
+        });
+    </script>
+</body>
+</html>
