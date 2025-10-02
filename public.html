@@ -245,6 +245,73 @@
             .public-content {
                 padding: 0 15px;
             }
+            
+            /* Hero Section Mobile Redesign */
+            .hero-section {
+                min-height: 85vh !important;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
+            }
+            
+            .slider-container {
+                height: 85vh !important;
+            }
+            
+            .slide-content {
+                flex-direction: column !important;
+                padding: 20px 15px !important;
+                gap: 20px !important;
+                text-align: center;
+            }
+            
+            .slide-image {
+                flex: 0 1 45% !important;
+                width: 100%;
+                order: 1;
+            }
+            
+            .hero-image {
+                width: 100%;
+                height: 220px !important;
+                object-fit: cover;
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .slide-text {
+                flex: 0 1 55% !important;
+                padding: 25px 20px !important;
+                margin: 0;
+                background: rgba(255, 255, 255, 0.98) !important;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                order: 2;
+            }
+            
+            .welcome-text {
+                font-size: 18px !important;
+                margin-bottom: 8px;
+                letter-spacing: 1px;
+            }
+            
+            .bidpora-title {
+                font-size: 36px !important;
+                margin-bottom: 8px;
+                line-height: 1.1;
+            }
+            
+            .subtitle {
+                font-size: 15px !important;
+                margin-bottom: 15px;
+                color: #666;
+            }
+            
+            .description {
+                font-size: 13px !important;
+                line-height: 1.4;
+                color: #555;
+                margin-bottom: 0;
+            }
         }
         
         /* Extra small mobile devices */
@@ -269,38 +336,51 @@
                 width: 260px;
             }
             
-            /* Hero Section - Extra Small */
+            /* Hero Section - Extra Small Mobile */
             .hero-section {
-                min-height: 350px;
+                min-height: 75vh !important;
                 margin-bottom: 15px;
             }
             
             .slider-container {
-                height: 330px;
+                height: 75vh !important;
+            }
+            
+            .slide-content {
+                padding: 15px 10px !important;
+                gap: 15px !important;
             }
             
             .slide-image {
-                height: 160px;
+                flex: 0 1 40% !important;
+            }
+            
+            .hero-image {
+                height: 180px !important;
+                border-radius: 10px;
             }
             
             .slide-text {
-                padding: 12px;
+                padding: 20px 15px !important;
+                flex: 0 1 60% !important;
             }
             
             .welcome-text {
-                font-size: 16px;
+                font-size: 16px !important;
             }
             
             .bidpora-title {
-                font-size: 28px;
+                font-size: 30px !important;
+                margin-bottom: 6px;
             }
             
             .subtitle {
-                font-size: 14px;
+                font-size: 13px !important;
+                margin-bottom: 12px;
             }
             
             .description {
-                font-size: 12px;
+                font-size: 12px !important;
                 line-height: 1.3;
             }
             
@@ -1377,6 +1457,115 @@
                 line-height: 1.4;
             }
         }
+
+        /* Swipe Gallery Styles */
+        .swipe-gallery {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            touch-action: pan-y;
+        }
+
+        .swipe-gallery-container {
+            display: flex;
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .swipe-gallery-item {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .swipe-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .swipe-gallery-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .swipe-gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .swipe-gallery-dot.active {
+            background: #f8636f;
+            transform: scale(1.2);
+        }
+
+        .swipe-gallery-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .swipe-gallery-controls:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .swipe-gallery-prev {
+            left: 10px;
+        }
+
+        .swipe-gallery-next {
+            right: 10px;
+        }
+
+        .swipe-gallery-controls i {
+            color: #333;
+            font-size: 16px;
+        }
+
+        /* Mobile specific swipe styles */
+        @media (max-width: 768px) {
+            .swipe-gallery-controls {
+                display: none;
+            }
+            
+            .swipe-gallery {
+                border-radius: 8px;
+            }
+            
+            .swipe-gallery img {
+                height: 180px;
+            }
+            
+            .swipe-gallery-dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .swipe-gallery img {
+                height: 160px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1823,15 +2012,44 @@
             const galeriList = document.getElementById('galeri-list');
             if (!galeriList) return;
 
-            const galleryHTML = galleryData.map(item => `
+            const galleryHTML = galleryData.map((item, index) => `
                 <div class="news-card">
+                    <div class="swipe-gallery" data-gallery="${index}">
+                        <div class="swipe-gallery-container">
+                            <div class="swipe-gallery-item">
+                                <img src="${item.image || 'https://via.placeholder.com/300x200'}" alt="${item.title}" />
+                            </div>
+                            ${item.additional_images ? item.additional_images.map(img => `
+                                <div class="swipe-gallery-item">
+                                    <img src="${img}" alt="${item.title}" />
+                                </div>
+                            `).join('') : ''}
+                        </div>
+                        <button class="swipe-gallery-controls swipe-gallery-prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="swipe-gallery-controls swipe-gallery-next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        ${(item.additional_images && item.additional_images.length > 0) ? `
+                            <div class="swipe-gallery-indicators">
+                                <div class="swipe-gallery-dot active"></div>
+                                ${item.additional_images.map(() => '<div class="swipe-gallery-dot"></div>').join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="card-content">
                         <h4>${item.title}</h4>
-                    <p>${item.description || ''}</p>
-                    <div class="news-date">&nbsp;</div>
+                        <p>${item.description || ''}</p>
+                        <div class="news-date">${new Date(item.date || Date.now()).toLocaleDateString('id-ID')}</div>
+                    </div>
                 </div>
             `).join('');
 
             galeriList.innerHTML = galleryHTML;
+            
+            // Initialize swipe functionality
+            initializeSwipeGalleries();
         }
 
         function loadMedalsData(medals) {
@@ -1951,6 +2169,118 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadPublicData();
         });
+
+        // Swipe Gallery Functionality
+        function initializeSwipeGalleries() {
+            const galleries = document.querySelectorAll('.swipe-gallery');
+            
+            galleries.forEach(gallery => {
+                const container = gallery.querySelector('.swipe-gallery-container');
+                const items = gallery.querySelectorAll('.swipe-gallery-item');
+                const prevBtn = gallery.querySelector('.swipe-gallery-prev');
+                const nextBtn = gallery.querySelector('.swipe-gallery-next');
+                const dots = gallery.querySelectorAll('.swipe-gallery-dot');
+                
+                if (items.length <= 1) return; // Skip if only one image
+                
+                let currentIndex = 0;
+                let startX = 0;
+                let isDragging = false;
+                
+                function updateGallery() {
+                    const translateX = -currentIndex * 100;
+                    container.style.transform = `translateX(${translateX}%)`;
+                    
+                    // Update dots
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
+                
+                function nextImage() {
+                    currentIndex = (currentIndex + 1) % items.length;
+                    updateGallery();
+                }
+                
+                function prevImage() {
+                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                    updateGallery();
+                }
+                
+                // Button controls
+                if (nextBtn) nextBtn.addEventListener('click', nextImage);
+                if (prevBtn) prevBtn.addEventListener('click', prevImage);
+                
+                // Dot controls
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentIndex = index;
+                        updateGallery();
+                    });
+                });
+                
+                // Touch/Swipe controls
+                let startY = 0;
+                
+                gallery.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    isDragging = true;
+                    container.style.transition = 'none';
+                }, { passive: true });
+                
+                gallery.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    
+                    const currentX = e.touches[0].clientX;
+                    const currentY = e.touches[0].clientY;
+                    const diffX = startX - currentX;
+                    const diffY = Math.abs(startY - currentY);
+                    
+                    // If vertical scroll is more significant, allow default behavior
+                    if (diffY > Math.abs(diffX)) {
+                        isDragging = false;
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    
+                    const translateX = -currentIndex * 100 - (diffX / gallery.offsetWidth) * 100;
+                    container.style.transform = `translateX(${translateX}%)`;
+                }, { passive: false });
+                
+                gallery.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+                    const threshold = gallery.offsetWidth * 0.3;
+                    
+                    container.style.transition = 'transform 0.3s ease';
+                    
+                    if (Math.abs(diffX) > threshold) {
+                        if (diffX > 0) {
+                            nextImage();
+                        } else {
+                            prevImage();
+                        }
+                    } else {
+                        updateGallery();
+                    }
+                    
+                    isDragging = false;
+                }, { passive: true });
+                
+                // Auto-advance gallery every 5 seconds
+                if (items.length > 1) {
+                    setInterval(() => {
+                        if (!isDragging) {
+                            nextImage();
+                        }
+                    }, 5000);
+                }
+            });
+        }
     </script>
 </body>
 </html>
