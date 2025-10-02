@@ -43,8 +43,37 @@
       "id": 1,
       "title": "Momentum Kemenangan",
       "description": "Momen kebahagiaan atlet setelah meraih kemenangan",
-      "image_url": "assets/images/pon.jpg",
+      "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400",
+      "additional_images": [
+        "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=400",
+        "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400"
+      ],
+      "date": "2024-01-15",
       "category": "Prestasi"
+    },
+    {
+      "id": 2,
+      "title": "Latihan Intensif",
+      "description": "Sesi latihan intensif para atlet menjelang kompetisi besar",
+      "image": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400",
+      "additional_images": [
+        "https://images.unsplash.com/photo-1529068755536-a5ade0dcb4e8?w=400",
+        "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400",
+        "https://images.unsplash.com/photo-1594736797933-d0ce6713b813?w=400"
+      ],
+      "date": "2024-01-10",
+      "category": "Latihan"
+    },
+    {
+      "id": 3,
+      "title": "Fasilitas Olahraga",
+      "description": "Fasilitas olahraga modern yang tersedia untuk para atlet",
+      "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400",
+      "additional_images": [
+        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400"
+      ],
+      "date": "2024-01-05",
+      "category": "Fasilitas"
     }
   ],
   "events": [
@@ -135,5 +164,68 @@
       "value": "info@bidpora.jepara.go.id\nadmin@bidpora.jepara.go.id",
       "icon": "fas fa-envelope"
     }
-  ]
+  ],
+  "competitions": [
+    {
+      "id": 1,
+      "title": "Kejuaraan Bulutangkis Antar Pelajar 2025",
+      "description": "Kompetisi bulutangkis untuk pelajar tingkat SMA/SMK se-Kabupaten Jepara",
+      "sport_category": "Bulutangkis",
+      "start_date": "2025-02-15",
+      "end_date": "2025-02-17",
+      "registration_start": "2024-12-01",
+      "registration_end": "2025-02-10",
+      "location": "GOR Bulutangkis Jepara",
+      "max_participants": 64,
+      "entry_fee": 50000,
+      "requirements": "Pelajar aktif SMA/SMK, fotokopi kartu pelajar, surat keterangan sehat",
+      "contact_person": "Budi Santoso",
+      "contact_phone": "081234567890",
+      "status": "open",
+      "image_url": "assets/images/pon1.jpg",
+      "created_at": "2024-12-01T00:00:00Z",
+      "updated_at": "2024-12-01T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Turnamen Sepak Bola U-17",
+      "description": "Turnamen sepak bola untuk kategori usia 17 tahun ke bawah",
+      "sport_category": "Sepak Bola",
+      "start_date": "2025-03-01",
+      "end_date": "2025-03-05",
+      "registration_start": "2024-12-01",
+      "registration_end": "2025-02-25",
+      "location": "Lapangan Sepak Bola Jepara",
+      "max_participants": 16,
+      "entry_fee": 100000,
+      "requirements": "Usia maksimal 17 tahun, surat keterangan sehat, fotokopi akta kelahiran",
+      "contact_person": "Ahmad Rahman",
+      "contact_phone": "081234567891",
+      "status": "open",
+      "image_url": "assets/images/pon3.jpg",
+      "created_at": "2024-12-01T00:00:00Z",
+      "updated_at": "2024-12-01T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Kompetisi Renang Pelajar",
+      "description": "Kompetisi renang untuk pelajar SD, SMP, dan SMA",
+      "sport_category": "Renang",
+      "start_date": "2025-02-20",
+      "end_date": "2025-02-22",
+      "registration_start": "2024-12-01",
+      "registration_end": "2025-02-15",
+      "location": "Kolam Renang Kartini Jepara",
+      "max_participants": 100,
+      "entry_fee": 30000,
+      "requirements": "Pelajar aktif, surat keterangan sehat, sertifikat bisa berenang",
+      "contact_person": "Siti Nurhaliza",
+      "contact_phone": "081234567892",
+      "status": "open",
+      "image_url": "assets/images/pon5.jpg",
+      "created_at": "2024-12-01T00:00:00Z",
+      "updated_at": "2024-12-01T00:00:00Z"
+    }
+  ],
+  "registrations": []
 }

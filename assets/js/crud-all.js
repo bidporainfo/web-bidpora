@@ -35,7 +35,9 @@ class ContentManager {
                 medal_tallies: data.medal_tallies || [],
                 match_schedules: data.match_schedules || [],
                 results: data.results || [],
-                contacts: data.contacts || []
+                contacts: data.contacts || [],
+                competitions: data.competitions || [],
+                registrations: data.registrations || []
             };
             console.log('Data loaded from JSON file:', this.data);
         } catch (error) {
@@ -48,7 +50,9 @@ class ContentManager {
                 medal_tallies: [],
                 match_schedules: [],
                 results: [],
-                contacts: []
+                contacts: [],
+                competitions: [],
+                registrations: []
             };
         }
     }
@@ -62,6 +66,7 @@ class ContentManager {
         this.setupForm('match', this.handleMatchSubmit.bind(this));
         this.setupForm('result', this.handleResultSubmit.bind(this));
         this.setupForm('contact', this.handleContactSubmit.bind(this));
+        this.setupForm('competition', this.handleCompetitionSubmit.bind(this));
         
         // Setup form keolahragaan (simple counter)
         this.setupForm('keolahragaan', this.handleKeolahragaanSubmit.bind(this));
@@ -74,6 +79,8 @@ class ContentManager {
         this.setupSearch('match');
         this.setupSearch('result');
         this.setupSearch('contact');
+        this.setupSearch('competition');
+        this.setupSearch('registration');
     }
 
     setupSearch(type) {
@@ -94,9 +101,14 @@ class ContentManager {
         this.renderTable('match');
         this.renderTable('result');
         this.renderTable('contact');
+        this.renderTable('competition');
+        this.renderTable('registration');
         
         // Load keolahragaan data
         this.loadKeolahragaanData();
+        
+        // Load filter options for registration
+        this.loadCompetitionFilters();
     }
 
     setupForm(type, submitHandler) {
@@ -338,6 +350,150 @@ class ContentManager {
     }
     async deleteContact(id){ if (!confirm('Hapus kontak ini?')) return; this.data.contacts = this.data.contacts.filter(r => r.id != id); await this.saveData(); this.renderTable('contact'); this.showNotification('Kontak dihapus', 'success'); }
 
+    // Competition Management
+    showAddCompetitionForm() { this.showForm('competition', 'Tambah Lomba Baru'); }
+    showEditCompetitionForm(id) {
+        const row = this.data.competitions.find(r => r.id == id);
+        if (!row) return; this.showForm('competition', 'Edit Lomba', row);
+    }
+    async handleCompetitionSubmit(e) {
+        e.preventDefault();
+        const formData = this.getFormData('competition');
+        if (formData.id) {
+            const idx = this.data.competitions.findIndex(r => r.id == formData.id);
+            if (idx !== -1) this.data.competitions[idx] = { ...this.data.competitions[idx], ...formData };
+        } else {
+            const newId = Math.max(...this.data.competitions.map(r => r.id), 0) + 1;
+            this.data.competitions.push({ 
+                id: newId, 
+                ...formData,
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString()
+            });
+        }
+        await this.saveData();
+        this.hideForm('competition');
+        this.renderTable('competition');
+        this.loadCompetitionFilters();
+        this.showNotification('Lomba berhasil disimpan!', 'success');
+    }
+    async deleteCompetition(id){ 
+        if (!confirm('Hapus lomba ini? Data pendaftar juga akan terhapus.')) return; 
+        this.data.competitions = this.data.competitions.filter(r => r.id != id); 
+        this.data.registrations = this.data.registrations.filter(r => r.competition_id != id);
+        await this.saveData(); 
+        this.renderTable('competition'); 
+        this.renderTable('registration');
+        this.loadCompetitionFilters();
+        this.showNotification('Lomba dihapus', 'success'); 
+    }
+
+    // Registration Management
+    loadCompetitionFilters() {
+        const filterSelect = document.getElementById('filterCompetition');
+        if (filterSelect) {
+            const options = '<option value="">Semua Lomba</option>' + 
+                this.data.competitions.map(comp => 
+                    `<option value="${comp.id}">${comp.title}</option>`
+                ).join('');
+            filterSelect.innerHTML = options;
+            
+            filterSelect.addEventListener('change', () => {
+                this.renderTable('registration');
+            });
+        }
+    }
+
+    viewRegistrationDetail(id) {
+        const registration = this.data.registrations.find(r => r.id == id);
+        if (!registration) return;
+        
+        const competition = this.data.competitions.find(c => c.id == registration.competition_id);
+        
+        const modal = document.getElementById('detailModal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        
+        modalTitle.textContent = 'Detail Pendaftar';
+        modalBody.innerHTML = `
+            <div class="detail-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Nama:</span>
+                    <span class="meta-value">${registration.participant_name}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Lomba:</span>
+                    <span class="meta-value">${competition ? competition.title : 'Unknown'}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Jenis Kelamin:</span>
+                    <span class="meta-value">${registration.gender}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tanggal Lahir:</span>
+                    <span class="meta-value">${new Date(registration.birth_date).toLocaleDateString('id-ID')}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Alamat:</span>
+                    <span class="meta-value">${registration.full_address}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Cabang Olahraga:</span>
+                    <span class="meta-value">${registration.sport_category}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tingkat Pendidikan:</span>
+                    <span class="meta-value">${registration.education_level || '-'}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Sekolah/Instansi:</span>
+                    <span class="meta-value">${registration.school_institution || '-'}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">No HP:</span>
+                    <span class="meta-value">${registration.phone_number}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">NISN:</span>
+                    <span class="meta-value">${registration.nisn || '-'}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tanggal Daftar:</span>
+                    <span class="meta-value">${new Date(registration.registration_date).toLocaleDateString('id-ID')}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Status:</span>
+                    <span class="meta-value">${registration.status}</span>
+                </div>
+            </div>
+            ${registration.notes ? `
+                <div class="detail-content">
+                    <h4>Catatan:</h4>
+                    <p>${registration.notes}</p>
+                </div>
+            ` : ''}
+        `;
+        modal.style.display = 'block';
+    }
+
+    updateRegistrationStatus(id, status) {
+        const registration = this.data.registrations.find(r => r.id == id);
+        if (!registration) return;
+        
+        registration.status = status;
+        this.saveData();
+        this.renderTable('registration');
+        this.showNotification(`Status pendaftar diubah menjadi ${status}`, 'success');
+    }
+
+    async deleteRegistration(id) {
+        if (!confirm('Hapus data pendaftar ini?')) return;
+        this.data.registrations = this.data.registrations.filter(r => r.id != id);
+        await this.saveData();
+        this.renderTable('registration');
+        this.showNotification('Data pendaftar dihapus', 'success');
+    }
+
     // Keolahragaan Management (Simple counter)
     loadKeolahragaanData() {
         // Load data from localStorage or set defaults
@@ -488,7 +644,9 @@ class ContentManager {
                 contacts: this.data.contacts || [],
                 news: this.data.news || [],
                 achievements: this.data.achievements || [],
-                gallery: this.data.gallery || []
+                gallery: this.data.gallery || [],
+                competitions: this.data.competitions || [],
+                registrations: this.data.registrations || []
             };
             localStorage.setItem('bidpora_public_bridge', JSON.stringify(publicData));
         } catch(_) {}
@@ -577,6 +735,17 @@ class ContentManager {
                 break;
             case 'contact':
                 data = this.data.contacts || [];
+                break;
+            case 'competition':
+                data = this.data.competitions || [];
+                break;
+            case 'registration':
+                data = this.data.registrations || [];
+                // Apply competition filter if selected
+                const filterCompetition = document.getElementById('filterCompetition');
+                if (filterCompetition && filterCompetition.value) {
+                    data = data.filter(reg => reg.competition_id == filterCompetition.value);
+                }
                 break;
             default:
                 data = this.data[type] || [];
@@ -734,6 +903,64 @@ class ContentManager {
                             </td>
                         </tr>
                     `;
+                case 'competition':
+                    const registrationCount = this.data.registrations.filter(reg => reg.competition_id == item.id).length;
+                    const statusClass = item.status === 'open' ? 'published' : item.status === 'closed' ? 'draft' : '';
+                    return `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td><strong>${item.title || ''}</strong></td>
+                            <td>${item.sport_category || ''}</td>
+                            <td>${item.start_date ? new Date(item.start_date).toLocaleDateString('id-ID') : ''} - ${item.end_date ? new Date(item.end_date).toLocaleDateString('id-ID') : ''}</td>
+                            <td>${item.registration_start ? new Date(item.registration_start).toLocaleDateString('id-ID') : ''} - ${item.registration_end ? new Date(item.registration_end).toLocaleDateString('id-ID') : ''}</td>
+                            <td><span class="status-badge ${statusClass}">${item.status || ''}</span></td>
+                            <td>${registrationCount}${item.max_participants ? `/${item.max_participants}` : ''}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-view" onclick="contentManager.showDetailModal('competition', ${item.id})" title="Detail">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-edit" onclick="contentManager.showEditCompetitionForm(${item.id})" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-delete" onclick="contentManager.deleteCompetition(${item.id})" title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                case 'registration':
+                    const competition = this.data.competitions.find(c => c.id == item.competition_id);
+                    const statusBadgeClass = item.status === 'approved' ? 'published' : item.status === 'pending' ? 'draft' : 'badge-danger';
+                    return `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td><strong>${item.participant_name || ''}</strong></td>
+                            <td>${competition ? competition.title : 'Unknown'}</td>
+                            <td>${item.gender || ''}</td>
+                            <td>${item.birth_date ? new Date(item.birth_date).toLocaleDateString('id-ID') : ''}</td>
+                            <td>${item.school_institution || '-'}</td>
+                            <td>${item.phone_number || ''}</td>
+                            <td>${item.registration_date ? new Date(item.registration_date).toLocaleDateString('id-ID') : ''}</td>
+                            <td><span class="status-badge ${statusBadgeClass}">${item.status || ''}</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-view" onclick="contentManager.viewRegistrationDetail(${item.id})" title="Detail">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <select onchange="contentManager.updateRegistrationStatus(${item.id}, this.value)" style="padding:2px;font-size:11px;margin-right:3px;">
+                                        <option value="pending" ${item.status === 'pending' ? 'selected' : ''}>Pending</option>
+                                        <option value="approved" ${item.status === 'approved' ? 'selected' : ''}>Approved</option>
+                                        <option value="rejected" ${item.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+                                    </select>
+                                    <button class="btn-delete" onclick="contentManager.deleteRegistration(${item.id})" title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
                 default:
                     return '';
             }
@@ -756,6 +983,10 @@ class ContentManager {
                 return ['sport', 'team_a', 'team_b', 'status'];
             case 'contact':
                 return ['type', 'title', 'value'];
+            case 'competition':
+                return ['title', 'sport_category', 'location', 'status'];
+            case 'registration':
+                return ['participant_name', 'gender', 'school_institution', 'phone_number'];
             default:
                 return [];
         }
@@ -921,6 +1152,32 @@ function hideResultForm() { contentManager.hideForm('result'); }
 
 function showAddContactForm() { contentManager.showAddContactForm(); }
 function hideContactForm() { contentManager.hideForm('contact'); }
+
+function showAddCompetitionForm() { contentManager.showAddCompetitionForm(); }
+function hideCompetitionForm() { contentManager.hideForm('competition'); }
+
+function exportRegistrations() {
+    const data = contentManager.data.registrations;
+    if (!data.length) {
+        alert('Tidak ada data untuk diekspor');
+        return;
+    }
+    
+    // Simple CSV export
+    let csv = 'No,Nama,Lomba,Jenis Kelamin,Tanggal Lahir,Alamat,Cabang Olahraga,Pendidikan,Sekolah/Instansi,No HP,NISN,Tanggal Daftar,Status\n';
+    data.forEach((reg, index) => {
+        const competition = contentManager.data.competitions.find(c => c.id == reg.competition_id);
+        csv += `${index + 1},"${reg.participant_name}","${competition ? competition.title : 'Unknown'}","${reg.gender}","${reg.birth_date}","${reg.full_address}","${reg.sport_category}","${reg.education_level || ''}","${reg.school_institution || ''}","${reg.phone_number}","${reg.nisn || ''}","${reg.registration_date}","${reg.status}"\n`;
+    });
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `data-pendaftar-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
 
 // Keolahragaan functions
 function resetKeolahragaan() {

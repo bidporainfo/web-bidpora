@@ -152,3 +152,50 @@ INSERT INTO match_schedules (sport, team_a, team_b, match_date, match_time, venu
 ('Sepak Bola', 'Jepara FC', 'Kudus United', '2024-12-15', '15:00:00', 'Lapangan Jepara', 'upcoming', NULL, NULL, 'assets/images/pon3.jpg'),
 ('Basket', 'Jepara Warriors', 'Semarang Giants', '2024-12-16', '19:00:00', 'GOR Jepara', 'upcoming', NULL, NULL, 'assets/images/pon5.jpg'),
 ('Voli', 'Jepara Spikers', 'Pati Thunder', '2024-12-10', '16:00:00', 'GOR Voli Jepara', 'completed', 3, 1, 'assets/images/pon1.jpg');
+
+-- Competitions table for managing competition/lomba
+CREATE TABLE competitions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    sport_category VARCHAR(100) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    registration_start DATE NOT NULL,
+    registration_end DATE NOT NULL,
+    location VARCHAR(255),
+    max_participants INT DEFAULT NULL,
+    entry_fee DECIMAL(10,2) DEFAULT 0,
+    requirements TEXT,
+    contact_person VARCHAR(255),
+    contact_phone VARCHAR(20),
+    status ENUM('draft', 'open', 'closed', 'cancelled', 'completed') DEFAULT 'draft',
+    image_url VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Competition registrations table for participant registration data
+CREATE TABLE competition_registrations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    competition_id INT NOT NULL,
+    participant_name VARCHAR(255) NOT NULL,
+    gender ENUM('Laki-laki', 'Perempuan') NOT NULL,
+    birth_date DATE NOT NULL,
+    full_address TEXT NOT NULL,
+    sport_category VARCHAR(100) NOT NULL,
+    education_level VARCHAR(100),
+    school_institution VARCHAR(255),
+    phone_number VARCHAR(20) NOT NULL,
+    nisn VARCHAR(20),
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+    notes TEXT,
+    FOREIGN KEY (competition_id) REFERENCES competitions(id) ON DELETE CASCADE
+);
+
+-- Insert sample competitions
+INSERT INTO competitions (title, description, sport_category, start_date, end_date, registration_start, registration_end, location, max_participants, entry_fee, requirements, contact_person, contact_phone, status, image_url) VALUES 
+('Kejuaraan Bulutangkis Antar Pelajar 2025', 'Kompetisi bulutangkis untuk pelajar tingkat SMA/SMK se-Kabupaten Jepara', 'Bulutangkis', '2025-02-15', '2025-02-17', '2025-01-01', '2025-02-10', 'GOR Bulutangkis Jepara', 64, 50000, 'Pelajar aktif SMA/SMK, fotokopi kartu pelajar, surat keterangan sehat', 'Budi Santoso', '081234567890', 'open', 'assets/images/pon1.jpg'),
+('Turnamen Sepak Bola U-17', 'Turnamen sepak bola untuk kategori usia 17 tahun ke bawah', 'Sepak Bola', '2025-03-01', '2025-03-05', '2025-01-15', '2025-02-25', 'Lapangan Sepak Bola Jepara', 16, 100000, 'Usia maksimal 17 tahun, surat keterangan sehat, fotokopi akta kelahiran', 'Ahmad Rahman', '081234567891', 'open', 'assets/images/pon3.jpg'),
+('Kompetisi Renang Pelajar', 'Kompetisi renang untuk pelajar SD, SMP, dan SMA', 'Renang', '2025-02-20', '2025-02-22', '2025-01-10', '2025-02-15', 'Kolam Renang Kartini Jepara', 100, 30000, 'Pelajar aktif, surat keterangan sehat, sertifikat bisa berenang', 'Siti Nurhaliza', '081234567892', 'open', 'assets/images/pon5.jpg');

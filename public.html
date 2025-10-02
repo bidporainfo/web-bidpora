@@ -246,71 +246,81 @@
                 padding: 0 15px;
             }
             
-            /* Hero Section Mobile Redesign */
+            /* Hero Section Mobile Redesign - Compact */
             .hero-section {
-                min-height: 85vh !important;
+                min-height: 60vh !important;
                 margin-bottom: 20px;
                 background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
+                position: relative;
             }
             
             .slider-container {
-                height: 85vh !important;
+                height: 60vh !important;
+                position: relative;
             }
             
             .slide-content {
                 flex-direction: column !important;
-                padding: 20px 15px !important;
-                gap: 20px !important;
+                padding: 15px !important;
+                gap: 15px !important;
                 text-align: center;
+                height: 100%;
+                justify-content: center;
             }
             
             .slide-image {
-                flex: 0 1 45% !important;
+                flex: 0 1 55% !important;
                 width: 100%;
                 order: 1;
+                position: relative;
             }
             
             .hero-image {
                 width: 100%;
-                height: 220px !important;
+                height: 180px !important;
                 object-fit: cover;
-                border-radius: 12px;
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+                border-radius: 15px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             }
             
             .slide-text {
-                flex: 0 1 55% !important;
-                padding: 25px 20px !important;
+                flex: 0 1 45% !important;
+                padding: 20px 15px !important;
                 margin: 0;
-                background: rgba(255, 255, 255, 0.98) !important;
-                border-radius: 20px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                background: rgba(255, 255, 255, 0.95) !important;
+                border-radius: 15px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
                 order: 2;
+                backdrop-filter: blur(10px);
             }
             
             .welcome-text {
-                font-size: 18px !important;
-                margin-bottom: 8px;
+                font-size: 16px !important;
+                margin-bottom: 6px;
                 letter-spacing: 1px;
             }
             
             .bidpora-title {
-                font-size: 36px !important;
-                margin-bottom: 8px;
+                font-size: 32px !important;
+                margin-bottom: 6px;
                 line-height: 1.1;
             }
             
             .subtitle {
-                font-size: 15px !important;
-                margin-bottom: 15px;
+                font-size: 14px !important;
+                margin-bottom: 12px;
                 color: #666;
             }
             
             .description {
-                font-size: 13px !important;
+                font-size: 12px !important;
                 line-height: 1.4;
                 color: #555;
                 margin-bottom: 0;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
             }
         }
         
@@ -1566,6 +1576,376 @@
                 height: 160px;
             }
         }
+
+        /* Registration Form Styles */
+        .form-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Competition Grid Layout */
+        .competition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .competition-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 2px solid transparent;
+            max-width: 100%;
+        }
+
+        .competition-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .competition-card.open {
+            border-color: #28a745;
+        }
+
+        .competition-card.closed {
+            border-color: #dc3545;
+        }
+
+        .competition-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .competition-content {
+            padding: 20px;
+        }
+
+        .competition-title {
+            color: #003b6f;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .competition-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .competition-status.closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .competition-description {
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .competition-info {
+            margin-bottom: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 0.85em;
+            gap: 8px;
+        }
+
+        .meta-item i {
+            color: #003b6f;
+            width: 16px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .meta-item span {
+            color: #555;
+        }
+
+        .meta-item strong {
+            color: #003b6f;
+            font-weight: 600;
+        }
+
+        .competition-register-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #f8636f, #ff4757);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .competition-register-btn:hover {
+            background: linear-gradient(135deg, #ff4757, #f8636f);
+            transform: translateY(-1px);
+        }
+
+        .competition-register-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.open {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .days-left {
+            color: #f8636f;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .competition-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin: 15px 10px;
+            }
+            
+            .competition-content {
+                padding: 15px;
+            }
+
+            .competition-image {
+                height: 150px;
+            }
+
+            .competition-title {
+                font-size: 1em;
+            }
+
+            .meta-item {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .competition-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #f8636f;
+        }
+
+        .form-group small {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .btn-primary {
+            background: #f8636f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #e5555a;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .competition-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid #f8636f;
+        }
+
+        .competition-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .competition-card h4 {
+            color: #003b6f;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .competition-card .competition-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .competition-meta .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+        }
+
+        .competition-meta .meta-item i {
+            color: #f8636f;
+        }
+
+        .competition-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .competition-status.open {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .competition-status.closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .competition-register-btn {
+            background: #f8636f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .competition-register-btn:hover {
+            background: #e5555a;
+            transform: translateY(-2px);
+        }
+
+        .competition-register-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 20px 15px;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .competition-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1580,6 +1960,7 @@
                     <li><a href="#berita" onclick="showSection('berita')">Berita</a></li>
                     <li><a href="#prestasi" onclick="showSection('prestasi')">Prestasi</a></li>
                     <li><a href="#galeri" onclick="showSection('galeri')">Galeri</a></li>
+                    <li><a href="#pendaftaran" onclick="showSection('pendaftaran')">Pendaftaran Lomba</a></li>
                     <li><a href="#kontak" onclick="showSection('kontak')">Kontak</a></li>
                 </ul>
             </div>
@@ -1606,6 +1987,7 @@
             <li><a href="#berita" onclick="showSection('berita'); closeMobileMenu();">Berita</a></li>
             <li><a href="#prestasi" onclick="showSection('prestasi'); closeMobileMenu();">Prestasi</a></li>
             <li><a href="#galeri" onclick="showSection('galeri'); closeMobileMenu();">Galeri</a></li>
+            <li><a href="#pendaftaran" onclick="showSection('pendaftaran'); closeMobileMenu();">Pendaftaran Lomba</a></li>
             <li><a href="#kontak" onclick="showSection('kontak'); closeMobileMenu();">Kontak</a></li>
         </ul>
         <a href="login-simple.html" class="mobile-login-btn">Login</a>
@@ -1822,6 +2204,112 @@
             <h3>Galeri Kegiatan</h3>
             <div class="news-grid" id="galeri-list"></div>
         </section>
+
+        <!-- Pendaftaran Lomba Section -->
+        <section id="pendaftaran-section" class="section" style="display: none;">
+            <h3>Pendaftaran Lomba</h3>
+            
+            <!-- Available Competitions -->
+            <div id="competition-list" class="competition-grid" style="margin-bottom: 40px;">
+                <!-- Competition cards will be loaded here -->
+            </div>
+            
+            <!-- Registration Form -->
+            <div id="registration-form-container" style="display: none;">
+                <div class="form-card" style="max-width: 800px; margin: 0 auto;">
+                    <h3 id="selected-competition-title">Form Pendaftaran Lomba</h3>
+                    <div id="competition-info" class="detail-meta" style="margin-bottom: 20px;">
+                        <!-- Competition details will be shown here -->
+                    </div>
+                    
+                    <form id="public-registration-form">
+                        <input type="hidden" id="selected-competition-id" value="">
+                        
+                        <div class="form-group">
+                            <label for="participant_name">Nama Lengkap <span style="color: red;">*</span></label>
+                            <input type="text" id="participant_name" name="participant_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender">Jenis Kelamin <span style="color: red;">*</span></label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="birth_date">Tanggal Lahir <span style="color: red;">*</span></label>
+                            <input type="date" id="birth_date" name="birth_date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="full_address">Alamat Lengkap <span style="color: red;">*</span></label>
+                            <textarea id="full_address" name="full_address" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sport_category">Cabang Olahraga <span style="color: red;">*</span></label>
+                            <input type="text" id="sport_category" name="sport_category" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="education_level">Tingkat Pendidikan</label>
+                            <select id="education_level" name="education_level">
+                                <option value="">Pilih Tingkat Pendidikan</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA/SMK">SMA/SMK</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="school_institution">Asal Sekolah/Instansi</label>
+                            <input type="text" id="school_institution" name="school_institution">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone_number">Nomor HP <span style="color: red;">*</span></label>
+                            <input type="tel" id="phone_number" name="phone_number" required>
+                            <small>Contoh: 081234567890</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nisn">NISN (Nomor Induk Siswa Nasional)</label>
+                            <input type="text" id="nisn" name="nisn">
+                            <small>Khusus untuk pelajar</small>
+                        </div>
+                        
+                        <div class="form-actions" style="text-align: center; margin-top: 30px;">
+                            <button type="submit" class="btn-primary" style="padding: 12px 30px; font-size: 16px;">
+                                <i class="fas fa-paper-plane"></i> Daftar Sekarang
+                            </button>
+                            <button type="button" class="btn-secondary" onclick="cancelRegistration()" style="padding: 12px 30px; font-size: 16px; margin-left: 10px;">
+                                <i class="fas fa-times"></i> Batal
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div id="registration-success" style="display: none; text-align: center; padding: 40px;">
+                <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
+                    <i class="fas fa-check-circle" style="font-size: 48px; margin-bottom: 15px;"></i>
+                    <h3>Pendaftaran Berhasil!</h3>
+                    <p>Terima kasih telah mendaftar. Data Anda akan segera diverifikasi oleh admin.</p>
+                    <button class="btn-primary" onclick="backToCompetitions()" style="margin-top: 15px;">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Daftar Lomba
+                    </button>
+                </div>
+            </div>
+        </section>
         
         <!-- Kontak Section -->
         <section id="kontak-section" class="section" style="display: none;">
@@ -1850,6 +2338,17 @@
             // Show selected section
             document.getElementById(sectionName + '-section').style.display = 'block';
             document.getElementById(sectionName + '-section').classList.add('active');
+            
+            // Auto-load competitions when pendaftaran section is opened
+            if (sectionName === 'pendaftaran') {
+                setTimeout(() => {
+                    const competitionList = document.getElementById('competition-list');
+                    if (competitionList && (competitionList.innerHTML.trim() === '' || competitionList.innerHTML.includes('Belum Ada Lomba'))) {
+                        console.log('Auto-loading competitions when section opened...');
+                        forceLoadCompetitions();
+                    }
+                }, 500);
+            }
             
             // Update nav links (desktop)
             document.querySelectorAll('.nav-menu a').forEach(link => {
@@ -1908,19 +2407,41 @@
         // Load data for public sections
         async function loadPublicData() {
             try {
-                // Prefer data bridged from admin via localStorage if available
+                // Priority 1: Admin data from localStorage
                 let data = {};
-                try {
-                    const bridged = localStorage.getItem('bidpora_public_bridge');
-                    if (bridged) {
-                        data = JSON.parse(bridged);
-                    } else {
-                const response = await fetch('data/database.json');
-                        data = await response.json();
+                const adminData = localStorage.getItem('bidpora_data');
+                if (adminData) {
+                    try {
+                        const parsed = JSON.parse(adminData);
+                        console.log('Using admin data:', parsed);
+                        data = parsed; // Use admin data directly
+                    } catch (e) {
+                        console.error('Error parsing admin data:', e);
                     }
-                } catch (_) {
-                    const response = await fetch('data/database.json');
-                    data = await response.json();
+                }
+                
+                // Priority 2: Bridged data
+                if (!data.competitions || data.competitions.length === 0) {
+                    try {
+                        const bridged = localStorage.getItem('bidpora_public_bridge');
+                        if (bridged) {
+                            data = JSON.parse(bridged);
+                            console.log('Using bridged data:', data);
+                        }
+                    } catch (e) {
+                        console.error('Error parsing bridged data:', e);
+                    }
+                }
+                
+                // Priority 3: JSON file fallback
+                if (!data.competitions || data.competitions.length === 0) {
+                    try {
+                        const response = await fetch('data/database.json?v=' + Date.now());
+                        data = await response.json();
+                        console.log('Using JSON file data:', data);
+                    } catch (e) {
+                        console.error('Error loading JSON file:', e);
+                    }
                 }
                 
                 // Load news data
@@ -1956,6 +2477,24 @@
                 // Load contacts data
                 if (data.contacts && data.contacts.length > 0) {
                     loadContactsData(data.contacts);
+                }
+
+                // Load competitions data
+                console.log('Full data loaded:', data);
+                if (data.competitions && data.competitions.length > 0) {
+                    console.log('Found competitions in main data:', data.competitions);
+                    loadCompetitionsData(data.competitions);
+                } else {
+                    console.log('No competitions found in main data, trying direct load...');
+                    // Force load from admin data if not found
+                    const adminData = localStorage.getItem('bidpora_data');
+                    if (adminData) {
+                        const parsed = JSON.parse(adminData);
+                        if (parsed.competitions && parsed.competitions.length > 0) {
+                            console.log('Loading from admin data:', parsed.competitions);
+                            loadCompetitionsData(parsed.competitions);
+                        }
+                    }
                 }
                 
             } catch (error) {
@@ -2165,9 +2704,458 @@
             });
         }
 
+        function loadCompetitionsData(competitions) {
+            const competitionList = document.getElementById('competition-list');
+            if (!competitionList) return;
+
+            console.log('Loading competitions:', competitions);
+
+            // Filter hanya lomba yang buka pendaftaran
+            const today = new Date();
+            console.log('Today date:', today.toISOString().split('T')[0]);
+            
+            const openCompetitions = competitions.filter(comp => {
+                const regStart = new Date(comp.registration_start);
+                const regEnd = new Date(comp.registration_end);
+                
+                console.log(`\n=== Checking Competition: ${comp.title} ===`);
+                console.log(`Status: "${comp.status}"`);
+                console.log(`Registration Start: ${comp.registration_start} → ${regStart.toDateString()}`);
+                console.log(`Registration End: ${comp.registration_end} → ${regEnd.toDateString()}`);
+                console.log(`Today: ${today.toDateString()}`);
+                console.log(`Status check: ${comp.status === 'open'}`);
+                console.log(`Date range check: ${today >= regStart} && ${today <= regEnd} = ${today >= regStart && today <= regEnd}`);
+                
+                // For now, show ALL open competitions regardless of date for testing
+                const isValid = comp.status === 'open';
+                console.log(`Final result (show all open): ${isValid}`);
+                
+                return isValid;
+            });
+            
+            console.log(`\nFiltered results: ${openCompetitions.length} out of ${competitions.length} competitions`);
+
+            if (openCompetitions.length === 0) {
+                // First try to load all competitions in debug mode automatically
+                console.log('No filtered competitions found, trying to load all...');
+                
+                // Show all competitions regardless of filter for now
+                const allOpenCompetitions = competitions.filter(comp => comp.status === 'open');
+                
+                if (allOpenCompetitions.length > 0) {
+                    console.log('Found open competitions, showing them:', allOpenCompetitions);
+                    // Use the same rendering logic but with all open competitions
+                    const competitionsHTML = allOpenCompetitions.map(comp => {
+                        const regEnd = new Date(comp.registration_end);
+                        const today = new Date();
+                        const daysLeft = Math.ceil((regEnd - today) / (1000 * 60 * 60 * 24));
+                        
+                        return `
+                            <div class="competition-card ${comp.status}">
+                                <img src="${comp.image_url || 'assets/images/pon.jpg'}" alt="${comp.title}" class="competition-image">
+                                <div class="competition-content">
+                                    <h4 class="competition-title">${comp.title}</h4>
+                                    <div class="competition-status ${comp.status}">
+                                        <i class="fas fa-check-circle"></i> Pendaftaran Dibuka
+                                    </div>
+                                    <p class="competition-description">${comp.description || 'Kompetisi olahraga untuk berbagai kategori peserta'}</p>
+                                    <div class="competition-info">
+                                        <div class="meta-item">
+                                            <i class="fas fa-running"></i>
+                                            <span><strong>Cabor:</strong> ${comp.sport_category}</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span><strong>Lokasi:</strong> ${comp.location}</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>${new Date(comp.start_date).toLocaleDateString('id-ID')} - ${new Date(comp.end_date).toLocaleDateString('id-ID')}</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span class="days-left">${daysLeft > 0 ? daysLeft + ' hari lagi' : 'Sudah tutup'}</span>
+                                        </div>
+                                        ${comp.entry_fee > 0 ? `
+                                            <div class="meta-item">
+                                                <i class="fas fa-money-bill"></i>
+                                                <span>Rp ${comp.entry_fee.toLocaleString('id-ID')}</span>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                    <button class="competition-register-btn" onclick="selectCompetition(${comp.id})">
+                                        <i class="fas fa-user-plus"></i> Daftar Sekarang
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    competitionList.innerHTML = competitionsHTML;
+                    return;
+                }
+                
+                // If still no competitions, show the error message
+                competitionList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <i class="fas fa-info-circle" style="font-size: 48px; color: #f8636f; margin-bottom: 15px;"></i>
+                        <h3 style="color: #003b6f; margin-bottom: 10px;">Belum Ada Lomba Terbuka</h3>
+                        <p style="color: #666;">Saat ini belum ada lomba yang membuka pendaftaran. Silakan cek kembali nanti.</p>
+                        <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                            <button class="btn-secondary" onclick="forceLoadCompetitions()" style="padding: 10px 20px;">
+                                <i class="fas fa-sync"></i> Sync Data dari Admin
+                            </button>
+                            <button class="btn-primary" onclick="loadAllCompetitions()" style="padding: 10px 20px;">
+                                <i class="fas fa-eye"></i> Tampilkan Semua (Debug)
+                            </button>
+                        </div>
+                        <p style="font-size: 12px; color: #999; margin-top: 10px;">Debug: Total lomba di database: ${competitions.length}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const competitionsHTML = openCompetitions.map(comp => {
+                const regEnd = new Date(comp.registration_end);
+                const daysLeft = Math.ceil((regEnd - today) / (1000 * 60 * 60 * 24));
+                
+                return `
+                    <div class="competition-card ${comp.status}">
+                        <img src="${comp.image_url || 'assets/images/pon.jpg'}" alt="${comp.title}" class="competition-image">
+                        <div class="competition-content">
+                            <h4 class="competition-title">${comp.title}</h4>
+                            <div class="competition-status ${comp.status}">
+                                <i class="fas fa-check-circle"></i> Pendaftaran Dibuka
+                            </div>
+                            <p class="competition-description">${comp.description || 'Kompetisi olahraga untuk berbagai kategori peserta'}</p>
+                            <div class="competition-info">
+                                <div class="meta-item">
+                                    <i class="fas fa-running"></i>
+                                    <span><strong>Cabor:</strong> ${comp.sport_category}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span><strong>Lokasi:</strong> ${comp.location}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>${new Date(comp.start_date).toLocaleDateString('id-ID')} - ${new Date(comp.end_date).toLocaleDateString('id-ID')}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="days-left">${daysLeft > 0 ? daysLeft + ' hari lagi' : 'Sudah tutup'}</span>
+                                </div>
+                                ${comp.entry_fee > 0 ? `
+                                    <div class="meta-item">
+                                        <i class="fas fa-money-bill"></i>
+                                        <span>Rp ${comp.entry_fee.toLocaleString('id-ID')}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <button class="competition-register-btn" onclick="selectCompetition(${comp.id})" style="width: 100%; margin-top: 15px;">
+                                <i class="fas fa-user-plus"></i> Daftar Sekarang
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            competitionList.innerHTML = competitionsHTML;
+        }
+
+        function selectCompetition(competitionId) {
+            // Get competition data from localStorage
+            const bridgedData = localStorage.getItem('bidpora_public_bridge');
+            let competitions = [];
+            if (bridgedData) {
+                const data = JSON.parse(bridgedData);
+                competitions = data.competitions || [];
+            }
+
+            const competition = competitions.find(c => c.id == competitionId);
+            if (!competition) {
+                alert('Data lomba tidak ditemukan');
+                return;
+            }
+
+            // Show registration form
+            document.getElementById('competition-list').style.display = 'none';
+            document.getElementById('registration-form-container').style.display = 'block';
+            document.getElementById('registration-success').style.display = 'none';
+
+            // Fill competition info
+            document.getElementById('selected-competition-title').textContent = `Pendaftaran: ${competition.title}`;
+            document.getElementById('selected-competition-id').value = competition.id;
+            document.getElementById('sport_category').value = competition.sport_category;
+
+            const competitionInfo = document.getElementById('competition-info');
+            competitionInfo.innerHTML = `
+                <div class="meta-item">
+                    <span class="meta-label">Lomba:</span>
+                    <span class="meta-value">${competition.title}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Cabang Olahraga:</span>
+                    <span class="meta-value">${competition.sport_category}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tanggal Lomba:</span>
+                    <span class="meta-value">${new Date(competition.start_date).toLocaleDateString('id-ID')} - ${new Date(competition.end_date).toLocaleDateString('id-ID')}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Lokasi:</span>
+                    <span class="meta-value">${competition.location}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Batas Pendaftaran:</span>
+                    <span class="meta-value">${new Date(competition.registration_end).toLocaleDateString('id-ID')}</span>
+                </div>
+                ${competition.entry_fee > 0 ? `
+                    <div class="meta-item">
+                        <span class="meta-label">Biaya Pendaftaran:</span>
+                        <span class="meta-value">Rp ${competition.entry_fee.toLocaleString('id-ID')}</span>
+                    </div>
+                ` : ''}
+                ${competition.requirements ? `
+                    <div class="meta-item" style="flex-direction: column; align-items: flex-start;">
+                        <span class="meta-label">Persyaratan:</span>
+                        <span class="meta-value" style="margin-top: 5px;">${competition.requirements}</span>
+                    </div>
+                ` : ''}
+            `;
+
+            // Scroll to form
+            document.getElementById('registration-form-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cancelRegistration() {
+            document.getElementById('competition-list').style.display = 'block';
+            document.getElementById('registration-form-container').style.display = 'none';
+            document.getElementById('registration-success').style.display = 'none';
+            
+            // Reset form
+            document.getElementById('public-registration-form').reset();
+            
+            // Scroll back to top
+            document.getElementById('competition-list').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function backToCompetitions() {
+            cancelRegistration();
+        }
+
+        function forceLoadCompetitions() {
+            console.log('Force loading competitions...');
+            
+            // Reload all data
+            loadPublicData();
+            
+            // Show feedback
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1000);
+        }
+
+        function loadAllCompetitions() {
+            console.log('=== DEBUG MODE: Loading ALL competitions ===');
+            
+            // Get competitions from any source
+            let competitions = [];
+            
+            // Try admin data first
+            const adminData = localStorage.getItem('bidpora_data');
+            if (adminData) {
+                const parsed = JSON.parse(adminData);
+                if (parsed.competitions && parsed.competitions.length > 0) {
+                    competitions = parsed.competitions;
+                    console.log('Using admin data:', competitions);
+                }
+            }
+            
+            if (competitions.length === 0) {
+                // Try bridge data
+                const bridgeData = localStorage.getItem('bidpora_public_bridge');
+                if (bridgeData) {
+                    const parsed = JSON.parse(bridgeData);
+                    if (parsed.competitions && parsed.competitions.length > 0) {
+                        competitions = parsed.competitions;
+                        console.log('Using bridge data:', competitions);
+                    }
+                }
+            }
+            
+            if (competitions.length > 0) {
+                // Load ALL competitions without filter for debugging
+                loadCompetitionsDataDebug(competitions);
+            } else {
+                // Fallback to JSON
+                fetch('data/database.json?v=' + Date.now())
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.competitions) {
+                            loadCompetitionsDataDebug(data.competitions);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading competitions:', error);
+                    });
+            }
+        }
+
+        function loadCompetitionsDataDebug(competitions) {
+            console.log('=== DEBUG MODE: Showing ALL competitions ===');
+            const competitionList = document.getElementById('competition-list');
+            if (!competitionList) return;
+
+            const competitionsHTML = competitions.map(comp => {
+                const regEnd = new Date(comp.registration_end);
+                const today = new Date();
+                const daysLeft = Math.ceil((regEnd - today) / (1000 * 60 * 60 * 24));
+                
+                return `
+                    <div class="competition-card ${comp.status}">
+                        <img src="${comp.image_url || 'assets/images/pon.jpg'}" alt="${comp.title}" class="competition-image">
+                        <div class="competition-content">
+                            <h4 class="competition-title">${comp.title}</h4>
+                            <div class="competition-status ${comp.status}">
+                                <i class="fas fa-${comp.status === 'open' ? 'check-circle' : 'times-circle'}"></i> 
+                                ${comp.status === 'open' ? 'Pendaftaran Dibuka' : 'Pendaftaran Ditutup'}
+                            </div>
+                            <p class="competition-description">${comp.description || 'Kompetisi olahraga untuk berbagai kategori peserta'}</p>
+                            <div class="competition-info">
+                                <div class="meta-item">
+                                    <i class="fas fa-running"></i>
+                                    <span><strong>Cabor:</strong> ${comp.sport_category}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span><strong>Lokasi:</strong> ${comp.location}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>${new Date(comp.start_date).toLocaleDateString('id-ID')} - ${new Date(comp.end_date).toLocaleDateString('id-ID')}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="days-left">${daysLeft > 0 ? daysLeft + ' hari lagi' : 'Sudah tutup'}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <i class="fas fa-${comp.status === 'open' ? 'check' : 'times'}"></i>
+                                    <span><span class="status-badge ${comp.status}">${comp.status.toUpperCase()}</span></span>
+                                </div>
+                                ${comp.entry_fee > 0 ? `
+                                    <div class="meta-item">
+                                        <i class="fas fa-money-bill"></i>
+                                        <span>Rp ${comp.entry_fee.toLocaleString('id-ID')}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <button class="competition-register-btn" onclick="selectCompetition(${comp.id})" ${comp.status !== 'open' ? 'disabled' : ''} style="width: 100%; margin-top: 15px;">
+                                <i class="fas fa-user-plus"></i> ${comp.status === 'open' ? 'Daftar Sekarang' : 'Pendaftaran Ditutup'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            competitionList.innerHTML = competitionsHTML || '<p>Tidak ada data lomba.</p>';
+        }
+
+        // Handle registration form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const registrationForm = document.getElementById('public-registration-form');
+            if (registrationForm) {
+                registrationForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(registrationForm);
+                    const registrationData = {
+                        competition_id: parseInt(document.getElementById('selected-competition-id').value),
+                        participant_name: formData.get('participant_name'),
+                        gender: formData.get('gender'),
+                        birth_date: formData.get('birth_date'),
+                        full_address: formData.get('full_address'),
+                        sport_category: formData.get('sport_category'),
+                        education_level: formData.get('education_level'),
+                        school_institution: formData.get('school_institution'),
+                        phone_number: formData.get('phone_number'),
+                        nisn: formData.get('nisn'),
+                        registration_date: new Date().toISOString(),
+                        status: 'pending'
+                    };
+
+                    // Validate required fields
+                    if (!registrationData.participant_name || !registrationData.gender || 
+                        !registrationData.birth_date || !registrationData.full_address || 
+                        !registrationData.phone_number) {
+                        alert('Harap lengkapi semua field yang wajib diisi (*)');
+                        return;
+                    }
+
+                    // Save registration to localStorage (simulating API)
+                    try {
+                        let adminData = localStorage.getItem('bidpora_data');
+                        if (!adminData) {
+                            adminData = { registrations: [] };
+                        } else {
+                            adminData = JSON.parse(adminData);
+                            if (!adminData.registrations) {
+                                adminData.registrations = [];
+                            }
+                        }
+
+                        // Generate new ID
+                        const newId = Math.max(...adminData.registrations.map(r => r.id), 0) + 1;
+                        registrationData.id = newId;
+
+                        // Add to registrations
+                        adminData.registrations.push(registrationData);
+
+                        // Save back to localStorage
+                        localStorage.setItem('bidpora_data', JSON.stringify(adminData));
+
+                        // Show success message
+                        document.getElementById('registration-form-container').style.display = 'none';
+                        document.getElementById('registration-success').style.display = 'block';
+                        
+                        // Scroll to success message
+                        document.getElementById('registration-success').scrollIntoView({ behavior: 'smooth' });
+
+                    } catch (error) {
+                        console.error('Error saving registration:', error);
+                        alert('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+                    }
+                });
+            }
+        });
+
         // Load data when page loads
         document.addEventListener('DOMContentLoaded', function() {
             loadPublicData();
+            
+            // Check if we're on pendaftaran page from URL
+            if (window.location.hash === '#pendaftaran') {
+                setTimeout(() => {
+                    console.log('Loading competitions from URL hash...');
+                    forceLoadCompetitions();
+                }, 1000);
+            }
+            
+            // Also try to auto-load competitions after a short delay if not loaded
+            setTimeout(() => {
+                const competitionList = document.getElementById('competition-list');
+                if (competitionList && competitionList.innerHTML.trim() === '') {
+                    console.log('Auto-loading competitions after delay...');
+                    forceLoadCompetitions();
+                }
+            }, 2000);
         });
 
         // Swipe Gallery Functionality

@@ -509,6 +509,15 @@
                         </ul>
                     </details>
                 </li>
+                <li class="submenu-wrap">
+                    <details class="sidebar-disclosure">
+                        <summary><i class="fas fa-trophy"></i> Manajemen Lomba <i class="fas fa-chevron-down"></i></summary>
+                        <ul class="submenu">
+                            <li><a href="#kelola-lomba"><i class="fas fa-trophy"></i> Kelola Lomba</a></li>
+                            <li><a href="#data-pendaftar"><i class="fas fa-users"></i> Data Pendaftar</a></li>
+                        </ul>
+                    </details>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -1330,6 +1339,190 @@
             </div>
         </section>
 
+        <!-- Kelola Lomba Section -->
+        <section id="kelola-lomba" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Lomba/Kompetisi</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-secondary" onclick="syncToPublic()" title="Sinkronkan data ke halaman public">
+                        <i class="fas fa-sync"></i> Sync ke Public
+                    </button>
+                    <button class="btn-primary" onclick="showAddCompetitionForm()">
+                        <i class="fas fa-plus"></i> Tambah Lomba
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Form Tambah/Edit Lomba -->
+            <div id="competition-form" class="form-card" style="display: none;">
+                <h3 id="competition-form-title">Tambah Lomba Baru</h3>
+                <form id="competition-form-element" enctype="multipart/form-data">
+                    <input type="hidden" id="competition-id" name="competition-id" value="">
+                    <div class="form-group">
+                        <label for="competition-title">Nama Lomba</label>
+                        <input type="text" id="competition-title" name="competition-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-description">Deskripsi</label>
+                        <textarea id="competition-description" name="competition-description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-sport_category">Cabang Olahraga</label>
+                        <select id="competition-sport_category" name="competition-sport_category" required>
+                            <option value="">Pilih Cabang Olahraga</option>
+                            <option value="Atletik">Atletik</option>
+                            <option value="Renang">Renang</option>
+                            <option value="Bulutangkis">Bulutangkis</option>
+                            <option value="Sepak Bola">Sepak Bola</option>
+                            <option value="Basket">Basket</option>
+                            <option value="Voli">Voli</option>
+                            <option value="Tenis Meja">Tenis Meja</option>
+                            <option value="Bulu Tangkis">Bulu Tangkis</option>
+                            <option value="Karate">Karate</option>
+                            <option value="Taekwondo">Taekwondo</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-start_date">Tanggal Mulai Lomba</label>
+                        <input type="date" id="competition-start_date" name="competition-start_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-end_date">Tanggal Selesai Lomba</label>
+                        <input type="date" id="competition-end_date" name="competition-end_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-registration_start">Tanggal Buka Pendaftaran</label>
+                        <input type="date" id="competition-registration_start" name="competition-registration_start" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-registration_end">Tanggal Tutup Pendaftaran</label>
+                        <input type="date" id="competition-registration_end" name="competition-registration_end" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-location">Lokasi</label>
+                        <input type="text" id="competition-location" name="competition-location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-max_participants">Maksimal Peserta</label>
+                        <input type="number" id="competition-max_participants" name="competition-max_participants" min="1">
+                        <small>Kosongkan jika tidak ada batas</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-entry_fee">Biaya Pendaftaran (Rp)</label>
+                        <input type="number" id="competition-entry_fee" name="competition-entry_fee" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-requirements">Persyaratan</label>
+                        <textarea id="competition-requirements" name="competition-requirements" rows="3"></textarea>
+                        <small>Tulis persyaratan yang harus dipenuhi peserta</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-contact_person">Nama Contact Person</label>
+                        <input type="text" id="competition-contact_person" name="competition-contact_person">
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-contact_phone">Nomor HP Contact Person</label>
+                        <input type="tel" id="competition-contact_phone" name="competition-contact_phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-status">Status</label>
+                        <select id="competition-status" name="competition-status" required>
+                            <option value="draft">Draft</option>
+                            <option value="open">Buka Pendaftaran</option>
+                            <option value="closed">Tutup Pendaftaran</option>
+                            <option value="completed">Selesai</option>
+                            <option value="cancelled">Dibatalkan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-image">Gambar</label>
+                        <input type="file" id="competition-image" name="competition-image" accept="image/*">
+                        <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideCompetitionForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Daftar Lomba -->
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="competitionPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="competitionSearch" type="search" placeholder="Cari lomba..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="competitionTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Lomba</th>
+                                <th>Cabang</th>
+                                <th>Tanggal</th>
+                                <th>Pendaftaran</th>
+                                <th>Status</th>
+                                <th>Peserta</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Pendaftar Section -->
+        <section id="data-pendaftar" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Data Pendaftar Lomba</h2>
+                <div style="display: flex; gap: 10px;">
+                    <select id="filterCompetition" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="">Semua Lomba</option>
+                    </select>
+                    <button class="btn-primary" onclick="exportRegistrations()">
+                        <i class="fas fa-download"></i> Export Excel
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Daftar Pendaftar -->
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="registrationPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="registrationSearch" type="search" placeholder="Cari pendaftar..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="registrationTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Lomba</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Sekolah/Instansi</th>
+                                <th>No HP</th>
+                                <th>Tanggal Daftar</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Modal Detail -->
@@ -1522,6 +1715,16 @@
                 dropdown.classList.remove('show');
             }
         });
+
+        // Sync function
+        function syncToPublic() {
+            if (window.contentManager && window.contentManager.saveData) {
+                window.contentManager.saveData();
+                alert('Data berhasil disinkronkan ke halaman public!');
+            } else {
+                alert('Content manager belum ready, coba lagi sebentar.');
+            }
+        }
 
         // Dashboard functions sudah dipindah ke supabase-integration.js
     </script>
