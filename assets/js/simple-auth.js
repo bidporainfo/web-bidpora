@@ -7,7 +7,7 @@ class SimpleAuth {
 
     // Load user dari localStorage
     loadUser() {
-        const user = localStorage.getItem('dispora_user');
+        const user = localStorage.getItem('bidpora_user');
         if (user) {
             this.currentUser = JSON.parse(user);
         }
@@ -38,7 +38,7 @@ class SimpleAuth {
                         };
                         
                         // Simpan ke localStorage
-                        localStorage.setItem('dispora_user', JSON.stringify(this.currentUser));
+                        localStorage.setItem('bidpora_user', JSON.stringify(this.currentUser));
                         return { success: true, user: this.currentUser };
                     }
                 }
@@ -51,13 +51,13 @@ class SimpleAuth {
                 this.currentUser = {
                     id: 1,
                     username: 'admin',
-                    email: 'admin@dispora.jepara.go.id',
+                    email: 'admin@bidpora.jepara.go.id',
                     role: 'admin',
                     loginTime: new Date().toISOString()
                 };
                 
                 // Simpan ke localStorage
-                localStorage.setItem('dispora_user', JSON.stringify(this.currentUser));
+                localStorage.setItem('bidpora_user', JSON.stringify(this.currentUser));
                 return { success: true, user: this.currentUser };
             } else {
                 return { success: false, message: 'Username atau password salah' };
@@ -70,7 +70,7 @@ class SimpleAuth {
     // Logout
     logout() {
         this.currentUser = null;
-        localStorage.removeItem('dispora_user');
+        localStorage.removeItem('bidpora_user');
     }
 
     // Cek apakah user sudah login

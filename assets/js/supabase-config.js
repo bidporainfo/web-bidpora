@@ -1,4 +1,4 @@
-// Konfigurasi Supabase untuk DISPORA Web App
+// Konfigurasi Supabase untuk BIDPORA Web App
 // Ganti dengan URL dan Key Supabase Anda
 
 const SUPABASE_CONFIG = {

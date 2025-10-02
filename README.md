@@ -1,10 +1,10 @@
-# DISPORA Web Application
+# BIDPORA Web Application
 
 Sistem Informasi Manajemen Pembinaan Olahraga Kabupaten Jepara
 
 ## Deskripsi
 
-Aplikasi web DISPORA adalah sistem informasi untuk mengelola data olahraga, berita, prestasi, galeri, dan jadwal pertandingan di Kabupaten Jepara. Aplikasi ini terdiri dari dua bagian utama:
+Aplikasi web BIDPORA adalah sistem informasi untuk mengelola data olahraga, berita, prestasi, galeri, dan jadwal pertandingan di Kabupaten Jepara. Aplikasi ini terdiri dari dua bagian utama:
 
 1. **Public Website** - Tampilan untuk pengunjung umum
 2. **Admin Dashboard** - Panel administrasi untuk mengelola konten
@@ -12,11 +12,11 @@ Aplikasi web DISPORA adalah sistem informasi untuk mengelola data olahraga, beri
 ## Fitur
 
 ### Public Website
-- **Beranda** - Slider dengan gambar dan informasi DISPORA
+- **Beranda** - Slider dengan gambar dan informasi BIDPORA
 - **Berita** - Daftar berita terkini
 - **Prestasi** - Daftar prestasi atlet
 - **Galeri** - Galeri foto kegiatan olahraga
-- **Kontak** - Informasi kontak DISPORA
+- **Kontak** - Informasi kontak BIDPORA
 
 ### Admin Dashboard
 - **Dashboard** - Statistik dan overview data
@@ -55,7 +55,7 @@ Aplikasi web DISPORA adalah sistem informasi untuk mengelola data olahraga, beri
 2. **Setup Database**
    - Buka phpMyAdmin atau MySQL client
    - Import file `database/schema.sql`
-   - Database akan dibuat dengan nama `dispora_web`
+   - Database akan dibuat dengan nama `bidpora_web`
 
 3. **Konfigurasi Database**
    - Edit file `config/database.php` jika diperlukan
@@ -66,9 +66,9 @@ Aplikasi web DISPORA adalah sistem informasi untuk mengelola data olahraga, beri
    - Folder ini untuk menyimpan gambar yang diupload
 
 5. **Akses Aplikasi**
-   - Public website: `http://localhost/web-simpora/public.html`
-   - Admin login: `http://localhost/web-simpora/login.html`
-   - Admin dashboard: `http://localhost/web-simpora/admin/dashboard.html`
+   - Public website: `http://localhost/web-bidpora/public.html`
+   - Admin login: `http://localhost/web-bidpora/login.html`
+   - Admin dashboard: `http://localhost/web-bidpora/admin/dashboard.html`
 
 ## Default Login
 
@@ -78,7 +78,7 @@ Aplikasi web DISPORA adalah sistem informasi untuk mengelola data olahraga, beri
 ## Struktur File
 
 ```
-web-simpora/
+web-bidpora/
 ├── assets/
 │   ├── css/
 │   │   └── styles.css
@@ -194,7 +194,7 @@ web-simpora/
 ### Database Connection Error
 - Pastikan MySQL service berjalan
 - Cek konfigurasi di `config/database.php`
-- Pastikan database `dispora_web` sudah dibuat
+- Pastikan database `bidpora_web` sudah dibuat
 
 ### Upload Error
 - Pastikan folder `assets/uploads/` ada dan writable
@@ -216,10 +216,10 @@ web-simpora/
 
 ## Lisensi
 
-Project ini dibuat untuk DISPORA Kabupaten Jepara. Silakan hubungi admin untuk informasi lebih lanjut.
+Project ini dibuat untuk BIDPORA Kabupaten Jepara. Silakan hubungi admin untuk informasi lebih lanjut.
 
 ## Kontak
 
-- **Email**: info@dispora.jepara.go.id
-- **Website**: www.dispora.jepara.go.id
+- **Email**: info@bidpora.jepara.go.id
+- **Website**: www.bidpora.jepara.go.id
 - **Alamat**: Jl. Pemuda No. 1, Jepara

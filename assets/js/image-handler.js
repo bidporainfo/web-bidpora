@@ -1,4 +1,4 @@
-// Image Handler untuk Website SIMPORA
+// Image Handler untuk Website BIDPORA
 // Menangani loading gambar dan fallback ke placeholder
 
 class ImageHandler {

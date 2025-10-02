@@ -1,18 +1,18 @@
-// GitHub Storage System untuk DISPORA Web App
+// GitHub Storage System untuk BIDPORA Web App
 // Menggunakan GitHub API untuk menyimpan data di repository
 
 class GitHubStorageManager {
     constructor() {
         this.dashboardData = { atlet: 0, tenaga: 0, cabor: 0 };
         this.githubConfig = {
-            owner: 'disporainfo',
-            repo: 'web-simpora',
+            owner: 'bidporainfo',
+            repo: 'web-bidpora',
             token: '',
             filePath: 'data/database.json'
         };
         // Load saved config if any
         try {
-            const saved = localStorage.getItem('dispora_github_config');
+            const saved = localStorage.getItem('bidpora_github_config');
             if (saved) {
                 const cfg = JSON.parse(saved);
                 this.githubConfig = { ...this.githubConfig, ...cfg };
@@ -42,7 +42,7 @@ class GitHubStorageManager {
         }
 
         // Fallback ke localStorage
-        const savedData = localStorage.getItem('dispora_dashboard');
+        const savedData = localStorage.getItem('bidpora_dashboard');
         if (savedData) {
             try {
                 this.dashboardData = JSON.parse(savedData);
@@ -124,7 +124,7 @@ class GitHubStorageManager {
             console.log('Data saved to GitHub');
         } catch (error) {
             console.log('GitHub save failed, using localStorage:', error);
-            localStorage.setItem('dispora_dashboard', JSON.stringify(this.dashboardData));
+            localStorage.setItem('bidpora_dashboard', JSON.stringify(this.dashboardData));
             console.log('Data saved to localStorage');
         }
     }
@@ -137,7 +137,7 @@ class GitHubStorageManager {
         // Local pieces
         let localContent = {};
         try {
-            const d = localStorage.getItem('dispora_data');
+            const d = localStorage.getItem('bidpora_data');
             if (d) localContent = JSON.parse(d);
         } catch(_) {}
 
@@ -212,7 +212,7 @@ class GitHubStorageManager {
         if (token === null) return;
 
         this.githubConfig = { owner, repo, filePath, token };
-        localStorage.setItem('dispora_github_config', JSON.stringify(this.githubConfig));
+        localStorage.setItem('bidpora_github_config', JSON.stringify(this.githubConfig));
         this.showNotification('Konfigurasi GitHub disimpan!', 'success');
     }
 

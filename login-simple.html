@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - DISPORA</title>
+    <title>Login - BIDPORA</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -37,7 +37,7 @@
         }
         
         .logo-section img {
-            height: 100px;
+            height: 120px;
             margin-bottom: 15px;
         }
         
@@ -109,7 +109,7 @@
             }
             
             .logo-section img {
-                height: 80px;
+                height: 100px;
             }
             
             .logo-section h1 {
@@ -124,7 +124,7 @@
             }
             
             .logo-section img {
-                height: 70px;
+                height: 90px;
             }
             
             .logo-section h1 {
@@ -217,8 +217,8 @@
 <body>
     <div class="login-container">
         <div class="logo-section">
-            <img src="DISPORA_LOGO.png" alt="DISPORA Logo" onerror="this.style.display='none'">
-            <h1>DISPORA JEPARA</h1>
+            <img src="BIDPORA_LOGO.png" alt="BIDPORA Logo" onerror="this.style.display='none'">
+            <h1>BIDPORA JEPARA</h1>
         </div>
         
         <div id="error-message" class="error-message"></div>
@@ -306,7 +306,7 @@
         
         // Cek session: jika sudah login, langsung ke dashboard
         document.addEventListener('DOMContentLoaded', function() {
-            const user = localStorage.getItem('dispora_user');
+            const user = localStorage.getItem('bidpora_user');
             if (user) {
                 try {
                     const userData = JSON.parse(user);

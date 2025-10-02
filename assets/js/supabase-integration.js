@@ -1,4 +1,4 @@
-// Supabase Integration untuk DISPORA Web App
+// Supabase Integration untuk BIDPORA Web App
 // Menggunakan konfigurasi dari supabase-config.js
 
 // Inisialisasi Supabase Client
@@ -74,7 +74,7 @@ class SupabaseDashboardManager {
     }
 
     loadFromLocalStorage() {
-        const savedData = localStorage.getItem('dispora_dashboard');
+        const savedData = localStorage.getItem('bidpora_dashboard');
         if (savedData) {
             this.dashboardData = JSON.parse(savedData);
             console.log('Data loaded from localStorage:', this.dashboardData);
@@ -106,7 +106,7 @@ class SupabaseDashboardManager {
     }
 
     saveToLocalStorage() {
-        localStorage.setItem('dispora_dashboard', JSON.stringify(this.dashboardData));
+        localStorage.setItem('bidpora_dashboard', JSON.stringify(this.dashboardData));
         console.log('Data saved to localStorage');
     }
 

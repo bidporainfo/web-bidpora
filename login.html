@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login - DISPORA</title>
+    <title>Login - BIDPORA</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -19,22 +19,22 @@
                         const user = {
                             id: 1,
                             username: 'admin',
-                            email: 'admin@dispora.jepara.go.id',
+                            email: 'admin@bidpora.jepara.go.id',
                             role: 'admin',
                             loginTime: new Date().toISOString()
                         };
-                        localStorage.setItem('dispora_user', JSON.stringify(user));
+                        localStorage.setItem('bidpora_user', JSON.stringify(user));
                         return { success: true, user: user };
                     } else {
                         return { success: false, message: 'Username atau password salah' };
                     }
                 },
                 isLoggedIn: function() {
-                    const user = localStorage.getItem('dispora_user');
+                    const user = localStorage.getItem('bidpora_user');
                     return user !== null;
                 },
                 logout: function() {
-                    localStorage.removeItem('dispora_user');
+                    localStorage.removeItem('bidpora_user');
                 }
             };
         }
@@ -64,7 +64,7 @@
         }
         
         .logo-section img {
-            height: 90px;
+            height: 110px;
             margin-bottom: 10px;
         }
         
@@ -219,7 +219,7 @@
             }
             
             .logo-section img {
-                height: 75px;
+                height: 95px;
             }
             
             .logo-section h1 {
@@ -235,7 +235,7 @@
             }
             
             .logo-section img {
-                height: 65px;
+                height: 85px;
             }
             
             .logo-section h1 {
@@ -266,7 +266,7 @@
 <body>
     <div class="login-container">
         <div class="logo-section">
-            <img src="DISPORA_LOGO.png" alt="DISPORA Logo" />
+            <img src="BIDPORA_LOGO.png" alt="BIDPORA Logo" />
         </div>
         
         <div id="error-message" class="error-message"></div>

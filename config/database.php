@@ -1,9 +1,9 @@
 <?php
-// Database configuration for DISPORA Web Application
+// Database configuration for BIDPORA Web Application
 
 class Database {
     private $host = 'localhost';
-    private $db_name = 'dispora_web';
+    private $db_name = 'bidpora_web';
     private $username = 'root';
     private $password = '';
     private $conn;

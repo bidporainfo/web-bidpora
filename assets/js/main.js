@@ -53,15 +53,15 @@ async function initCharts(){
     var barCanvas = document.getElementById('barMedali');
     if (!pieCanvas && !barCanvas) return;
     // Ambil dari localStorage dashboard; fallback ke default
-    var stored = localStorage.getItem('dispora_dashboard');
+    var stored = localStorage.getItem('bidpora_dashboard');
     var dashboard = { atlet: 0, tenaga: 0, cabor: 0 };
     try { if (stored) dashboard = JSON.parse(stored); } catch(_) {}
     if (pieCanvas && window.Chart) {
         // Destroy existing instance if any
-        if (window.__disporaPieChart) { try { window.__disporaPieChart.destroy(); } catch(e) {} }
+        if (window.__bidporaPieChart) { try { window.__bidporaPieChart.destroy(); } catch(e) {} }
         const labels = ['Atlet','Tenaga','CABOR'];
         const values = [dashboard.atlet || 0, dashboard.tenaga || 0, dashboard.cabor || 0];
-        window.__disporaPieChart = new Chart(pieCanvas, {
+        window.__bidporaPieChart = new Chart(pieCanvas, {
             type: 'pie',
             data: { labels: labels, datasets: [{ data: values, backgroundColor: [
                 '#f8636f','#ffb74d','#4fc3f7','#81c784','#9575cd','#ffd54f','#4dd0e1','#a1887f'
@@ -77,14 +77,14 @@ async function initCharts(){
         });
     }
     if (barCanvas && window.Chart) {
-        if (window.__disporaBarChart) { try { window.__disporaBarChart.destroy(); } catch(e) {} }
+        if (window.__bidporaBarChart) { try { window.__bidporaBarChart.destroy(); } catch(e) {} }
         const m = {
             labels: ['Atlet','Tenaga','CABOR'],
             emas: [dashboard.atlet || 0, 0, 0],
             perak: [0, dashboard.tenaga || 0, 0],
             perunggu: [0, 0, dashboard.cabor || 0]
         };
-        window.__disporaBarChart = new Chart(barCanvas, {
+        window.__bidporaBarChart = new Chart(barCanvas, {
             type: 'bar',
             data: {
                 labels: m.labels,

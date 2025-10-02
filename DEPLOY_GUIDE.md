@@ -19,15 +19,15 @@ Web Anda sudah siap dengan **Simple Storage** yang:
 1. Buka https://github.com
 2. Login ke akun GitHub Anda
 3. Klik **"New repository"**
-4. Nama repository: `web-simpora`
+4. Nama repository: `web-bidpora`
 5. Pilih **"Public"**
 6. **JANGAN** centang "Add a README file"
 7. Klik **"Create repository"**
 
 ### **Step 3: Upload File ke GitHub**
 ```bash
-# Buka command prompt di folder web-simpora
-cd C:\xampp\htdocs\web-simpora
+# Buka command prompt di folder web-bidpora
+cd C:\xampp\htdocs\web-bidpora
 
 # Inisialisasi git
 git init
@@ -36,10 +36,10 @@ git init
 git add .
 
 # Commit pertama
-git commit -m "Initial commit - DISPORA Web App with Simple Storage"
+git commit -m "Initial commit - BIDPORA Web App with Simple Storage"
 
 # Hubungkan dengan repository GitHub
-git remote add origin https://github.com/USERNAME/web-simpora.git
+git remote add origin https://github.com/USERNAME/web-bidpora.git
 
 # Push ke GitHub
 git push -u origin main
@@ -58,7 +58,7 @@ git push -u origin main
 
 ### **Step 5: Akses Website**
 Website Anda akan tersedia di:
-`https://USERNAME.github.io/web-simpora`
+`https://USERNAME.github.io/web-bidpora`
 
 **Ganti `USERNAME` dengan username GitHub Anda!**
 
@@ -84,7 +84,7 @@ Website Anda akan tersedia di:
 ## 📱 **CARA MENGGUNAKAN**
 
 ### **1. Akses Dashboard**
-1. Buka website: `https://USERNAME.github.io/web-simpora`
+1. Buka website: `https://USERNAME.github.io/web-bidpora`
 2. Login dengan admin credentials
 3. Akses dashboard admin
 

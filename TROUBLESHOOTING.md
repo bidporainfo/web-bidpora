@@ -23,7 +23,7 @@ Password: admin123
 
 #### **3. File Structure yang Benar**
 ```
-web-simpora/
+web-bidpora/
 ├── index.html          # Landing page
 ├── login.html          # Login page
 ├── dashboard.html      # Admin dashboard
@@ -42,12 +42,12 @@ web-simpora/
 
 ### **1. Test Local (XAMPP)**
 ```
-http://localhost/web-simpora/login.html
+http://localhost/web-bidpora/login.html
 ```
 
 ### **2. Test GitHub Pages**
 ```
-https://disporainfo.github.io/web.dispora.info/login.html
+https://bidporainfo.github.io/web.bidpora.info/login.html
 ```
 
 ### **3. Test dengan Credentials**
@@ -68,7 +68,7 @@ git push origin main
 - Cek di repository Settings > Pages
 
 ### **3. Test Website**
-- Buka: `https://disporainfo.github.io/web.dispora.info/`
+- Buka: `https://bidporainfo.github.io/web.bidpora.info/`
 - Klik link login atau akses langsung: `login.html`
 
 ## 🔍 **DEBUGGING**
@@ -92,18 +92,18 @@ git push origin main
 
 ### **1. Direct URL**
 ```
-https://disporainfo.github.io/web.dispora.info/login.html
+https://bidporainfo.github.io/web.bidpora.info/login.html
 ```
 
 ### **2. Via Index**
 ```
-https://disporainfo.github.io/web.dispora.info/
+https://bidporainfo.github.io/web.bidpora.info/
 ```
 Kemudian klik link login
 
 ### **3. Via Public Page**
 ```
-https://disporainfo.github.io/web.dispora.info/public.html
+https://bidporainfo.github.io/web.bidpora.info/public.html
 ```
 Kemudian klik tombol admin
 

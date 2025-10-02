@@ -71,14 +71,14 @@ Tidak perlu setup apapun! Sistem sudah siap pakai.
 // Edit assets/js/github-storage.js
 this.githubConfig = {
     owner: 'your-username',     // Username GitHub Anda
-    repo: 'web-simpora',        // Nama repository
+    repo: 'web-bidpora',        // Nama repository
     token: '',                  // Personal Access Token (opsional)
     filePath: 'data/dashboard.json'
 };
 ```
 
 #### **2. Setup Repository**
-1. Pastikan repository `web-simpora` sudah ada di GitHub
+1. Pastikan repository `web-bidpora` sudah ada di GitHub
 2. Buat folder `data/` di repository
 3. Buat file `data/dashboard.json` dengan isi:
 ```json

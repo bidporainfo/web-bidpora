@@ -1,8 +1,8 @@
--- Database schema for DISPORA Web Application
+-- Database schema for BIDPORA Web Application
 -- Created for admin management with image upload capabilities
 
-CREATE DATABASE IF NOT EXISTS dispora_web;
-USE dispora_web;
+CREATE DATABASE IF NOT EXISTS bidpora_web;
+USE bidpora_web;
 
 -- Users table for admin authentication
 CREATE TABLE users (
@@ -108,20 +108,20 @@ CREATE TABLE contact_info (
 
 -- Insert default admin user (password: admin123)
 INSERT INTO users (username, email, password_hash, role) VALUES 
-('admin', 'admin@dispora.jepara.go.id', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+('admin', 'admin@bidpora.jepara.go.id', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
 
 -- Insert sample contact information
 INSERT INTO contact_info (type, value, icon, is_primary) VALUES 
 ('phone', '0291-123456', 'fas fa-phone', TRUE),
-('email', 'info@dispora.jepara.go.id', 'fas fa-envelope', TRUE),
+('email', 'info@bidpora.jepara.go.id', 'fas fa-envelope', TRUE),
 ('address', 'Jl. Pemuda No. 1, Jepara', 'fas fa-map-marker-alt', TRUE),
-('website', 'www.dispora.jepara.go.id', 'fas fa-globe', FALSE);
+('website', 'www.bidpora.jepara.go.id', 'fas fa-globe', FALSE);
 
 -- Insert sample news
 INSERT INTO news (title, content, image_url, author, is_published) VALUES 
-('PON XXI Aceh-Sumut 2024', 'Atlet Kabupaten Jepara berhasil meraih prestasi gemilang dalam PON XXI yang diselenggarakan di Aceh dan Sumatera Utara.', 'assets/images/pon.jpg', 'Admin DISPORA', TRUE),
-('Kejuaraan Bulutangkis Regional', 'Tim bulutangkis Kabupaten Jepara berhasil menjadi juara dalam kejuaraan regional yang diselenggarakan di Semarang.', 'assets/images/pon1.jpg', 'Admin DISPORA', TRUE),
-('Pelatihan Atlet Muda', 'DISPORA mengadakan pelatihan intensif untuk atlet muda dalam berbagai cabang olahraga.', 'assets/images/pon2.jpg', 'Admin DISPORA', TRUE);
+('PON XXI Aceh-Sumut 2024', 'Atlet Kabupaten Jepara berhasil meraih prestasi gemilang dalam PON XXI yang diselenggarakan di Aceh dan Sumatera Utara.', 'assets/images/pon.jpg', 'Admin BIDPORA', TRUE),
+('Kejuaraan Bulutangkis Regional', 'Tim bulutangkis Kabupaten Jepara berhasil menjadi juara dalam kejuaraan regional yang diselenggarakan di Semarang.', 'assets/images/pon1.jpg', 'Admin BIDPORA', TRUE),
+('Pelatihan Atlet Muda', 'BIDPORA mengadakan pelatihan intensif untuk atlet muda dalam berbagai cabang olahraga.', 'assets/images/pon2.jpg', 'Admin BIDPORA', TRUE);
 
 -- Insert sample achievements
 INSERT INTO achievements (title, description, image_url, category, achievement_date) VALUES 

@@ -17,7 +17,7 @@ class NewsManager {
     async loadNews() {
         try {
             // Try localStorage first (admin-managed data)
-            const local = localStorage.getItem('dispora_news');
+            const local = localStorage.getItem('bidpora_news');
             if (local) {
                 this.newsData = JSON.parse(local) || [];
                 return;
@@ -140,7 +140,7 @@ class NewsManager {
 
     async saveToDatabase() {
         try {
-            localStorage.setItem('dispora_news', JSON.stringify(this.newsData));
+            localStorage.setItem('bidpora_news', JSON.stringify(this.newsData));
             console.log('News data saved to localStorage');
         } catch (e) {
             console.error('Failed saving news to localStorage', e);

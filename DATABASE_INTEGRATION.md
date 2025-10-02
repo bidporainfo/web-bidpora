@@ -1,4 +1,4 @@
-# Integrasi Database dengan Website SIMPORA
+# Integrasi Database dengan Website BIDPORA
 
 ## Tentang Data Dummy vs Database Real
 

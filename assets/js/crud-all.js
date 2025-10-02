@@ -17,7 +17,7 @@ class ContentManager {
     async loadData() {
         try {
             // Cek localStorage dulu
-            const localData = localStorage.getItem('dispora_data');
+            const localData = localStorage.getItem('bidpora_data');
             if (localData) {
                 this.data = JSON.parse(localData);
                 console.log('Data loaded from localStorage:', this.data);
@@ -341,7 +341,7 @@ class ContentManager {
     // Keolahragaan Management (Simple counter)
     loadKeolahragaanData() {
         // Load data from localStorage or set defaults
-        const savedData = localStorage.getItem('dispora_keolahragaan');
+        const savedData = localStorage.getItem('bidpora_keolahragaan');
         let keolahragaanData = {
             jumlah_atlet: 180,
             jumlah_tenaga: 54,
@@ -389,7 +389,7 @@ class ContentManager {
         };
         
         // Save to localStorage
-        localStorage.setItem('dispora_keolahragaan', JSON.stringify(keolahragaanData));
+        localStorage.setItem('bidpora_keolahragaan', JSON.stringify(keolahragaanData));
         
         // Update dashboard counters
         this.updateDashboardCounters(keolahragaanData);
@@ -451,7 +451,7 @@ class ContentManager {
     async saveData() {
         // Simpan ke localStorage karena GitHub Pages tidak bisa write file
         try {
-            localStorage.setItem('dispora_data', JSON.stringify(this.data));
+            localStorage.setItem('bidpora_data', JSON.stringify(this.data));
             console.log('Data saved to localStorage:', this.data);
         } catch (error) {
             console.error('Error saving data:', error);
@@ -490,7 +490,7 @@ class ContentManager {
                 achievements: this.data.achievements || [],
                 gallery: this.data.gallery || []
             };
-            localStorage.setItem('dispora_public_bridge', JSON.stringify(publicData));
+            localStorage.setItem('bidpora_public_bridge', JSON.stringify(publicData));
         } catch(_) {}
     }
 
@@ -506,7 +506,7 @@ class ContentManager {
             };
         } else {
             // Load from localStorage keolahragaan data or use defaults
-            const savedData = localStorage.getItem('dispora_keolahragaan');
+            const savedData = localStorage.getItem('bidpora_keolahragaan');
             if (savedData) {
                 try {
                     const keolahragaanData = JSON.parse(savedData);
@@ -532,7 +532,7 @@ class ContentManager {
         if (caborCard) caborCard.textContent = counts.cabor;
         
         // Save to localStorage for dashboard charts
-        localStorage.setItem('dispora_dashboard', JSON.stringify(counts));
+        localStorage.setItem('bidpora_dashboard', JSON.stringify(counts));
         
         // Update charts if available
         if (window.updateDashboardCharts) {
@@ -547,7 +547,7 @@ class ContentManager {
         }
         
         // Update halaman lain jika ada
-        try { localStorage.setItem('dispora_public_cache', JSON.stringify(this.data)); } catch(_) {}
+        try { localStorage.setItem('bidpora_public_cache', JSON.stringify(this.data)); } catch(_) {}
     }
 
     renderTable(type) {

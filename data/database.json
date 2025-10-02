@@ -5,7 +5,7 @@
       "username": "admin",
       "password": "admin123",
       "role": "admin",
-      "email": "admin@dispora.jepara.go.id"
+      "email": "admin@bidpora.jepara.go.id"
     }
   ],
   "news": [
@@ -14,7 +14,7 @@
       "title": "PON XXI Aceh-Sumut 2024",
       "content": "Atlet Kabupaten Jepara berhasil meraih prestasi gemilang dalam PON XXI yang diselenggarakan di Aceh dan Sumatera Utara.",
       "image_url": "assets/images/pon.jpg",
-      "author": "Admin DISPORA",
+      "author": "Admin BIDPORA",
       "published_at": "2024-10-15T10:00:00Z",
       "is_published": true
     },
@@ -23,7 +23,7 @@
       "title": "Kejuaraan Bulutangkis Regional",
       "content": "Tim bulutangkis Kabupaten Jepara berhasil menjadi juara dalam kejuaraan regional yang diselenggarakan di Semarang.",
       "image_url": "assets/images/pon1.jpg",
-      "author": "Admin DISPORA",
+      "author": "Admin BIDPORA",
       "published_at": "2024-09-20T14:30:00Z",
       "is_published": true
     }
@@ -132,7 +132,7 @@
       "id": 3,
       "type": "email",
       "title": "Email",
-      "value": "info@dispora.jepara.go.id\nadmin@dispora.jepara.go.id",
+      "value": "info@bidpora.jepara.go.id\nadmin@bidpora.jepara.go.id",
       "icon": "fas fa-envelope"
     }
   ]

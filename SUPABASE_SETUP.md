@@ -1,4 +1,4 @@
-# Setup Supabase untuk DISPORA Web App
+# Setup Supabase untuk BIDPORA Web App
 
 ## Mengapa Supabase?
 
@@ -142,12 +142,12 @@ git push origin main
 Setelah deploy, update URL di Supabase:
 1. Go to Settings > API
 2. Add your GitHub Pages URL ke "Site URL"
-3. Add `https://your-username.github.io/web-simpora` ke "Redirect URLs"
+3. Add `https://your-username.github.io/web-bidpora` ke "Redirect URLs"
 
 ## Testing
 
-1. **Local**: `http://localhost/web-simpora/dashboard.html`
-2. **Production**: `https://your-username.github.io/web-simpora/dashboard.html`
+1. **Local**: `http://localhost/web-bidpora/dashboard.html`
+2. **Production**: `https://your-username.github.io/web-bidpora/dashboard.html`
 
 Data akan tersinkron antara local dan production!
 

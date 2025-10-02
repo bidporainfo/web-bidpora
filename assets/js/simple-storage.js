@@ -1,4 +1,4 @@
-// Simple Storage System untuk DISPORA Web App
+// Simple Storage System untuk BIDPORA Web App
 // Menggunakan localStorage dengan fitur export/import
 
 class SimpleStorageManager {
@@ -21,7 +21,7 @@ class SimpleStorageManager {
     }
 
     loadDashboardData() {
-        const savedData = localStorage.getItem('dispora_dashboard');
+        const savedData = localStorage.getItem('bidpora_dashboard');
         if (savedData) {
             try {
                 this.dashboardData = JSON.parse(savedData);
@@ -33,7 +33,7 @@ class SimpleStorageManager {
     }
 
     saveDashboardData() {
-        localStorage.setItem('dispora_dashboard', JSON.stringify(this.dashboardData));
+        localStorage.setItem('bidpora_dashboard', JSON.stringify(this.dashboardData));
         console.log('Data saved to localStorage');
     }
 
@@ -121,7 +121,7 @@ class SimpleStorageManager {
         
         const link = document.createElement('a');
         link.href = URL.createObjectURL(dataBlob);
-        link.download = `dispora-dashboard-${new Date().toISOString().split('T')[0]}.json`;
+        link.download = `bidpora-dashboard-${new Date().toISOString().split('T')[0]}.json`;
         link.click();
         
         this.showNotification('Data berhasil di-export!', 'success');
@@ -202,7 +202,7 @@ class SimpleStorageManager {
 
     // Method untuk backup otomatis
     autoBackup() {
-        const backupKey = 'dispora_dashboard_backup';
+        const backupKey = 'bidpora_dashboard_backup';
         const backupData = {
             data: this.dashboardData,
             timestamp: new Date().toISOString()
@@ -212,7 +212,7 @@ class SimpleStorageManager {
 
     // Method untuk restore dari backup
     restoreFromBackup() {
-        const backupKey = 'dispora_dashboard_backup';
+        const backupKey = 'bidpora_dashboard_backup';
         const backupData = localStorage.getItem(backupKey);
         
         if (backupData) {

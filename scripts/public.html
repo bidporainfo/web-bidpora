@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DISPORA - Informasi Olahraga Kabupaten Jepara</title>
+    <title>BIDPORA - Informasi Olahraga Kabupaten Jepara</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -196,7 +196,7 @@
             text-align: center;
         }
         
-        .dispora-title {
+        .bidpora-title {
             font-size: 64px;
             color: #003b6f;
             font-weight: 900;
@@ -966,7 +966,7 @@
                 text-align: center;
             }
             
-            .dispora-title {
+            .bidpora-title {
                 font-size: 48px;
                 text-align: center;
             }
@@ -1037,7 +1037,7 @@
         <div class="nav-container">
             <div class="nav-left">
                 <div class="logo-section">
-                    <img src="DISPORA_LOGO.png" alt="DISPORA Logo" />
+                    <img src="BIDPORA_LOGO.png" alt="BIDPORA Logo" />
                 </div>
                 <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
                 <ul class="nav-menu" id="navMenu">
@@ -1065,14 +1065,14 @@
                             <div class="slide-image">
                                 <div class="image-card">
                                     <figure class="hero-figure">
-                                        <img src="assets/images/pon.jpg" alt="Selamat Datang di DISPORA" class="hero-image" onerror="this.onerror=null;this.src='assets/images/pon.jpg'">
+                                        <img src="assets/images/pon.jpg" alt="Selamat Datang di BIDPORA" class="hero-image" onerror="this.onerror=null;this.src='assets/images/pon.jpg'">
                                         <figcaption class="image-caption"></figcaption>
                                     </figure>
                                 </div>
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">SELAMAT DATANG</h1>
-                                <h2 class="dispora-title">DISPORA</h2>
+                                <h2 class="bidpora-title">BIDPORA</h2>
                                 <h3 class="subtitle">Dinas Pemuda dan Olahraga</h3>
                                 <p class="description">Bergabunglah dengan kami dalam membangun generasi muda yang sehat, berprestasi, dan berkarakter melalui pembinaan olahraga yang berkualitas dan berkelanjutan.</p>
                             </div>
@@ -1092,7 +1092,7 @@
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">PRESTASI</h1>
-                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h2 class="bidpora-title">OLAHRAGA</h2>
                                 <h3 class="subtitle">Mencapai Keunggulan</h3>
                                 <p class="description">Wujudkan impian menjadi juara melalui latihan yang tekun, dedikasi yang tinggi, dan semangat pantang menyerah dalam setiap kompetisi olahraga.</p>
                             </div>
@@ -1112,7 +1112,7 @@
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">KOMPETISI</h1>
-                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h2 class="bidpora-title">OLAHRAGA</h2>
                                 <h3 class="subtitle">Ajang Prestasi</h3>
                                 <p class="description">Ikuti berbagai kompetisi olahraga yang diselenggarakan untuk mengasah kemampuan, membangun karakter, dan meraih prestasi terbaik.</p>
                             </div>
@@ -1132,7 +1132,7 @@
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">PEMBINAAN</h1>
-                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h2 class="bidpora-title">OLAHRAGA</h2>
                                 <h3 class="subtitle">Membangun Karakter</h3>
                                 <p class="description">Program pembinaan olahraga yang komprehensif untuk mengembangkan potensi atlet muda dengan pelatihan berkualitas dan pendampingan profesional.</p>
                             </div>
@@ -1152,7 +1152,7 @@
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">FESTIVAL</h1>
-                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h2 class="bidpora-title">OLAHRAGA</h2>
                                 <h3 class="subtitle">Kebersamaan & Prestasi</h3>
                                 <p class="description">Rayakan semangat olahraga dalam festival yang mempersatukan seluruh elemen masyarakat untuk menciptakan lingkungan olahraga yang sehat dan kompetitif.</p>
                             </div>
@@ -1258,7 +1258,7 @@
                         </div>
                         <div class="contact-details">
                             <h4>Email</h4>
-                            <p>info@dispora.jepara.go.id<br>admin@dispora.jepara.go.id</p>
+                            <p>info@bidpora.jepara.go.id<br>admin@bidpora.jepara.go.id</p>
                         </div>
                     </div>
                 </div>
@@ -1267,7 +1267,7 @@
     </main>
     
     <footer class="footer">
-        <p>&copy; 2025 DISPORA Kabupaten Jepara. Semua hak dilindungi.</p>
+        <p>&copy; 2025 BIDPORA Kabupaten Jepara. Semua hak dilindungi.</p>
     </footer>
     
     <script src="assets/js/image-handler.js"></script>
@@ -1349,9 +1349,9 @@
             try {
                 // ONLY use local admin-managed cache; do not fallback to JSON to avoid dummy
                 let data = { achievements: [], gallery: [], events: [], medal_tallies: [], match_schedules: [], results: [] };
-                const cache = localStorage.getItem('dispora_public_cache');
+                const cache = localStorage.getItem('bidpora_public_cache');
                 if (cache) { data = JSON.parse(cache); }
-                const news = JSON.parse(localStorage.getItem('dispora_news') || '[]');
+                const news = JSON.parse(localStorage.getItem('bidpora_news') || '[]');
                 renderNewsLatest(news);
                 renderNewsList(news);
                 renderAchievementsList(data.achievements || []);

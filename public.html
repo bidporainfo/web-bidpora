@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DISPORA - Informasi Olahraga Kabupaten Jepara</title>
+    <title>BIDPORA - Informasi Olahraga Kabupaten Jepara</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -202,7 +202,7 @@
         /* Mobile responsiveness */
         @media (max-width: 768px) {
             .logo-section img {
-                height: 65px;
+                height: 100px;
             }
             
             .public-nav {
@@ -291,7 +291,7 @@
                 font-size: 16px;
             }
             
-            .dispora-title {
+            .bidpora-title {
                 font-size: 28px;
             }
             
@@ -463,7 +463,7 @@
             text-align: center;
         }
         
-        .dispora-title {
+        .bidpora-title {
             font-size: 64px;
             color: #003b6f;
             font-weight: 900;
@@ -1208,7 +1208,7 @@
                 margin-bottom: 5px;
             }
             
-            .dispora-title {
+            .bidpora-title {
                 font-size: 32px;
                 text-align: center;
                 margin-bottom: 5px;
@@ -1384,7 +1384,7 @@
         <div class="nav-container">
             <div class="nav-left">
                 <div class="logo-section">
-                    <img src="DISPORA_LOGO.png" alt="DISPORA Logo" />
+                    <img src="BIDPORA_LOGO.png" alt="BIDPORA Logo" />
                 </div>
                 <ul class="nav-menu">
                     <li><a href="#beranda" class="active" onclick="showSection('beranda')">Beranda</a></li>
@@ -1431,12 +1431,12 @@
                     <div class="slide active">
                         <div class="slide-content">
                             <div class="slide-image">
-                                <img src="assets/images/pon.jpg" alt="Selamat Datang di DISPORA" class="hero-image">
+                                <img src="assets/images/pon.jpg" alt="Selamat Datang di BIDPORA" class="hero-image">
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">SELAMAT DATANG</h1>
-                                <h2 class="dispora-title">DISPORA</h2>
-                                <h3 class="subtitle">Dinas Pemuda dan Olahraga</h3>
+                                <h2 class="bidpora-title">BIDPORA</h2>
+                                <h3 class="subtitle">Bidang Pemuda dan Olahraga</h3>
                                 <p class="description">Bergabunglah dengan kami dalam membangun generasi muda yang sehat, berprestasi, dan berkarakter melalui pembinaan olahraga yang berkualitas dan berkelanjutan.</p>
                             </div>
                         </div>
@@ -1450,7 +1450,7 @@
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">PRESTASI</h1>
-                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h2 class="bidpora-title">OLAHRAGA</h2>
                                 <h3 class="subtitle">Mencapai Keunggulan</h3>
                                 <p class="description">Wujudkan impian menjadi juara melalui latihan yang tekun, dedikasi yang tinggi, dan semangat pantang menyerah dalam setiap kompetisi olahraga.</p>
                             </div>
@@ -1465,7 +1465,7 @@
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">KOMPETISI</h1>
-                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h2 class="bidpora-title">OLAHRAGA</h2>
                                 <h3 class="subtitle">Ajang Prestasi</h3>
                                 <p class="description">Ikuti berbagai kompetisi olahraga yang diselenggarakan untuk mengasah kemampuan, membangun karakter, dan meraih prestasi terbaik.</p>
                             </div>
@@ -1480,7 +1480,7 @@
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">PEMBINAAN</h1>
-                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h2 class="bidpora-title">OLAHRAGA</h2>
                                 <h3 class="subtitle">Membangun Karakter</h3>
                                 <p class="description">Program pembinaan olahraga yang komprehensif untuk mengembangkan potensi atlet muda dengan pelatihan berkualitas dan pendampingan profesional.</p>
                             </div>
@@ -1495,7 +1495,7 @@
                             </div>
                             <div class="slide-text">
                                 <h1 class="welcome-text">FESTIVAL</h1>
-                                <h2 class="dispora-title">OLAHRAGA</h2>
+                                <h2 class="bidpora-title">OLAHRAGA</h2>
                                 <h3 class="subtitle">Kebersamaan & Prestasi</h3>
                                 <p class="description">Rayakan semangat olahraga dalam festival yang mempersatukan seluruh elemen masyarakat untuk menciptakan lingkungan olahraga yang sehat dan kompetitif.</p>
                             </div>
@@ -1646,7 +1646,7 @@
     </main>
     
     <footer class="footer">
-        <p>&copy; 2025 DISPORA Kabupaten Jepara. Semua hak dilindungi.</p>
+        <p>&copy; 2025 BIDPORA Kabupaten Jepara. Semua hak dilindungi.</p>
     </footer>
     
     <script src="assets/js/image-handler.js"></script>
@@ -1722,7 +1722,7 @@
                 // Prefer data bridged from admin via localStorage if available
                 let data = {};
                 try {
-                    const bridged = localStorage.getItem('dispora_public_bridge');
+                    const bridged = localStorage.getItem('bidpora_public_bridge');
                     if (bridged) {
                         data = JSON.parse(bridged);
                     } else {

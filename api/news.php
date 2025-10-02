@@ -31,7 +31,7 @@ switch ($method) {
         
         $title = $_POST['title'] ?? '';
         $content = $_POST['content'] ?? '';
-        $author = $_POST['author'] ?? 'Admin DISPORA';
+        $author = $_POST['author'] ?? 'Admin BIDPORA';
         $is_published = isset($_POST['is_published']) ? (bool)$_POST['is_published'] : true;
         
         if (empty($title) || empty($content)) {
@@ -66,7 +66,7 @@ switch ($method) {
         $id = $input['id'] ?? 0;
         $title = $input['title'] ?? '';
         $content = $input['content'] ?? '';
-        $author = $input['author'] ?? 'Admin DISPORA';
+        $author = $input['author'] ?? 'Admin BIDPORA';
         $is_published = isset($input['is_published']) ? (bool)$input['is_published'] : true;
         
         if (empty($title) || empty($content)) {

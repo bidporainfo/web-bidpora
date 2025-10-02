@@ -1,4 +1,4 @@
-# Setup Gambar untuk Website SIMPORA
+# Setup Gambar untuk Website BIDPORA
 
 ## Gambar yang Dibutuhkan
 
@@ -106,7 +106,7 @@ Website sudah dilengkapi dengan fallback system:
 
 Setelah menambahkan gambar:
 
-1. **Local Test**: Buka `localhost/web-simpora/public.html`
+1. **Local Test**: Buka `localhost/web-bidpora/public.html`
 2. **Check Console**: Pastikan tidak ada error 404
 3. **Fallback Test**: Hapus salah satu gambar, pastikan fallback muncul
 4. **Performance**: Check loading time di Network tab

@@ -23,20 +23,20 @@
             // Local content from ContentManager
             let localContent = {};
             try {
-                const d = localStorage.getItem('dispora_data');
+                const d = localStorage.getItem('bidpora_data');
                 if (d) localContent = JSON.parse(d);
             } catch(_) {}
 
             // Dashboard numbers
             let dashboard = {};
             try {
-                const d = localStorage.getItem('dispora_dashboard');
+                const d = localStorage.getItem('bidpora_dashboard');
                 if (d) dashboard = JSON.parse(d);
             } catch(_) {}
 
             // News
             let news = [];
-            try { news = JSON.parse(localStorage.getItem('dispora_news') || '[]'); } catch(_) {}
+            try { news = JSON.parse(localStorage.getItem('bidpora_news') || '[]'); } catch(_) {}
 
             // Optional other sections
             const medals = localContent.medal_tallies || [];
@@ -81,9 +81,9 @@
                         gallery: data.gallery || [],
                         events: data.events || []
                     };
-                    localStorage.setItem('dispora_data', JSON.stringify(localContent));
+                    localStorage.setItem('bidpora_data', JSON.stringify(localContent));
                     if (data._dashboard) {
-                        localStorage.setItem('dispora_dashboard', JSON.stringify(data._dashboard));
+                        localStorage.setItem('bidpora_dashboard', JSON.stringify(data._dashboard));
                     }
                     alert('Import berhasil. Commit file ke data/database.json di repo agar pengunjung melihat perubahan.');
                     // Optional: refresh tables if available

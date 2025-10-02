@@ -2,8 +2,8 @@
 
 ## 🚨 **MASALAH: login.html TIDAK BISA DIBUKA**
 
-Repository: `web.dispora.info`
-URL: `https://disporainfo.github.io/web.dispora.info/`
+Repository: `web.bidpora.info`
+URL: `https://bidporainfo.github.io/web.bidpora.info/`
 
 ## 🔧 **SOLUSI YANG SUDAH DIBUAT**
 
@@ -32,22 +32,22 @@ Setelah deploy, test URL berikut:
 
 #### **A. Landing Page Simple**
 ```
-https://disporainfo.github.io/web.dispora.info/index-simple.html
+https://bidporainfo.github.io/web.bidpora.info/index-simple.html
 ```
 
 #### **B. Login Simple**
 ```
-https://disporainfo.github.io/web.dispora.info/login-simple.html
+https://bidporainfo.github.io/web.bidpora.info/login-simple.html
 ```
 
 #### **C. Dashboard (setelah login)**
 ```
-https://disporainfo.github.io/web.dispora.info/dashboard.html
+https://bidporainfo.github.io/web.bidpora.info/dashboard.html
 ```
 
 #### **D. Public Website**
 ```
-https://disporainfo.github.io/web.dispora.info/public.html
+https://bidporainfo.github.io/web.bidpora.info/public.html
 ```
 
 ## 🔍 **TROUBLESHOOTING**
@@ -55,12 +55,12 @@ https://disporainfo.github.io/web.dispora.info/public.html
 ### **1. Jika login-simple.html tidak bisa dibuka:**
 
 #### **A. Cek File di Repository**
-- Buka: `https://github.com/disporainfo/web.dispora.info`
+- Buka: `https://github.com/bidporainfo/web.bidpora.info`
 - Pastikan file `login-simple.html` ada di root
 - Pastikan file sudah ter-commit
 
 #### **B. Cek GitHub Pages Status**
-- Go to: `https://github.com/disporainfo/web.dispora.info/settings/pages`
+- Go to: `https://github.com/bidporainfo/web.bidpora.info/settings/pages`
 - Pastikan status "Your site is published"
 - Pastikan source: "Deploy from a branch" > "main"
 
@@ -83,18 +83,18 @@ https://disporainfo.github.io/web.dispora.info/public.html
 
 ### **1. Via Index Simple**
 ```
-https://disporainfo.github.io/web.dispora.info/index-simple.html
+https://bidporainfo.github.io/web.bidpora.info/index-simple.html
 ```
 Kemudian klik "Login Admin"
 
 ### **2. Direct Login**
 ```
-https://disporainfo.github.io/web.dispora.info/login-simple.html
+https://bidporainfo.github.io/web.bidpora.info/login-simple.html
 ```
 
 ### **3. Via Public Website**
 ```
-https://disporainfo.github.io/web.dispora.info/public.html
+https://bidporainfo.github.io/web.bidpora.info/public.html
 ```
 Kemudian cari link admin
 
@@ -112,12 +112,12 @@ Setelah deploy:
 ### **1. Cek Repository Structure**
 Pastikan struktur file seperti ini:
 ```
-web.dispora.info/
+web.bidpora.info/
 ├── index-simple.html
 ├── login-simple.html
 ├── dashboard.html
 ├── public.html
-├── DISPORA_LOGO.png
+├── BIDPORA_LOGO.png
 ├── assets/
 │   ├── css/
 │   │   └── styles.css
