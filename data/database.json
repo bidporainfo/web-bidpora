@@ -112,5 +112,28 @@
       "level": "Kabupaten",
       "image_url": "assets/images/pon2.jpg"
     }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "type": "alamat",
+      "title": "Alamat",
+      "value": "Jl. Pemuda No. 123\nJepara, Jawa Tengah 59411",
+      "icon": "fas fa-map-marker-alt"
+    },
+    {
+      "id": 2,
+      "type": "telepon",
+      "title": "Telepon",
+      "value": "(0291) 123456\n(0291) 789012",
+      "icon": "fas fa-phone"
+    },
+    {
+      "id": 3,
+      "type": "email",
+      "title": "Email",
+      "value": "info@dispora.jepara.go.id\nadmin@dispora.jepara.go.id",
+      "icon": "fas fa-envelope"
+    }
   ]
 }

@@ -342,6 +342,112 @@
                 transform: translateY(0);
             }
         }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: #003b6f;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .detail-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .detail-meta {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .detail-meta .meta-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .detail-meta .meta-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-meta .meta-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .detail-meta .meta-value {
+            color: #333;
+        }
+
+        .detail-content {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .btn-view {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .btn-view:hover {
+            background: #138496;
+        }
     </style>
 </head>
 <body>
@@ -377,7 +483,7 @@
         <nav>
             <ul>
                 <li class="active"><a href="#dashboard-section" style="display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="#keolahragaan" style="display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;"><i class="fas fa-dumbbell"></i> Data Keolahragaan</a></li>
+                <li><a href="#data-keolahragaan" style="display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;"><i class="fas fa-dumbbell"></i> Data Keolahragaan</a></li>
                 <li class="submenu-wrap">
                     <details class="sidebar-disclosure">
                         <summary><i class="fas fa-cogs"></i> Manajemen Konten <i class="fas fa-chevron-down"></i></summary>
@@ -387,11 +493,22 @@
                             <li><a href="#kelola-galeri"><i class="fas fa-images"></i> Kelola Galeri</a></li>
                             <li><a href="#kelola-events"><i class="fas fa-calendar"></i> Kelola Events</a></li>
                             <li><a href="#kelola-dashboard"><i class="fas fa-sliders-h"></i> Kelola Dashboard</a></li>
+                            <li><a href="#kelola-kontak"><i class="fas fa-address-book"></i> Kelola Kontak</a></li>
                         </ul>
                     </details>
                 </li>
                 <li><a href="#pelatihan" style="display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;"><i class="fas fa-chalkboard-teacher"></i> Pelatihan/Workshop</a></li>
                 <li><i class="fas fa-link"></i> Link Survey</li>
+                <li class="submenu-wrap">
+                    <details class="sidebar-disclosure">
+                        <summary><i class="fas fa-database"></i> Data Publik <i class="fas fa-chevron-down"></i></summary>
+                        <ul class="submenu">
+                            <li><a href="#kelola-medali"><i class="fas fa-award"></i> Kelola Medali</a></li>
+                            <li><a href="#kelola-jadwal"><i class="fas fa-calendar-day"></i> Kelola Jadwal</a></li>
+                            <li><a href="#kelola-hasil"><i class="fas fa-flag-checkered"></i> Kelola Hasil</a></li>
+                        </ul>
+                    </details>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -399,7 +516,7 @@
     <!-- Overlay untuk menutup sidebar saat klik di luar -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <main class="main-content ui-scale-110" style="align-items:center;">
+    <main class="main-content" style="align-items:center;">
         <!-- Dashboard Section -->
         <section id="dashboard-section" class="content-section active">
             <div class="dashboard-header">
@@ -465,6 +582,170 @@
             </section>
         </section>
 
+        <!-- Kelola Medali Section -->
+        <section id="kelola-medali" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Data Medali</h2>
+                <button class="btn-primary" onclick="showAddMedalForm()">
+                    <i class="fas fa-plus"></i> Tambah Data Medali
+                </button>
+            </div>
+            <div id="medal-form" class="form-card" style="display: none;">
+                <h3 id="medal-form-title">Tambah Data Medali</h3>
+                <form id="medal-form-element">
+                    <input type="hidden" id="medal-id" name="medal-id" value="">
+                    <div class="form-group">
+                        <label for="medal-competition_name">Nama Kompetisi</label>
+                        <input type="text" id="medal-competition_name" name="medal-competition_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medal-gold_count">Emas</label>
+                        <input type="number" id="medal-gold_count" name="medal-gold_count" value="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medal-silver_count">Perak</label>
+                        <input type="number" id="medal-silver_count" name="medal-silver_count" value="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medal-bronze_count">Perunggu</label>
+                        <input type="number" id="medal-bronze_count" name="medal-bronze_count" value="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medal-competition_date">Tanggal</label>
+                        <input type="date" id="medal-competition_date" name="medal-competition_date" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideMedalForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="medalPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="medalSearch" type="search" placeholder="Cari..."></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="medalTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kompetisi</th>
+                                <th>Emas</th>
+                                <th>Perak</th>
+                                <th>Perunggu</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kelola Jadwal Section -->
+        <section id="kelola-jadwal" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Jadwal Pertandingan</h2>
+                <button class="btn-primary" onclick="showAddMatchForm()"><i class="fas fa-plus"></i> Tambah Jadwal</button>
+            </div>
+            <div id="match-form" class="form-card" style="display: none;">
+                <h3 id="match-form-title">Tambah Jadwal Baru</h3>
+                <form id="match-form-element">
+                    <input type="hidden" id="match-id" value="">
+                    <div class="form-group"><label for="match-sport">Cabang</label><input type="text" id="match-sport" required></div>
+                    <div class="form-group"><label for="match-team_a">Tim A</label><input type="text" id="match-team_a" required></div>
+                    <div class="form-group"><label for="match-team_b">Tim B</label><input type="text" id="match-team_b" required></div>
+                    <div class="form-group"><label for="match-match_date">Tanggal</label><input type="date" id="match-match_date" required></div>
+                    <div class="form-group"><label for="match-match_time">Waktu</label><input type="time" id="match-match_time"></div>
+                    <div class="form-group"><label for="match-venue">Venue</label><input type="text" id="match-venue"></div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideMatchForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="matchPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="matchSearch" type="search" placeholder="Cari..."></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="matchTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Cabang</th>
+                                <th>Tim</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
+                                <th>Venue</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kelola Hasil Section -->
+        <section id="kelola-hasil" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Hasil Pertandingan</h2>
+                <button class="btn-primary" onclick="showAddResultForm()"><i class="fas fa-plus"></i> Tambah Hasil</button>
+            </div>
+            <div id="result-form" class="form-card" style="display: none;">
+                <h3 id="result-form-title">Tambah Hasil Pertandingan</h3>
+                <form id="result-form-element">
+                    <input type="hidden" id="result-id" value="">
+                    <div class="form-group"><label for="result-sport">Cabang</label><input type="text" id="result-sport" required></div>
+                    <div class="form-group"><label for="result-team_a">Tim A</label><input type="text" id="result-team_a" required></div>
+                    <div class="form-group"><label for="result-team_b">Tim B</label><input type="text" id="result-team_b" required></div>
+                    <div class="form-group"><label for="result-score">Skor</label><input type="text" id="result-score"></div>
+                    <div class="form-group"><label for="result-status">Status</label><input type="text" id="result-status" placeholder="winner/draw/dll"></div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideResultForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="resultPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="resultSearch" type="search" placeholder="Cari..."></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="resultTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Cabang</th>
+                                <th>Tim A</th>
+                                <th>Tim B</th>
+                                <th>Skor</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
         <!-- Berita Terkini Section -->
         <section id="berita-terkini" class="content-section" style="display: none;">
             <h2>Berita Terkini</h2>
@@ -588,27 +869,27 @@
             <div id="news-form" class="form-card" style="display: none;">
                 <h3 id="form-title">Tambah Berita Baru</h3>
                 <form id="news-form-element" enctype="multipart/form-data">
-                    <input type="hidden" id="news-id" value="">
+                    <input type="hidden" id="news-id" name="news-id" value="">
                     <div class="form-group">
                         <label for="news-title">Judul Berita</label>
-                        <input type="text" id="news-title" required>
+                        <input type="text" id="news-title" name="news-title" required>
                     </div>
                     <div class="form-group">
                         <label for="news-content">Konten</label>
-                        <textarea id="news-content" rows="6" required></textarea>
+                        <textarea id="news-content" name="news-content" rows="6" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="news-author">Penulis</label>
-                        <input type="text" id="news-author" value="Admin DISPORA">
+                        <input type="text" id="news-author" name="news-author" value="Admin DISPORA">
                     </div>
                     <div class="form-group">
                         <label for="news-image">Gambar</label>
-                        <input type="file" id="news-image" accept="image/*">
+                        <input type="file" id="news-image" name="news-image" accept="image/*">
                         <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
                     </div>
                     <div class="form-group">
                         <label>
-                            <input type="checkbox" id="news-published" checked>
+                            <input type="checkbox" id="news-published" name="news-published" checked>
                             Publikasikan segera
                         </label>
                     </div>
@@ -660,18 +941,18 @@
             <div id="achievement-form" class="form-card" style="display: none;">
                 <h3 id="achievement-form-title">Tambah Prestasi Baru</h3>
                 <form id="achievement-form-element" enctype="multipart/form-data">
-                    <input type="hidden" id="achievement-id" value="">
+                    <input type="hidden" id="achievement-id" name="achievement-id" value="">
                     <div class="form-group">
                         <label for="achievement-title">Judul Prestasi</label>
-                        <input type="text" id="achievement-title" required>
+                        <input type="text" id="achievement-title" name="achievement-title" required>
                     </div>
                     <div class="form-group">
                         <label for="achievement-description">Deskripsi</label>
-                        <textarea id="achievement-description" rows="4" required></textarea>
+                        <textarea id="achievement-description" name="achievement-description" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="achievement-category">Kategori</label>
-                        <select id="achievement-category" required>
+                        <select id="achievement-category" name="achievement-category" required>
                             <option value="">Pilih Kategori</option>
                             <option value="Atletik">Atletik</option>
                             <option value="Renang">Renang</option>
@@ -684,11 +965,11 @@
                     </div>
                     <div class="form-group">
                         <label for="achievement-date">Tanggal Prestasi</label>
-                        <input type="date" id="achievement-date" required>
+                        <input type="date" id="achievement-date" name="achievement-date" required>
                     </div>
                     <div class="form-group">
                         <label for="achievement-image">Gambar</label>
-                        <input type="file" id="achievement-image" accept="image/*">
+                        <input type="file" id="achievement-image" name="achievement-image" accept="image/*">
                         <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
                     </div>
                     <div class="form-actions">
@@ -738,18 +1019,18 @@
             <div id="gallery-form" class="form-card" style="display: none;">
                 <h3 id="gallery-form-title">Tambah Foto Baru</h3>
                 <form id="gallery-form-element" enctype="multipart/form-data">
-                    <input type="hidden" id="gallery-id" value="">
+                    <input type="hidden" id="gallery-id" name="gallery-id" value="">
                     <div class="form-group">
                         <label for="gallery-title">Judul Foto</label>
-                        <input type="text" id="gallery-title" required>
+                        <input type="text" id="gallery-title" name="gallery-title" required>
                     </div>
                     <div class="form-group">
                         <label for="gallery-description">Deskripsi</label>
-                        <textarea id="gallery-description" rows="3"></textarea>
+                        <textarea id="gallery-description" name="gallery-description" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="gallery-category">Kategori</label>
-                        <select id="gallery-category" required>
+                        <select id="gallery-category" name="gallery-category" required>
                             <option value="">Pilih Kategori</option>
                             <option value="Prestasi">Prestasi</option>
                             <option value="Latihan">Latihan</option>
@@ -760,7 +1041,7 @@
                     </div>
                     <div class="form-group">
                         <label for="gallery-image">Foto</label>
-                        <input type="file" id="gallery-image" accept="image/*" required>
+                        <input type="file" id="gallery-image" name="gallery-image" accept="image/*" required>
                         <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
                     </div>
                     <div class="form-actions">
@@ -810,30 +1091,30 @@
             <div id="event-form" class="form-card" style="display: none;">
                 <h3 id="event-form-title">Tambah Event Baru</h3>
                 <form id="event-form-element" enctype="multipart/form-data">
-                    <input type="hidden" id="event-id" value="">
+                    <input type="hidden" id="event-id" name="event-id" value="">
                     <div class="form-group">
                         <label for="event-title">Judul Event</label>
-                        <input type="text" id="event-title" required>
+                        <input type="text" id="event-title" name="event-title" required>
                     </div>
                     <div class="form-group">
                         <label for="event-description">Deskripsi</label>
-                        <textarea id="event-description" rows="4" required></textarea>
+                        <textarea id="event-description" name="event-description" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="event-date">Tanggal Event</label>
-                        <input type="date" id="event-date" required>
+                        <input type="date" id="event-date" name="event-date" required>
                     </div>
                     <div class="form-group">
                         <label for="event-time">Waktu Event</label>
-                        <input type="time" id="event-time">
+                        <input type="time" id="event-time" name="event-time">
                     </div>
                     <div class="form-group">
                         <label for="event-location">Lokasi</label>
-                        <input type="text" id="event-location" required>
+                        <input type="text" id="event-location" name="event-location" required>
                     </div>
                     <div class="form-group">
                         <label for="event-image">Gambar</label>
-                        <input type="file" id="event-image" accept="image/*">
+                        <input type="file" id="event-image" name="event-image" accept="image/*">
                         <small>Format: JPG, PNG, GIF. Maksimal 5MB</small>
                     </div>
                     <div class="form-actions">
@@ -898,7 +1179,171 @@
             </div>
         </section>
 
+        <!-- Data Keolahragaan Section -->
+        <section id="data-keolahragaan" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Data Keolahragaan</h2>
+                <p>Kelola jumlah data atlet, tenaga olahraga, dan cabang olahraga yang akan ditampilkan di dashboard</p>
+            </div>
+            
+            <!-- Form Update Jumlah -->
+            <div class="form-card">
+                <h3>Update Jumlah Data Keolahragaan</h3>
+                <form id="keolahragaan-form-element">
+                    <div class="form-group">
+                        <label for="jumlah-atlet">
+                            <i class="fas fa-running"></i> Jumlah Atlet
+                        </label>
+                        <input type="number" id="jumlah-atlet" name="jumlah-atlet" min="0" value="180" required>
+                        <small>Jumlah total atlet yang terdaftar</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah-tenaga">
+                            <i class="fas fa-users"></i> Jumlah Tenaga Olahraga
+                        </label>
+                        <input type="number" id="jumlah-tenaga" name="jumlah-tenaga" min="0" value="54" required>
+                        <small>Jumlah total pelatih, wasit, dan tenaga pendukung</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah-cabor">
+                            <i class="fas fa-swimmer"></i> Jumlah Cabang Olahraga
+                        </label>
+                        <input type="number" id="jumlah-cabor" name="jumlah-cabor" min="0" value="67" required>
+                        <small>Jumlah total cabang olahraga yang dibina</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Simpan Perubahan
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="resetKeolahragaan()">
+                            <i class="fas fa-undo"></i> Reset ke Default
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Info Cards Preview -->
+            <div class="form-card">
+                <h3>Preview Dashboard</h3>
+                <p>Begini tampilan yang akan muncul di dashboard:</p>
+                <div class="info-cards" style="margin-top: 20px;">
+                    <div class="info-card blue">
+                        <div class="card-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">Jumlah Atlet</div>
+                            <div class="number" id="preview-atlet">180</div>
+                        </div>
+                    </div>
+                    <div class="info-card green">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">Jumlah Tenaga Olahraga</div>
+                            <div class="number" id="preview-tenaga">54</div>
+                        </div>
+                    </div>
+                    <div class="info-card yellow">
+                        <div class="card-icon">
+                            <i class="fas fa-swimmer"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">Jumlah CABOR</div>
+                            <div class="number" id="preview-cabor">67</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kelola Kontak Section -->
+        <section id="kelola-kontak" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Kelola Kontak</h2>
+                <button class="btn-primary" onclick="showAddContactForm()">
+                    <i class="fas fa-plus"></i> Tambah Info Kontak
+                </button>
+            </div>
+            
+            <!-- Form Tambah/Edit Kontak -->
+            <div id="contact-form" class="form-card" style="display: none;">
+                <h3 id="contact-form-title">Tambah Info Kontak Baru</h3>
+                <form id="contact-form-element">
+                    <input type="hidden" id="contact-id" name="contact-id" value="">
+                    <div class="form-group">
+                        <label for="contact-type">Jenis Kontak</label>
+                        <select id="contact-type" name="contact-type" required>
+                            <option value="">Pilih Jenis</option>
+                            <option value="alamat">Alamat</option>
+                            <option value="telepon">Telepon</option>
+                            <option value="email">Email</option>
+                            <option value="fax">Fax</option>
+                            <option value="website">Website</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-title">Judul</label>
+                        <input type="text" id="contact-title" name="contact-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-value">Informasi</label>
+                        <textarea id="contact-value" name="contact-value" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-icon">Icon (Font Awesome)</label>
+                        <input type="text" id="contact-icon" name="contact-icon" placeholder="fas fa-map-marker-alt">
+                        <small>Contoh: fas fa-map-marker-alt, fas fa-phone, fas fa-envelope</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Simpan</button>
+                        <button type="button" class="btn-secondary" onclick="hideContactForm()">Batal</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Daftar Kontak -->
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div>
+                        <label>Show <select id="contactPageSize"><option>10</option><option>25</option><option>50</option></select> entries</label>
+                    </div>
+                    <div>
+                        <label>Search: <input id="contactSearch" type="search" placeholder="Cari kontak..." /></label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="contactTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Jenis</th>
+                                <th>Judul</th>
+                                <th>Informasi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <!-- Modal Detail -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Detail</h3>
+                <span class="close" onclick="closeDetailModal()">&times;</span>
+            </div>
+            <div id="modal-body">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
 
     <footer class="footer">
         © 2025 Sistem Informasi Manajemen Pembinaan Olahraga
@@ -1082,6 +1527,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="assets/js/simple-storage.js"></script>
+    <script src="assets/js/export-import.js"></script>
     <script src="assets/js/crud-news.js"></script>
     <script src="assets/js/crud-all.js"></script>
     <script src="assets/js/main.js?v=20250926-1"></script>

@@ -64,7 +64,7 @@
         }
         
         .logo-section img {
-            height: 60px;
+            height: 90px;
             margin-bottom: 10px;
         }
         
@@ -208,6 +208,58 @@
             margin-bottom: 20px;
             font-size: 14px;
             display: none;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 25px 20px;
+                margin: 0 15px;
+                max-width: 320px;
+            }
+            
+            .logo-section img {
+                height: 75px;
+            }
+            
+            .logo-section h1 {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px 15px;
+                margin: 0 10px;
+                max-width: 300px;
+            }
+            
+            .logo-section img {
+                height: 65px;
+            }
+            
+            .logo-section h1 {
+                font-size: 16px;
+            }
+            
+            .form-group input {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+            
+            .form-group .input-icon input {
+                padding-left: 35px;
+            }
+            
+            .login-btn {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .social-login a {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>

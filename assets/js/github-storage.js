@@ -3,17 +3,21 @@
 
 class GitHubStorageManager {
     constructor() {
-        this.dashboardData = {
-            atlet: 180,
-            tenaga: 54,
-            cabor: 67
-        };
+        this.dashboardData = { atlet: 0, tenaga: 0, cabor: 0 };
         this.githubConfig = {
-            owner: 'your-username', // Ganti dengan username GitHub Anda
-            repo: 'web-simpora',    // Ganti dengan nama repository
-            token: '',              // Personal Access Token (opsional)
-            filePath: 'data/dashboard.json'
+            owner: 'disporainfo',
+            repo: 'web-simpora',
+            token: '',
+            filePath: 'data/database.json'
         };
+        // Load saved config if any
+        try {
+            const saved = localStorage.getItem('dispora_github_config');
+            if (saved) {
+                const cfg = JSON.parse(saved);
+                this.githubConfig = { ...this.githubConfig, ...cfg };
+            }
+        } catch(_) {}
         this.init();
     }
 
@@ -66,12 +70,12 @@ class GitHubStorageManager {
         return JSON.parse(content);
     }
 
-    async saveToGitHub() {
+    async saveToGitHub(compiledDatabaseJson) {
         if (!this.githubConfig.owner || this.githubConfig.owner === 'your-username') {
             throw new Error('GitHub not configured');
         }
 
-        const content = JSON.stringify(this.dashboardData, null, 2);
+        const content = JSON.stringify(compiledDatabaseJson, null, 2);
         const encodedContent = btoa(content);
 
         // Get current file SHA
@@ -90,7 +94,7 @@ class GitHubStorageManager {
         const url = `https://api.github.com/repos/${this.githubConfig.owner}/${this.githubConfig.repo}/contents/${this.githubConfig.filePath}`;
         
         const payload = {
-            message: `Update dashboard data - ${new Date().toISOString()}`,
+            message: `Update data/database.json - ${new Date().toISOString()}`,
             content: encodedContent,
             ...(sha && { sha })
         };
@@ -115,15 +119,42 @@ class GitHubStorageManager {
 
     async saveDashboardData() {
         try {
-            // Coba save ke GitHub dulu
-            await this.saveToGitHub();
+            const databaseJson = await this.buildDatabaseJson();
+            await this.saveToGitHub(databaseJson);
             console.log('Data saved to GitHub');
         } catch (error) {
             console.log('GitHub save failed, using localStorage:', error);
-            // Fallback ke localStorage
             localStorage.setItem('dispora_dashboard', JSON.stringify(this.dashboardData));
             console.log('Data saved to localStorage');
         }
+    }
+
+    async buildDatabaseJson() {
+        // Get current remote database.json to preserve sections not managed locally
+        let remote = {};
+        try { remote = await this.loadFromGitHub(); } catch(_) {}
+
+        // Local pieces
+        let localContent = {};
+        try {
+            const d = localStorage.getItem('dispora_data');
+            if (d) localContent = JSON.parse(d);
+        } catch(_) {}
+
+        // Assemble
+        const compiled = {
+            users: remote.users || [],
+            news: remote.news || [],
+            achievements: localContent.achievements || remote.achievements || [],
+            gallery: localContent.gallery || remote.gallery || [],
+            events: localContent.events || remote.events || [],
+            medal_tallies: remote.medal_tallies || [],
+            match_schedules: remote.match_schedules || [],
+            results: remote.results || [],
+            // optional: embed dashboard numbers for public if needed later
+            _dashboard: this.dashboardData
+        };
+        return compiled;
     }
 
     setupEventListeners() {
@@ -148,7 +179,7 @@ class GitHubStorageManager {
             `;
             
             buttonContainer.innerHTML = `
-                <button class="btn-secondary" onclick="githubStorage.syncWithGitHub()" title="Sync dengan GitHub">
+                <button class="btn-secondary" onclick="githubStorage.pushToGitHub()" title="Kirim ke GitHub">
                     <i class="fab fa-github"></i> Sync GitHub
                 </button>
                 <button class="btn-secondary" onclick="githubStorage.showConfig()" title="Konfigurasi GitHub">
@@ -160,24 +191,29 @@ class GitHubStorageManager {
         }
     }
 
-    async syncWithGitHub() {
+    async pushToGitHub() {
         try {
-            await this.loadDashboardData();
-            this.updateDashboardDisplay();
-            this.showNotification('Data berhasil di-sync dengan GitHub!', 'success');
+            const databaseJson = await this.buildDatabaseJson();
+            await this.saveToGitHub(databaseJson);
+            this.showNotification('Berhasil push data ke GitHub!', 'success');
         } catch (error) {
-            this.showNotification('Gagal sync dengan GitHub: ' + error.message, 'error');
+            this.showNotification('Gagal push ke GitHub: ' + error.message, 'error');
         }
     }
 
     showConfig() {
-        const config = prompt(`Konfigurasi GitHub:\n\nUsername: ${this.githubConfig.owner}\nRepository: ${this.githubConfig.repo}\nFile Path: ${this.githubConfig.filePath}\n\nMasukkan username GitHub Anda:`, this.githubConfig.owner);
-        
-        if (config && config !== this.githubConfig.owner) {
-            this.githubConfig.owner = config;
-            localStorage.setItem('dispora_github_config', JSON.stringify(this.githubConfig));
-            this.showNotification('Konfigurasi GitHub berhasil disimpan!', 'success');
-        }
+        const owner = prompt('GitHub Username/Org:', this.githubConfig.owner || '');
+        if (owner === null) return;
+        const repo = prompt('Repository name:', this.githubConfig.repo || '');
+        if (repo === null) return;
+        const filePath = prompt('Data file path (ex: data/database.json):', this.githubConfig.filePath || 'data/database.json');
+        if (filePath === null) return;
+        const token = prompt('Personal Access Token (repo scope). Token disimpan lokal di browser:', this.githubConfig.token || '');
+        if (token === null) return;
+
+        this.githubConfig = { owner, repo, filePath, token };
+        localStorage.setItem('dispora_github_config', JSON.stringify(this.githubConfig));
+        this.showNotification('Konfigurasi GitHub disimpan!', 'success');
     }
 
     showEditForm() {
@@ -198,8 +234,9 @@ class GitHubStorageManager {
         
         await this.saveDashboardData();
         this.updateDashboardDisplay();
-        this.hideForm();
+        if (window.updateDashboardCharts) { window.updateDashboardCharts(); }
         this.showNotification('Data dashboard berhasil diperbarui!', 'success');
+        try { this.showEditForm(); } catch(_) {}
     }
 
     updateDashboardDisplay() {

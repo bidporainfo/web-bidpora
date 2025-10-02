@@ -96,8 +96,10 @@ async function initCharts(){
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: { y: { beginAtZero: true } },
-                plugins: { legend: { position: 'top' } }
+                plugins: { legend: { position: 'top' } },
+                layout: { padding: { left: 10, right: 10, top: 0, bottom: 0 } }
             }
         });
     }

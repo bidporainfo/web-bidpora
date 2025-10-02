@@ -37,7 +37,7 @@
         }
         
         .logo-section img {
-            height: 80px;
+            height: 100px;
             margin-bottom: 15px;
         }
         
@@ -99,6 +99,47 @@
             border-radius: 5px;
             margin-bottom: 15px;
             display: none;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 30px 20px;
+                margin: 0 15px;
+            }
+            
+            .logo-section img {
+                height: 80px;
+            }
+            
+            .logo-section h1 {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 25px 15px;
+                margin: 0 10px;
+            }
+            
+            .logo-section img {
+                height: 70px;
+            }
+            
+            .logo-section h1 {
+                font-size: 18px;
+            }
+            
+            .form-group input {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+            
+            .login-btn {
+                padding: 10px;
+                font-size: 14px;
+            }
         }
         
         .success-message {
@@ -208,13 +249,10 @@
             <i class="fas fa-eye"></i> Lihat sebagai Pengunjung
         </button>
         
-        <div class="info-box">
-            <h4>Default Login:</h4>
-            <p><strong>Username:</strong> admin</p>
-            <p><strong>Password:</strong> admin123</p>
-        </div>
+        
     </div>
     
+    <script src="assets/js/simple-auth.js"></script>
     <script>
         function showError(message) {
             const errorDiv = document.getElementById('error-message');
@@ -235,7 +273,7 @@
             document.getElementById('success-message').style.display = 'none';
         }
         
-        function handleLogin(event) {
+        async function handleLogin(event) {
             event.preventDefault();
             hideMessages();
             
@@ -248,24 +286,17 @@
                 return;
             }
 
-            // Simple login check
-            if (username === 'admin' && password === 'admin123') {
-                // Simpan session
-                const user = {
-                    id: 1,
-                    username: 'admin',
-                    email: 'admin@dispora.jepara.go.id',
-                    role: 'admin',
-                    loginTime: new Date().toISOString()
-                };
-                localStorage.setItem('dispora_user', JSON.stringify(user));
-                
-                showSuccess('Login berhasil! Mengalihkan...');
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1000);
-            } else {
-                showError('Username atau password salah');
+            // Use simple-auth (reads data/database.json; fallback to hardcoded internally)
+            try {
+                const result = await window.simpleAuth.login(username, password);
+                if (result && result.success) {
+                    showSuccess('Login berhasil! Mengalihkan...');
+                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+                } else {
+                    showError(result && result.message ? result.message : 'Username atau password salah');
+                }
+            } catch (e) {
+                showError('Terjadi kesalahan saat login');
             }
         }
         

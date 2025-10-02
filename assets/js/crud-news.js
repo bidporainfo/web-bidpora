@@ -16,6 +16,13 @@ class NewsManager {
 
     async loadNews() {
         try {
+            // Try localStorage first (admin-managed data)
+            const local = localStorage.getItem('dispora_news');
+            if (local) {
+                this.newsData = JSON.parse(local) || [];
+                return;
+            }
+            // Fallback to repo JSON for initial data
             const response = await fetch('data/database.json');
             const data = await response.json();
             this.newsData = data.news || [];
@@ -132,11 +139,12 @@ class NewsManager {
     }
 
     async saveToDatabase() {
-        // In a real implementation, this would be an API call to update the database
-        // For now, we'll just update the local data
-        console.log('News data updated:', this.newsData);
-        // Note: In GitHub Pages, you can't directly write to files
-        // You would need a backend service or use a service like Netlify Forms, Formspree, etc.
+        try {
+            localStorage.setItem('dispora_news', JSON.stringify(this.newsData));
+            console.log('News data saved to localStorage');
+        } catch (e) {
+            console.error('Failed saving news to localStorage', e);
+        }
     }
 
     renderNewsTable() {
@@ -176,6 +184,9 @@ class NewsManager {
                 </td>
                 <td>
                     <div class="action-buttons">
+                        <button class="btn-view" onclick="contentManager.showDetailModal('news', ${news.id})" title="Detail">
+                            <i class="fas fa-eye"></i>
+                        </button>
                         <button class="btn-edit" onclick="newsManager.showEditForm(${news.id})" title="Edit">
                             <i class="fas fa-edit"></i>
                         </button>
